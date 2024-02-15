@@ -9,7 +9,7 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.popup-inner {
+.popup_inner {
   background-color: white;
   position: absolute;
   left: 50%;
@@ -21,16 +21,16 @@
   width: 40%;
 }
 
-.popup-inner h2 {
+.popup_inner h2 {
   margin-top: 0;
 }
 
-.popup-inner label {
+.popup_inner label {
   display: block;
   margin-bottom: 10px;
 }
 
-.popup-inner input {
+.popup_inner input {
   width: 100%;
   padding: 5px;
   border-radius: 5px;
@@ -38,8 +38,8 @@
   margin-bottom: 10px;
 }
 
-.popup-inner button[type="submit"],
-.popup-inner button[type="button"] {
+.popup_inner button[type="submit"],
+.popup_inner button[type="button"] {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -53,31 +53,31 @@
   border-radius: 5px;
 }
 
-.popup-inner button[type="submit"]:hover,
-.popup-inner button[type="button"]:hover {
+.popup_inner button[type="submit"]:hover,
+.popup_inner button[type="button"]:hover {
   background-color: #45a049;
 }
 
-.popup-inner button[type="submit"] {
+.popup_inner button[type="submit"] {
   margin-top: 20px;
 }
 
-.popup-inner button[type="button"] {
+.popup_inner button[type="button"] {
   margin-top: 20px;
   background-color: #f44336;
 }
 
-.popup-inner button[type="button"]:hover {
+.popup_inner button[type="button"]:hover {
   background-color: #da190b;
 }
 
-.popup-inner button[type="submit"]:disabled {
+.popup_inner button[type="submit"]:disabled {
   background-color: #bfbfbf;
   color: #ffffff;
   cursor: not-allowed;
 }
 
-.popup-inner button[type="button"]:disabled {
+.popup_inner button[type="button"]:disabled {
   background-color: #bfbfbf;
   color: #ffffff;
   cursor: not-allowed;

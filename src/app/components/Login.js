@@ -1,11 +1,7 @@
 import { useState } from "react";
+import styles from "./login.module.css";
 
 export default function Login(props) {
-  const [seen, setSeen] = useState(false);
-
-  function togglePop() {
-    setSeen(!seen);
-  }
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,8 +12,8 @@ export default function Login(props) {
   }
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
+    <div className={styles.popup}>
+      <div className={styles.popup_inner}>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <label>

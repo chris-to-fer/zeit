@@ -1,13 +1,84 @@
-.main {
+/* .main {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+} */
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  gap: 1%;
+  align-items: center;
+  /* height: 15%;
+  width: 97vw; */
+  border: 0.2rem;
+  border-style: solid;
+  border-radius: 12px;
+  border-color: grey;
+  padding: 3%;
+  margin: 12px;
+  grid-area: header;
 }
 
-.description {
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 1%;
+  align-items: center;
+  height: 95vh;
+  width: 30%;
+  border: 0.2rem;
+  border-style: solid;
+  border-radius: 12px;
+  border-color: grey;
+  padding: 3%;
+  margin-left: 12px;
+  margin-right: 12px;
+  grid-area: sidebar;
+}
+.card_project {
+  grid-area: main;
+  border: 0.2rem;
+  border-style: solid;
+  border-radius: 12px;
+  border-color: grey;
+  padding: 3%;
+  margin-left: 12px;
+  margin-right: 12px;
+  width: 70%;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 5px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  gap: 1%;
+  align-items: center;
+  /* height: 15%;
+    width: 97vw; */
+  border: 0.2rem;
+  border-style: solid;
+  border-radius: 12px;
+  border-color: grey;
+  padding: 3%;
+  margin: 12px;
+  grid-area: header;
+}
+
+/* .description {
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
@@ -109,7 +180,7 @@
   position: relative;
 }
 /* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
+/* @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
@@ -127,7 +198,7 @@
 }
 
 /* Mobile */
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
   .content {
     padding: 4rem;
   }
@@ -201,10 +272,10 @@
     );
     z-index: 1;
   }
-}
+} */
 
 /* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
+/* @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
@@ -223,8 +294,8 @@
 @keyframes rotate {
   from {
     transform: rotate(360deg);
-  }
+  } 
   to {
     transform: rotate(0deg);
   }
-}
+}  */

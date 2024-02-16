@@ -1,12 +1,24 @@
 import styles from "./page.module.css";
-import Sidebar from "./components/Sidebar";
+
 import React from "react";
 
-export default function Page() {
+export default async function Page({ params }) {
+  console.log("params", params);
+
+  const userId = params.userId;
+  console.log("log", userId);
+  const res = await fetch(`/api/${userId}/projects`, {
+    headers: {
+      "Content-Type": "application/json",
+      "API-Key": process.env.DATA_API_KEY,
+    },
+  });
+  const data = await res.json();
+
+  return Response.json({ data });
   return (
-    <main className={styles.main}>
-      page
-      <Sidebar />
-    </main>
+    <>
+      <div className={styles.card_project}></div>
+    </>
   );
 }

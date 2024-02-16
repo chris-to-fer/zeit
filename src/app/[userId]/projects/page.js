@@ -1,8 +1,10 @@
 "use client";
 import styles from "./page.module.css";
-import useSWR from "swr";
+import useSWR, { SWRConfig } from "swr";
 import React from "react";
 import ProjectCard from "./components/ProjectCard";
+import useLocalStorageState from "use-local-storage-state";
+import Sidebar from "./components/Sidebar";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -19,9 +21,16 @@ const fetcher = async (url) => {
 };
 
 export default function Page({ params }) {
+  const [project, setProject] = useLocalStorageState("project", {
+    defaultValue: "",
+  });
+
   const userId = params.userId;
   const {
     data: { projects } = {},
+    data: { users } = {},
+    data: { employees } = {},
+    data: { times } = {},
     isLoading,
     mutate,
     error,
@@ -33,15 +42,18 @@ export default function Page({ params }) {
     return null;
   }
 
-  console.log("log", userId);
-
-  console.log("projects", projects);
+  const handleClick = (id) => {
+    setProject(id);
+  };
 
   return (
     <>
-      <div className={styles.card_project}>
-        <ProjectCard data={projects} />
-      </div>
+      <SWRConfig value={{ fetcher }}>
+        <Sidebar projects={projects} handleClick={handleClick} />
+        <div className={styles.card_project}>
+          <ProjectCard projects={projects} project={project} />
+        </div>
+      </SWRConfig>
     </>
   );
 }

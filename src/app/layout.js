@@ -11,9 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="de">
-      {/* <SWRConfig value={{ fetcher }}> */}
       <body className={inter.className}>{children}</body>
-      {/* </SWRConfig> */}
     </html>
   );
 }

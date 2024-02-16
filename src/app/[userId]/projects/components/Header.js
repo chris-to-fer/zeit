@@ -5,9 +5,9 @@ import styles from ".././page.module.css";
 const userId = 1;
 export default function Header() {
   return (
-    <navigation className={styles.navigation}>
+    <nav className={styles.navigation}>
       <Link href="/">Home</Link>
       <Link href={`/${userId}/projects`}>Projects</Link>
-    </navigation>
+    </nav>
   );
 }

@@ -58,7 +58,7 @@ export default function Home() {
           <h2>
             What are the benefits? <span>-&gt;</span>
           </h2>
-          <p>See how you save time and become accounting's best friend</p>
+          <p>See how you save time and become accounting&apos;s best friend</p>
         </a>
 
         <a

@@ -1,23 +1,9 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import useSWR from "swr";
 
-export default function ProjectCard({ params, userId, selectedProject }) {
-  const {
-    data: { user } = {},
-
-    isLoading,
-    mutate,
-    error,
-  } = useSWR(`/api/${userId}/user`);
-
-  if (isLoading) {
-    return <h2>...is Loading</h2>;
-  }
-
-  console.log("SPAAA", user);
-  const project = user.projects.find((e) => (e._id = selectedProject));
+export default function ProjectCard({ user, params, userId, selectedProject }) {
+  const project = user.projects?.find((e) => e._id === selectedProject);
 
   return (
     <>

@@ -7,7 +7,7 @@ const projectSchema = new Schema(
     // createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
     projectCode: { type: String, required: true },
-
+    _id: { type: String },
     companyName: { type: String, required: true },
     companyAddress: { type: String, required: true },
     companyPhone: Number,

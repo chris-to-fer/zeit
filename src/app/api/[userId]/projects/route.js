@@ -20,7 +20,6 @@ export async function POST(request, { params, searchParams }, response) {
     );
 
     console.log("Server side project created");
-    console.log("Server Body received", request.body);
 
     return NextResponse.json({ status: 201 });
   } catch (error) {

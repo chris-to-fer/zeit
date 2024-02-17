@@ -2,22 +2,10 @@
 import React from "react";
 import styles from ".././page.module.css";
 import SidebarQuery from "./SidebarQuery";
-import useSWR from "swr";
+
 import Link from "next/link";
 
-export default function Sidebar({ handleClick, userId }) {
-  const {
-    data: { user } = {},
-
-    isLoading,
-    mutate,
-    error,
-  } = useSWR(`/api/${userId}/user`);
-
-  if (isLoading) {
-    return <h2>...is Loading</h2>;
-  }
-
+export default function Sidebar({ user, handleClick, userId }) {
   user && console.log("user", user);
 
   return (

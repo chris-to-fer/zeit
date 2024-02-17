@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/app/db/connectDB";
 import Project from "@/app/db/model/Project";
-import mongoose from "mongoose";
 import User from "@/app/db/model/User";
 
 export async function GET(request, { params, searchParams }) {

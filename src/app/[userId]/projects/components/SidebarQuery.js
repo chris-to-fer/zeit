@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function SidebarQuery({ projects, handleClick }) {
-  console.log(projects);
   return (
     <>
       {projects.map((e) => (

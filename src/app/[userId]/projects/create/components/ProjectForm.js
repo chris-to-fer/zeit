@@ -1,10 +1,27 @@
 "use client";
 import React from "react";
 import styles from "../../page.module.css";
+import useSWR from "swr";
 
-export default function ProjectForm({ defaultValue }) {
+export default function ProjectForm({ params, defaultValue }) {
+  const userId = params.userId;
   // const defaultValue = "";
-  const onSubmit = () => {};
+
+  async function onSubmit(e) {
+    e.prevent.Default();
+    console.log("submi clickt");
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    const response = await fetch(`/api/${userId}/projects`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    console.log("create sent", data);
+  }
   return (
     <form className={styles.form} action="">
       <label htmlFor="name">Projekt Titel: </label>
@@ -71,9 +88,12 @@ export default function ProjectForm({ defaultValue }) {
         <button type="submit" onSubmit={onSubmit}>
           Änderungen Speichern
         </button>
+        {/* <button type="submit" onClick={onSubmit}>
+          Abbrechen
+        </button>
         <button type="submit" onSubmit={onSubmit}>
           Löschen
-        </button>
+        </button> */}
       </p>
     </form>
   );

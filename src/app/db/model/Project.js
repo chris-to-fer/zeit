@@ -17,7 +17,7 @@ const projectSchema = new Schema(
     invoiceAddress: { type: String, required: true },
     active: Boolean,
 
-    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
+    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "employees" }],
   },
   {
     timestamps: true,

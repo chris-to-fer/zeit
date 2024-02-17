@@ -1,22 +1,37 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import useSWR from "swr";
 
-export default function ProjectCard({ projects }) {
+export default function ProjectCard({ params, userId, selectedProject }) {
+  const {
+    data: { user } = {},
+
+    isLoading,
+    mutate,
+    error,
+  } = useSWR(`/api/${userId}/user`);
+
+  if (isLoading) {
+    return <h2>...is Loading</h2>;
+  }
+
+  console.log("SPAAA", user);
+  const project = user.projects.find((e) => (e._id = selectedProject));
+
   return (
     <>
-      <h2>{projects[0].name}</h2>
-      <p>Projektnummer: {projects[0].projectCode}</p>
-      <p>Firma: {projects[0].companyName}</p>
-      <p>Anschrift: {projects[0].companyAddress}</p>
-      <p>Telefon: {projects[0].companyPhone}</p>
-      <p>Email: {projects[0].companyEmail}</p>
-      <p>Rechnungsanschrift: {projects[0].invoiceAddress}</p>
-      <p>Kontaktperson: {projects[0].contact}</p>
-      <p>Email Kontakt: {projects[0].email}</p>
-      <p>Aktiv: {projects[0].active && `Ja`}</p>
-      <Link href="/">
-        <h2>Beschäftigte</h2>
-      </Link>
+      <h2>{project?.name}</h2>
+      <p>Projektnummer: {project?.projectCode}</p>
+      <p>Firma: {project?.companyName}</p>
+      <p>Anschrift: {project?.companyAddress}</p>
+      <p>Telefon: {project?.companyPhone}</p>
+      <p>Email: {project?.companyEmail}</p>
+      <p>Rechnungsanschrift: {project?.invoiceAddress}</p>
+      <p>Kontaktperson: {project?.contact}</p>
+      <p>Email Kontakt: {project?.email}</p>
+      <p>Aktiv: {project?.active && `Ja`}</p>
+      <Link href="/">{project && <h2>Beschäftigte</h2>}</Link>
     </>
   );
 }

@@ -4,6 +4,7 @@ import "../../globals.css";
 import Header from "./components/Header";
 import styles from "./page.module.css";
 import Footer from "./components/Footer";
+import { SWRProvider } from "@/app/swr-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +16,13 @@ export const metadata = {
 export default function RootLayout({ params, children }) {
   return (
     <>
-      <Header />
-      <main className={styles.main}>{children}</main>
-      <Footer />
+      <SWRProvider>
+        <Header params={params} />
+
+        <main className={styles.main}>{children}</main>
+
+        <Footer params={params} />
+      </SWRProvider>
     </>
   );
 }

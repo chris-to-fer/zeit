@@ -4,14 +4,11 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    name: String,
-    required: true,
-    lastName: String,
-    required: true,
-    email: String,
-    required: true,
-    address: String,
-    required: true,
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    address: { type: String, required: true },
+    create_at: { type: Date, default: Date.now },
 
     projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   },

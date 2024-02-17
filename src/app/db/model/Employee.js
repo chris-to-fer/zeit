@@ -4,25 +4,22 @@ const { Schema } = mongoose;
 
 const employeeSchema = new Schema(
   {
-    name: String,
-    required: true,
-    lastName: String,
-    required: true,
-    email: String,
-    required: true,
-    address: String,
-    required: true,
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    address: { type: String, required: true },
     phone: Number,
-    required: true,
-    department: String,
-    required: true,
-    position: String,
-    required: true,
-    project: String,
-    required: true,
-    active: Boolean,
-    project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
-    required: true,
+
+    department: { type: String, required: true },
+    position: { type: String, required: true },
+    project: { type: String, required: true },
+    active: { type: Boolean, required: true },
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+    },
+    create_at: { type: Date, default: Date.now },
   },
 
   {

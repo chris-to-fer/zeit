@@ -18,7 +18,7 @@ export default function Sidebar({ handleClick, userId }) {
     return <h2>...is Loading</h2>;
   }
 
-  user && console.log("pjs", user);
+  user && console.log("user", user);
 
   return (
     <aside className={styles.aside}>

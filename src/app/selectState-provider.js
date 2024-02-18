@@ -1,18 +1,18 @@
-// "use client";
-// import useSWR from "swr";
+"use client";
+import React, { createContext } from "react";
 
-// import React from "react";
+export const selectStateContext = createContext();
 
-// export function SelectStateProvider({ children }) {
-//   const [selectedProject, setSelectedProject] = React.useState("");
-//   // const colorVariables = colorTheme === 'light'
-//   //   ? LIGHT_COLORS
-//   //   : DARK_COLORS;
-//   return (
-//     <>
-//       {children}
-//       {selectedProject}
-//       {setSelectedProject}
-//     </>
-//   );
-// }
+export default function SelectStateProvider({ children }) {
+  const [selectedProject, setSelectedProject] = React.useState("");
+
+  return (
+    <>
+      <selectStateContext.Provider
+        value={{ selectedProject, setSelectedProject }}
+      >
+        {children}
+      </selectStateContext.Provider>
+    </>
+  );
+}

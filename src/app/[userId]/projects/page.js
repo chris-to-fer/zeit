@@ -1,44 +1,32 @@
-"use client";
 import styles from "./page.module.css";
 import React from "react";
 import ProjectCard from "./components/ProjectCard";
-import { useState } from "react";
 import Sidebar from "./components/Sidebar";
-import useSWR from "swr";
+import SelectStateProvider from "@/app/selectState-provider";
+import { revalidatePath } from "next/cache";
 
-export default function Page({ children, params }) {
+export default async function Page({ children, params }) {
+  const HOSTNAME = process.env.HOSTNAME_URL;
+
   const userId = params.userId;
-  const [selectedProject, setSelectedProject] = useState("");
+  revalidatePath(`${HOSTNAME}/`);
+  console.log(`${HOSTNAME}/${userId}/user`);
 
-  const {
-    data: { user } = {},
-    isLoading,
-    mutate,
-  } = useSWR(`/api/${userId}/user`, {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-  });
+  const res = await fetch(`${HOSTNAME}/api/${userId}/user`);
+  const data = await res.json();
+  if (!data) return <h3>Data is loading..</h3>;
+  console.log("data_____", data);
+  const user = data.user;
 
-  function handleClick(id) {
-    setSelectedProject(id);
-    console.log("click SP", id);
-  }
-  console.log("sp", selectedProject);
-
-  if (isLoading) {
-    return null;
-  }
-  console.log("ussr", user);
   return (
     <>
-      <Sidebar user={user} userId={userId} handleClick={handleClick} />
-      <div className={styles.card_project}>
-        <ProjectCard
-          user={user}
-          userId={userId}
-          selectedProject={selectedProject}
-        />
-      </div>
+      <SelectStateProvider>
+        {children}
+        <Sidebar user={user} userId={userId} />
+        <div className={styles.card_project}>
+          <ProjectCard user={user} userId={userId} />
+        </div>
+      </SelectStateProvider>
     </>
   );
 }

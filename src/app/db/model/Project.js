@@ -4,10 +4,9 @@ const { Schema } = mongoose;
 
 const projectSchema = new Schema(
   {
-    // createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
     projectCode: { type: String, required: true },
-    _id: { type: String },
+
     companyName: { type: String, required: true },
     companyAddress: { type: String, required: true },
     companyPhone: Number,
@@ -17,7 +16,7 @@ const projectSchema = new Schema(
     invoiceAddress: { type: String },
     active: { type: Boolean },
 
-    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "employees" }],
+    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
   },
   {
     timestamps: true,

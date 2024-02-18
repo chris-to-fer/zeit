@@ -1,0 +1,38 @@
+import { headers } from "next/headers";
+import Sidebar from "../components/Sidebar";
+import styles from "../page.module.css";
+
+export default async function Page({ children, params }) {
+  const userId = params.userId;
+  const proId = params.proId;
+  const HOSTNAME = process.env.HOSTNAME_URL;
+
+  const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
+    method: "GET",
+    headers: headers(),
+  });
+
+  const data = await res.json();
+  if (!data) return <h3>no data</h3>;
+  const {
+    projects: { employees },
+  } = data;
+  console.log("Emp data", data.projects);
+
+  return (
+    <>
+      <Sidebar userId={userId} proId={proId} projects={[data.projects]} />
+      <div className={styles.card_project}>
+        <h2>Mitarbeiter des Projekts </h2>
+        <ul>
+          {employees.map((e) => (
+            <li key={e._id}>
+              {e.name} {e.lastName} - {e.position}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {children}
+    </>
+  );
+}

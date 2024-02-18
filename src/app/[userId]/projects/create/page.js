@@ -1,12 +1,16 @@
 import React from "react";
 import ProjectForm from "./components/ProjectForm";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default function Create({ params }) {
-  const headersList = headers();
-  const domain = headersList.get("host") || "";
-  const fullUrl = headersList.get("referer") || "";
-
-  console.log("fu", fullUrl);
-  return <ProjectForm params={params} />;
+  const HOSTNAME = process.env.HOSTNAME_URL;
+  const userId = params.userId;
+  async function revalidate() {
+    "use server";
+    revalidatePath(`${HOSTNAME}/${userId}/projects`);
+    redirect(`${HOSTNAME}/${userId}/projects`);
+  }
+  return <ProjectForm params={params} revalidate={revalidate} />;
 }

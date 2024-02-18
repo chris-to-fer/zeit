@@ -6,13 +6,13 @@ const timeSchema = new Schema(
   {
     employeeId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "employees",
+      ref: "Employee",
       required: true,
     },
 
     projectID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "projects",
+      ref: "Project",
       required: true,
     },
 

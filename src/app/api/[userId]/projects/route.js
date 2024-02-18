@@ -2,17 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/app/db/connectDB";
 import Project from "@/app/db/model/Project";
 import User from "@/app/db/model/User";
-import { redirect } from "next/dist/server/api-utils";
+import Employee from "@/app/db/model/Employee";
 
 export async function POST(request, { params, searchParams }, response) {
-  console.log(params);
   const userId = params.userId;
   try {
     await connectDB();
 
-    const createFormData = await request.json();
+    const dataFromForm = await request.json();
 
-    const newProject = await Project.create(createFormData);
+    const newProject = await Project.create(dataFromForm);
     await User.findByIdAndUpdate(
       userId,
       { $push: { projects: newProject._id } },
@@ -23,7 +22,7 @@ export async function POST(request, { params, searchParams }, response) {
 
     return NextResponse.json({ status: 201 });
   } catch (error) {
-    console.log(error);
+    console.log("Error posting new project", error);
     return NextResponse.json({ status: 400 });
   }
 }

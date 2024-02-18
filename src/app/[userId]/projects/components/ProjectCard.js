@@ -1,10 +1,21 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { useContext } from "react";
+import { selectStateContext } from "@/app/selectState-provider";
 
-export default function ProjectCard({ user, params, userId, selectedProject }) {
+export default function ProjectCard({ user, userId }) {
+  const { selectedProject } = useContext(selectStateContext);
+
   const project = user.projects?.find((e) => e._id === selectedProject);
+  const proId = project?._id;
 
+  if (!project)
+    return (
+      <h4>
+        Bitte wählen Sie links Ihr Projekt oder erstellen ein neues Projekt.
+      </h4>
+    );
   return (
     <>
       <h2>{project?.name}</h2>
@@ -17,7 +28,9 @@ export default function ProjectCard({ user, params, userId, selectedProject }) {
       <p>Kontaktperson: {project?.contact}</p>
       <p>Email Kontakt: {project?.email}</p>
       <p>Aktiv: {project?.active && `Ja`}</p>
-      <Link href="/">{project && <h2>Beschäftigte</h2>}</Link>
+      <Link href={`/${userId}/projects/${proId}`}>
+        <h4>Beschäftigte</h4>
+      </Link>
     </>
   );
 }

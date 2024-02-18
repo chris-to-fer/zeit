@@ -1,20 +1,13 @@
 "use client";
 import React from "react";
 import styles from "../../page.module.css";
-import useSWR from "swr";
+
 import { useRouter } from "next/navigation";
 
-export default function ProjectForm({ params, defaultValue }) {
+export default function ProjectForm({ revalidate, params, defaultValue }) {
   const userId = params.userId;
   const router = useRouter();
   console.log(userId);
-  //   const {
-  //     data: { user } = {},
-  // isLoading,
-  //     mutate,
-  //     error,
-  //   } = useSWR(`/api/${userId}/user`);
-  // const defaultValue = "";
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,9 +22,11 @@ export default function ProjectForm({ params, defaultValue }) {
       },
       body: JSON.stringify(data),
     });
-    console.log("create sent", data);
+
     if (response.ok) {
-      router.push(`/${userId}/projects`);
+      console.log("create sent", data);
+      revalidate();
+      // router.push(`/${userId}/projects`);
     }
   }
 

@@ -15,8 +15,6 @@ export default function Sidebar({ user, userId, proId, projects }) {
         <Link href={`/${userId}/projects/create`}>
           <button>Erstellen</button>
         </Link>
-        <br></br>
-        <button>Bearbeiten</button>
       </ul>
     </aside>
   );

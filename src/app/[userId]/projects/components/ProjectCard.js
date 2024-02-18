@@ -31,6 +31,12 @@ export default function ProjectCard({ user, userId }) {
       <Link href={`/${userId}/projects/${proId}`}>
         <h4>Beschäftigte</h4>
       </Link>
+      <br></br>
+      {selectedProject && (
+        <Link href={{ pathname: `/${userId}/projects/create`, query: project }}>
+          <button>Bearbeiten</button>
+        </Link>
+      )}
     </>
   );
 }

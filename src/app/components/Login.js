@@ -21,7 +21,7 @@ export default function Login(props) {
             Username:
             <input
               type="text"
-              value={username}
+              defaultValue={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </label>
@@ -29,7 +29,7 @@ export default function Login(props) {
             Password:
             <input
               type="password"
-              value={password}
+              defaultValue={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>

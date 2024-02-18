@@ -2,12 +2,10 @@
 import React from "react";
 import styles from "../../page.module.css";
 
-import { useRouter } from "next/navigation";
-
-export default function ProjectForm({ revalidate, params, defaultValue }) {
+export default function ProjectForm({ revalidate, params, searchParams }) {
   const userId = params.userId;
-  const router = useRouter();
-  console.log(userId);
+  const defaultValue = searchParams;
+  console.log("dfevalue", defaultValue);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,21 +24,25 @@ export default function ProjectForm({ revalidate, params, defaultValue }) {
     if (response.ok) {
       console.log("create sent", data);
       revalidate();
-      // router.push(`/${userId}/projects`);
     }
   }
 
   return (
     <form className={styles.form} method="POST" onSubmit={handleSubmit}>
       <label htmlFor="name">Projekt Titel: </label>
-      <input type="text" id="name" name="name" value={defaultValue} />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        defaultValue={defaultValue.name}
+      />
 
       <label htmlFor="projectCode">Projekt Nummer: </label>
       <input
         type="string"
         id="projectCode"
         name="projectCode"
-        value={defaultValue}
+        defaultValue={defaultValue.projectCode}
       />
 
       <label htmlFor="companyName">Firma: </label>
@@ -48,7 +50,7 @@ export default function ProjectForm({ revalidate, params, defaultValue }) {
         type="text"
         id="companyName"
         name="companyName"
-        value={defaultValue}
+        defaultValue={defaultValue.companyName}
       />
 
       <label htmlFor="companyAddress">Anschrift: </label>
@@ -57,7 +59,7 @@ export default function ProjectForm({ revalidate, params, defaultValue }) {
         type="text"
         id="companyAddress"
         name="companyAddress"
-        value={defaultValue}
+        defaultValue={defaultValue.companyAddress}
       />
 
       <label htmlFor="companyPhone">Telefon: </label>
@@ -65,7 +67,7 @@ export default function ProjectForm({ revalidate, params, defaultValue }) {
         type="number"
         id="companyPhone"
         name="companyPhone"
-        value={defaultValue}
+        defaultValue={defaultValue.companyPhone}
       />
 
       <label htmlFor="companyEmail">Email: </label>
@@ -73,20 +75,40 @@ export default function ProjectForm({ revalidate, params, defaultValue }) {
         type="email"
         id="companyEmail"
         name="companyEmail"
-        value={defaultValue}
+        defaultValue={defaultValue.companyEmail}
       />
 
       <label htmlFor="contact">Kontaktperson: </label>
-      <input type="text" id="contact" name="contact" value={defaultValue} />
+      <input
+        type="text"
+        id="contact"
+        name="contact"
+        defaultValue={defaultValue.contact}
+      />
 
       <label htmlFor="email">Email: </label>
-      <input type="email" id="email" name="email" value={defaultValue} />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        defaultValue={defaultValue.email}
+      />
 
       <label htmlFor="invoiceAddress">Rechnungsaddresse: </label>
-      <input type="text" id="invoiceAddress" name="invoiceAddress" />
+      <input
+        type="text"
+        id="invoiceAddress"
+        name="invoiceAddress"
+        defaultValue={defaultValue.invoiceAddress}
+      />
 
       <label htmlFor="active">Aktiv: </label>
-      <input type="checkbox" id="active" name="active" value={defaultValue} />
+      <input
+        type="checkbox"
+        id="active"
+        name="active"
+        defaultValue={defaultValue.active}
+      />
       <p>
         <button type="submit">Änderungen Speichern</button>
         {/* <button type="submit" onClick={onSubmit}>

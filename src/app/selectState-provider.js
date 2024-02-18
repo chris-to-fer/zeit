@@ -1,10 +1,14 @@
 "use client";
 import React, { createContext } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 export const selectStateContext = createContext();
 
 export default function SelectStateProvider({ children }) {
-  const [selectedProject, setSelectedProject] = React.useState("");
+  const [selectedProject, setSelectedProject] = useLocalStorageState(
+    "selectedProject",
+    { defaultvalue: "" }
+  );
 
   return (
     <>

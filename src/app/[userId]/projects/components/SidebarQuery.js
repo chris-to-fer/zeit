@@ -2,6 +2,7 @@
 import React from "react";
 import { useContext } from "react";
 import { selectStateContext } from "@/app/selectState-provider";
+import Link from "next/link";
 
 export default function SidebarQuery({ projects }) {
   const { selectedProject, setSelectedProject } =

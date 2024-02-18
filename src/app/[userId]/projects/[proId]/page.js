@@ -27,7 +27,7 @@ export default async function Page({ children, params }) {
         <ul>
           {employees.map((e) => (
             <li key={e._id}>
-              {e.name} {e.lastName} - {e.position}
+              {e.name} {e.lastName} <strong>{e.position}</strong>
             </li>
           ))}
         </ul>

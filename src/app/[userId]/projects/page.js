@@ -1,59 +1,32 @@
-"use client";
 import styles from "./page.module.css";
-import useSWR, { SWRConfig } from "swr";
 import React from "react";
 import ProjectCard from "./components/ProjectCard";
-import useLocalStorageState from "use-local-storage-state";
 import Sidebar from "./components/Sidebar";
+import SelectStateProvider from "@/app/selectState-provider";
+import { revalidatePath } from "next/cache";
 
-const fetcher = async (url) => {
-  const res = await fetch(url);
-  // If the status code is not in the range 200-299,
-  // we still try to parse and throw it.
-  if (!res.ok) {
-    const error = new Error("An error occurred while fetching the data.");
-    // Attach extra info to the error object.
-    error.info = await res.json();
-    error.status = res.status;
-    throw error;
-  }
-  return await res.json();
-};
-
-export default function Page({ params }) {
-  const [project, setProject] = useLocalStorageState("project", {
-    defaultValue: "",
-  });
+export default async function Page({ children, params }) {
+  const HOSTNAME = process.env.HOSTNAME_URL;
 
   const userId = params.userId;
-  const {
-    data: { projects } = {},
-    data: { users } = {},
-    data: { employees } = {},
-    data: { times } = {},
-    isLoading,
-    mutate,
-    error,
-  } = useSWR(`/api/${userId}/projects`, fetcher);
-  if (isLoading) {
-    return <h2>...is Loading</h2>;
-  }
-  if (!projects) {
-    return null;
-  }
+  revalidatePath(`${HOSTNAME}/`);
+  console.log(`${HOSTNAME}/${userId}/user`);
 
-  const handleClick = (id) => {
-    setProject(id);
-  };
+  const res = await fetch(`${HOSTNAME}/api/${userId}/user`);
+  const data = await res.json();
+  if (!data) return <h3>Data is loading..</h3>;
+  console.log("data_____", data);
+  const user = data.user;
 
   return (
     <>
-      <SWRConfig value={{ fetcher }}>
-        <Sidebar projects={projects} handleClick={handleClick} />
+      <SelectStateProvider>
+        {children}
+        <Sidebar user={user} userId={userId} />
         <div className={styles.card_project}>
-          <ProjectCard projects={projects} project={project} />
+          <ProjectCard user={user} userId={userId} />
         </div>
-      </SWRConfig>
+      </SelectStateProvider>
     </>
   );
 }

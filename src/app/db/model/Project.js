@@ -4,9 +4,8 @@ const { Schema } = mongoose;
 
 const projectSchema = new Schema(
   {
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
-    projectCode: { type: String, required: true, unique: true },
+    projectCode: { type: String, required: true },
 
     companyName: { type: String, required: true },
     companyAddress: { type: String, required: true },
@@ -14,8 +13,8 @@ const projectSchema = new Schema(
     companyEmail: { type: String, required: true },
     contact: { type: String, required: true },
     email: { type: String, required: true },
-    invoiceAddress: { type: String, required: true },
-    active: Boolean,
+    invoiceAddress: { type: String },
+    active: { type: Boolean },
 
     employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
   },

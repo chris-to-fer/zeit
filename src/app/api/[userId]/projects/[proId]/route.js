@@ -14,3 +14,20 @@ export async function GET(request, { params, searchParams }) {
 
   return NextResponse.json({ projects }, { status: 200 });
 }
+
+export async function POST(request, { params, searchParams }, response) {
+  const userId = params.userId;
+  const proId = params.proId;
+  try {
+    await connectDB();
+    const editedForm = await request.json();
+    const updatedProject = await Project.findByIdAndUpdate(proId, {
+      $set: editedForm,
+    });
+    console.log("Server side project edited");
+    return NextResponse.json({ status: 201 });
+  } catch (error) {
+    console.log("Error editing project", error);
+    return NextResponse.json({ status: 400 });
+  }
+}

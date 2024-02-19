@@ -1,31 +1,12 @@
 "use client";
 import React from "react";
 import styles from "../../page.module.css";
+import Link from "next/link";
 
-export default function ProjectForm({ revalidate, params, searchParams }) {
+export default function ProjectForm({ handleSubmit, params, searchParams }) {
   const userId = params.userId;
   const defaultValue = searchParams;
   console.log("dfevalue", defaultValue);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    console.log("submi clickt");
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-
-    const response = await fetch(`/api/${userId}/projects`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      console.log("create sent", data);
-      revalidate();
-    }
-  }
 
   return (
     <form className={styles.form} method="POST" onSubmit={handleSubmit}>
@@ -111,12 +92,10 @@ export default function ProjectForm({ revalidate, params, searchParams }) {
       />
       <p>
         <button type="submit">Änderungen Speichern</button>
-        {/* <button type="submit" onClick={onSubmit}>
-          Abbrechen
-        </button>
-        <button type="submit" onSubmit={onSubmit}>
-          Löschen
-        </button> */}
+        <Link href={`/${userId}/projects`}>
+          <button>Abbrechen</button>
+        </Link>
+        <button type="submit">Löschen</button>
       </p>
     </form>
   );

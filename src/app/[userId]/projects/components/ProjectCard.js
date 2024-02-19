@@ -11,11 +11,7 @@ export default function ProjectCard({ user, userId }) {
   const proId = project?._id;
 
   if (!project)
-    return (
-      <h4>
-        Bitte wählen Sie links Ihr Projekt oder erstellen ein neues Projekt.
-      </h4>
-    );
+    return <h4>Bitte links ein Projekt wählen oder ein neues erstellen.</h4>;
   return (
     <>
       <h2>{project?.name}</h2>
@@ -27,7 +23,7 @@ export default function ProjectCard({ user, userId }) {
       <p>Rechnungsanschrift: {project?.invoiceAddress}</p>
       <p>Kontaktperson: {project?.contact}</p>
       <p>Email Kontakt: {project?.email}</p>
-      <p>Aktiv: {project?.active && `Ja`}</p>
+      <p>Aktiv: {project?.active ? "Ja" : "Nein"}</p>
       <Link href={`/${userId}/projects/${proId}`}>
         <h4>Beschäftigte</h4>
       </Link>

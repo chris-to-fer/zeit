@@ -24,9 +24,6 @@ export async function POST(request, { params, searchParams }, response) {
 
   if (data.name) {
     try {
-      // await connectDB();
-      // const data = await request.json();
-
       const updatedProject = await Project.findByIdAndUpdate(proId, {
         $set: data,
       });
@@ -37,10 +34,15 @@ export async function POST(request, { params, searchParams }, response) {
       return NextResponse.json({ status: 400 });
     }
   } else if (data.message === "DELETE") {
-    const projectToDelete = await Project.findByIdAndDelete(proId);
-    await User.findByIdAndUpdate(userId, {
-      $pull: { projects: proId },
-    });
-    return NextResponse.json({ status: 201 });
+    try {
+      const projectToDelete = await Project.findByIdAndDelete(proId);
+      await User.findByIdAndUpdate(userId, {
+        $pull: { projects: proId },
+      });
+      return NextResponse.json({ status: 201 });
+    } catch (error) {
+      console.log("Error deleting project", error);
+      return NextResponse.json({ status: 400 });
+    }
   }
 }

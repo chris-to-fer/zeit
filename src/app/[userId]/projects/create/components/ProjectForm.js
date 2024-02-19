@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "../../page.module.css";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ProjectForm({
   proId,
@@ -16,6 +17,7 @@ export default function ProjectForm({
   async function handleDelete() {
     console.log("click delete");
     const data = { message: "DELETE" };
+    confirm("Löschen?");
 
     const response = await fetch(`/api/${userId}/projects/${proId}`, {
       method: "POST",
@@ -31,7 +33,7 @@ export default function ProjectForm({
       revalidateDelete();
     }
   }
-
+  const [active, setActive] = useState(true);
   return (
     <>
       <form className={styles.form} action={handleSubmit}>
@@ -110,13 +112,24 @@ export default function ProjectForm({
 
         <label htmlFor="active">Aktiv: </label>
         <input
-          type="checkbox"
+          type="radio"
           id="active"
           name="active"
-          defaultValue={defaultValue.active}
-          value="true"
+          value={true}
+          defaultChecked={defaultValue.active === "true" ? true : false}
+          required
         />
-        {/* <input type="hidden" name="_method" value="PUT" /> */}
+        <label htmlFor="inactive">Inaktiv: </label>
+        <input
+          type="radio"
+          id="inactive"
+          name="active"
+          value={false}
+          defaultChecked={defaultValue.active === "false" ? true : false}
+          required
+        />
+        <p>{defaultValue.active}</p>
+
         <p>
           <button type="submit">Änderungen Speichern</button>
           <Link href={`/${userId}/projects`}>

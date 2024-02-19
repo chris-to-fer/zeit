@@ -31,6 +31,7 @@ export default function PageEdit({ params, searchParams }) {
     );
 
     if (response.ok) {
+      alert("Das Projekt wurde erstellt.");
       console.log("edit sent", data);
       revalidatePath(`${HOSTNAME}/${userId}/projects`);
       redirect(`${HOSTNAME}/${userId}/projects`);

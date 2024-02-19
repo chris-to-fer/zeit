@@ -114,6 +114,7 @@ export default function ProjectForm({
           id="active"
           name="active"
           defaultValue={defaultValue.active}
+          value="true"
         />
         {/* <input type="hidden" name="_method" value="PUT" /> */}
         <p>

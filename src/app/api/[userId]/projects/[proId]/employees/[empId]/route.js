@@ -9,7 +9,7 @@ export async function GET(request, { params, searchParams }) {
   await connectDB();
   const { userId, proId, empId } = params;
   console.log("empid", empId);
-  const emp = await Employee.findById(empId).populate("times");
+  const employee = await Employee.findById(empId).populate("times");
 
-  return NextResponse.json({ emp }, { status: 200 });
+  return NextResponse.json({ employee }, { status: 200 });
 }

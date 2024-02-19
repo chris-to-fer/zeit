@@ -4,17 +4,17 @@ const { Schema } = mongoose;
 
 const timeSchema = new Schema(
   {
-    // employeeId: {
+    // employeeId: [{
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: "Employee",
     //   required: true,
-    // },
+    // }],
 
-    // projectId: {
+    // projectId: [{
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: "Project",
     //   required: true,
-    // },
+    // }],
 
     date: { Date },
 

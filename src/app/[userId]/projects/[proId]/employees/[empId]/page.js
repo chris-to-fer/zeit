@@ -18,12 +18,12 @@ export default async function Page({ params }) {
   console.log("response", res);
   const data = await res.json();
 
-  // if (!data) return null;
-  // const {
-  //   employees: { times },
-  // } = data;
+  if (!data) return null;
+  const {
+    employee: { times },
+  } = data;
 
-  console.log("data", data);
+  console.log("data", times);
   return (
     <>
       <h3>Arbeitszeiten nach Kalenderwochen von XX</h3>

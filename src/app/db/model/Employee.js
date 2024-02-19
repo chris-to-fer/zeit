@@ -20,11 +20,12 @@ const employeeSchema = new Schema(
     //   required: true,
     // },
     // create_at: { type: Date, default: Date.now },
-    times: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Time",
-      required: true,
-    },
+    times: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Time",
+      },
+    ],
   },
 
   {

@@ -15,7 +15,7 @@ export default async function Page({ children, params }) {
   const res = await fetch(`${HOSTNAME}/api/${userId}/user`);
   const data = await res.json();
   if (!data) return <h3>Data is loading..</h3>;
-  console.log("data_____", data);
+
   const user = data.user;
 
   return (

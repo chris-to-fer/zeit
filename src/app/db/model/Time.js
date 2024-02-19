@@ -4,19 +4,19 @@ const { Schema } = mongoose;
 
 const timeSchema = new Schema(
   {
-    employeeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-      required: true,
-    },
+    // employeeId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Employee",
+    //   required: true,
+    // },
 
-    projectID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
-      required: true,
-    },
+    // projectId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Project",
+    //   required: true,
+    // },
 
-    date: { Date, default: Date.now, required: true },
+    date: { Date },
 
     start: { type: Number, required: true },
     end: { type: Number, required: true },

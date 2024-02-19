@@ -1,10 +1,12 @@
 import { headers } from "next/headers";
 import Sidebar from "../components/Sidebar";
 import styles from "../page.module.css";
+import Link from "next/link";
 
 export default async function Page({ children, params }) {
   const userId = params.userId;
   const proId = params.proId;
+
   const HOSTNAME = process.env.HOSTNAME_URL;
 
   const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
@@ -26,9 +28,14 @@ export default async function Page({ children, params }) {
         <h2>Mitarbeiter des Projekts </h2>
         <ul>
           {employees.map((e) => (
-            <li key={e._id}>
-              {e.name} {e.lastName} <strong>{e.position}</strong>
-            </li>
+            <Link
+              href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${e._id}`}
+              key={e._id}
+            >
+              <li>
+                {e.name} {e.lastName} <strong>{e.position}</strong>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

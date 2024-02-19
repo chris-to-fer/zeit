@@ -12,14 +12,19 @@ const employeeSchema = new Schema(
 
     department: { type: String, required: true },
     position: { type: String, required: true },
-    project: { type: String, required: true },
+    // project: { type: String, required: true },
     active: { type: Boolean, required: true },
-    project: {
+    // project: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Project",
+    //   required: true,
+    // },
+    // create_at: { type: Date, default: Date.now },
+    times: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
+      ref: "Time",
       required: true,
     },
-    create_at: { type: Date, default: Date.now },
   },
 
   {

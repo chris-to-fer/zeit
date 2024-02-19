@@ -10,20 +10,16 @@ export default function Create({ params, searchParams }) {
   console.log("pamsssss", searchParams);
   const HOSTNAME = process.env.HOSTNAME_URL;
   const userId = params.userId;
+  const proId = params.proId;
 
-  async function revalidate() {
+  async function handleSubmit(formData) {
     "use server";
-    revalidatePath(`${HOSTNAME}/${userId}/projects`);
-    redirect(`${HOSTNAME}/${userId}/projects`);
-  }
-  async function handleSubmit(e) {
-    "use server";
-    e.preventDefault();
-    console.log("submi clickt");
-    const formData = new FormData(e.target);
+    // e.preventDefault();
+    // console.log("submi clickt");
+    // const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-
-    const response = await fetch(`/api/${userId}/projects`, {
+    //const data = formData;
+    const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +29,8 @@ export default function Create({ params, searchParams }) {
 
     if (response.ok) {
       console.log("create sent", data);
-      revalidate();
+      revalidatePath(`${HOSTNAME}/${userId}/projects`);
+      redirect(`${HOSTNAME}/${userId}/projects`);
     }
   }
 
@@ -41,7 +38,6 @@ export default function Create({ params, searchParams }) {
     <ProjectForm
       searchParams={searchParams}
       params={params}
-      revalidate={revalidate}
       handleSubmit={handleSubmit}
     />
   );

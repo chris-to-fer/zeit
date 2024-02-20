@@ -16,11 +16,11 @@ const timeSchema = new Schema(
     //   required: true,
     // }],
 
-    date: { Date },
+    date: { type: Date, unique: true },
 
-    start: { type: Number, required: true },
-    end: { type: Number, required: true },
-    break: { type: Number, required: true },
+    start: { type: String, required: true },
+    end: { type: String, required: true },
+    break: { type: String, required: true },
     catering: { type: Boolean, required: true },
     travelTo: Number,
     travelBack: Number,

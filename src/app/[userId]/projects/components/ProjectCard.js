@@ -25,7 +25,7 @@ export default function ProjectCard({ user, userId }) {
       <p>Email Kontakt: {project?.email}</p>
       <p>Aktiv: {project?.active ? "Ja" : "Nein"}</p>
       <Link href={`/${userId}/projects/${proId}`}>
-        <h4>Beschäftigte</h4>
+        <h4>Mitarbeiter ➡️</h4>
       </Link>
       <br></br>
       {selectedProject && (

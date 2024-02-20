@@ -26,14 +26,19 @@ export default async function Page({ params, children }) {
     employee: { times },
   } = data;
 
-  console.log("times", times);
+  // console.log("times", times);
 
   const dates = times.map((e) => e.date.slice(0, 19).replace(/T/g, " "));
   const weeks = makeWeeks(dates);
   console.log("weeks", weeks);
   const weeksFilled = [];
   fillWeeks(weeksFilled, weeks, proId, userId, empId, HOSTNAME);
-
+  weeksFilled.sort(
+    (a, b) =>
+      b.key.slice(5, weeksFilled[weeksFilled.indexOf(b)].length) -
+      a.key.slice(5, weeksFilled[weeksFilled.indexOf(a)].length)
+  );
+  // console.log("WF ", weeksFilled);
   return (
     <>
       <Sidebar proId={proId} />

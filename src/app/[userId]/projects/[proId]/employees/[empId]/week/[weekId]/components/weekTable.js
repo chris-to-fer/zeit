@@ -3,18 +3,26 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "date", headerName: "Datum", width: 19 },
+  { field: "start", headerName: "Start", width: 130 },
+  { field: "end", headerName: "Ende", width: 130 },
+  { field: "break", headerName: "Pause", width: 70 },
+  { field: "catering", headerName: "Catering", width: 130 },
+  { field: "travelTo", headerName: "Hinreise", width: 130 },
+  { field: "travelBack", headerName: "Rückreise", width: 70 },
+  { field: "type", headerName: "Art", width: 130 },
+  { field: "place", headerName: "Ort", width: 130 },
+  { field: "isHome", headerName: "zu Hause", width: 70 },
+
+  //   {
+  //     field: "age",
+  //     headerName: "Age",
+  //     type: "number",
+  //     width: 90,
+  //   },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
+    field: "comment",
+    headerName: "Kommentar",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
@@ -37,16 +45,16 @@ const rows = [
 
 export default function DataTable() {
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 500, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 7 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[7, 10]}
         checkboxSelection
       />
     </div>

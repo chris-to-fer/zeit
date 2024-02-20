@@ -2,7 +2,7 @@ import React from "react";
 import { revalidatePath } from "next/cache";
 import Sidebar from "../../../components/Sidebar";
 import styles from "../../../page.module.css";
-import makeWeeks from "@/app/lib/MakeWeeks";
+import makeWeeks from "@/app/lib/makeWeeks";
 import fillWeeks from "@/app/lib/fillWeeks";
 
 export default async function Page({ params, children }) {
@@ -38,7 +38,21 @@ export default async function Page({ params, children }) {
       b.key.slice(5, weeksFilled[weeksFilled.indexOf(b)].length) -
       a.key.slice(5, weeksFilled[weeksFilled.indexOf(a)].length)
   );
-  // console.log("WF ", weeksFilled);
+  console.log("WF ", weeksFilled);
+  // function germanDateSwap(weeksFilled) {
+  //   console.log(
+  //     "test ",
+  //     weeksFilled.map((e) =>
+  //       e.date
+  //         .split()
+  //         .splice(1, 0, e.date[e.date.length - 1])
+  //         .splice(e.date.length - 1, 1, e.date[0])
+  //         .join()
+  //     )
+  //   );
+  // }
+  // germanDateSwap(weeksFilled);
+
   return (
     <>
       <Sidebar proId={proId} />

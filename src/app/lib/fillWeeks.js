@@ -11,7 +11,12 @@ export default function fillWeeks(
   for (const [key, value] of Object.entries(weeks)) {
     weeksFilled.push(
       <li key={key}>
-        <Link href={`${HOSTNAME}/${userId}/projects`}> {key}:</Link>{" "}
+        <Link
+          href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${key}`}
+        >
+          {" "}
+          {key}:
+        </Link>{" "}
         {value.map((e, index) => {
           if (index !== value.length - 1) {
             return (

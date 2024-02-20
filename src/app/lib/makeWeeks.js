@@ -6,7 +6,7 @@ export default function makeWeeks(dates) {
       super(...args);
     }
 
-    toLocaleDateString = (dates) => super.toLocaleDateString("fa-IR-u-nu-latn");
+    toLocaleDateString = () => super.toLocaleDateString("fa-IR-u-nu-latn");
     getParts = () => this.toLocaleDateString().split("/");
     getDay = () => (super.getDay() === 6 ? 0 : super.getDay() + 1);
     getDate = () => this.getParts()[2];
@@ -16,9 +16,17 @@ export default function makeWeeks(dates) {
     getDayName = () => this.toLocaleDateString("fa-IR", { weekday: "long" });
   }
 
-  // [
-  // "1396-10-11 09:07:21",
-  // "1396-10-10 10:03:51",
+  // const dates = [
+  //   "1396-10-11 09:07:21",
+  //   "1396-10-10 10:03:51",
+  //   "1396-10-07 02:07:02",
+  //   "1396-11-27 08:02:45",
+  //   "1396-11-19 01:02:32",
+  //   "1396-12-01 22:13:21",
+  //   "1396-02-12 09:07:21",
+  //   "1396-05-18 04:02:29",
+  //   "1396-05-21 14:01:42",
+  //   "1396-07-11 01:16:29"
   // ];
 
   const groups = dates.reduce((acc, curr) => {
@@ -43,7 +51,6 @@ export default function makeWeeks(dates) {
 
     return acc;
   }, {});
-
   return groups;
 
   //______________________________________end make weeks from days

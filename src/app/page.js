@@ -1,23 +1,31 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import styles from "./page.module.css";
-import Login from "./components/Login";
+import { useSession, signOut, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const [seen, setSeen] = useState(false);
+  const { data: session, status, user } = useSession();
+  console.log("session", session);
+  console.log("user", user);
+  console.log("status", status);
 
-  function togglePop() {
-    setSeen(!seen);
-  }
+  useEffect(() => {
+    session && router.push(`/${session?.user.userId}/projects`);
+  }, [session, user, router]);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
           New here?&nbsp;
           <code className={styles.code}>register</code>
+          {session && "you are logged in"}
         </p>
-        <div>
+        {/* <div>
           <a href="https://google.de" target="_blank" rel="noopener noreferrer">
             By{" "}
             <Image
@@ -29,15 +37,17 @@ export default function Home() {
               priority
             />
           </a>
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.center}>
         <h1>z e i t</h1>
       </div>
+      {session && <p>Signed in as {session.user.email}</p>}
+      {/* {!session && <p>Not signed in</p>} */}
 
       <div className={styles.grid}>
-        <a
+        {/* <a
           href="https://google.de"
           className={styles.card}
           target="_blank"
@@ -47,39 +57,26 @@ export default function Home() {
             How does it work? <span>-&gt;</span>
           </h2>
           <p>Quick overview and demo.</p>
-        </a>
-
-        <a
-          href="https://google.de"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            What are the benefits? <span>-&gt;</span>
-          </h2>
-          <p>See how you save time and become accounting&apos;s best friend</p>
-        </a>
-
-        <a
-          href="https://google.de"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Video <span>-&gt;</span>
-          </h2>
-          <p>Watch a 5 min explains it all video</p>
-        </a>
-
-        <button onClick={togglePop} className={styles.card}>
-          <h2>
-            Login <span>-&gt;</span>
-          </h2>
-          <p></p>
-        </button>
-        {seen ? <Login toggle={togglePop} /> : null}
+        </a> */}
+        {!session && (
+          <button onClick={() => signIn()} className={styles.card}>
+            <h2>
+              Login <span>-&gt;</span>
+            </h2>
+            <p></p>
+          </button>
+        )}
+        {session && (
+          <button onClick={() => signOut()} className={styles.card}>
+            <h2>
+              Logout <span>-&gt;</span>
+            </h2>
+            <p></p>
+          </button>
+        )}
+        {/* marcel button:  */}
+        {/* {session && <button onClick={() => signOut()}>Sign out</button>}
+        {!session && <button onClick={() => signIn()}>Sign in</button>} */}
       </div>
     </main>
   );

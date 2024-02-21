@@ -1,20 +1,22 @@
 "use client";
 import { useState } from "react";
-
 import styles from "./page.module.css";
-
 import { useSession, signOut, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const [seen, setSeen] = useState(false);
   const { data: session, status, user } = useSession();
   console.log("session", session);
   console.log("user", user);
   console.log("status", status);
 
-  function togglePop() {
-    setSeen(!seen);
-  }
+  useEffect(() => {
+    session && router.push(`/${session?.user.userId}/projects`);
+  }, [session, user, router]);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>

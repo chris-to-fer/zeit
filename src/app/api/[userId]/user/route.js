@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
-import Time from "@/app/db/model/Time";
+import Project from "@/app/db/model/Project";
 
 export async function GET(request, { params, searchParams }) {
   await connectDB();

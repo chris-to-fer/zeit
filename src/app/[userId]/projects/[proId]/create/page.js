@@ -1,27 +1,16 @@
 import React from "react";
-import ProjectForm from "./components/ProjectForm";
-// import mongoose from "mongoose";
-// import { headers } from "next/headers";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import EmpForm from "./components/EmpForm";
 
-export default function Create({ params, searchParams }) {
+export default function CreateEmployees({ params }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
-  const userId = params.userId;
-  const proId = params.proId;
+  const { userId, proId } = params.userId;
 
   async function handleSubmit(formData) {
     "use server";
-    // e.preventDefault();
-    // console.log("submi clickt");
-    // const formData = new FormData(e.target);
-
     let data = Object.fromEntries(formData);
-
-    data = { ...data, createdBy: userId };
-
-    //const data = formData;
+    // data = { ...data, createdBy: userId };
     const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
       method: "POST",
       headers: {
@@ -29,19 +18,17 @@ export default function Create({ params, searchParams }) {
       },
       body: JSON.stringify(data),
     });
-
     if (response.ok) {
-      console.log("create sent", data);
+      console.log("create employee sent:", data);
       revalidatePath(`${HOSTNAME}/${userId}/projects`);
       redirect(`${HOSTNAME}/${userId}/projects`);
     }
   }
 
   return (
-    <ProjectForm
-      searchParams={searchParams}
-      params={params}
-      handleSubmit={handleSubmit}
-    />
+    <div>
+      page um mitarbeiter hinzuzufügen
+      <EmpForm />
+    </div>
   );
 }

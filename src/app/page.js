@@ -44,7 +44,7 @@ export default function Home() {
         <h1>z e i t</h1>
       </div>
       {session && <p>Signed in as {session.user.email}</p>}
-      {!session && <p>Not signed in</p>}
+      {/* {!session && <p>Not signed in</p>} */}
 
       <div className={styles.grid}>
         {/* <a

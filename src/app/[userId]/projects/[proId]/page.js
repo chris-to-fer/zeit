@@ -19,7 +19,6 @@ export default async function Page({ children, params }) {
   const {
     projects: { employees },
   } = data;
-  console.log("Emp data", data.projects);
 
   return (
     <>

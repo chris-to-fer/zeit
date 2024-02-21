@@ -1,40 +1,12 @@
 "use client";
+
 import React from "react";
-import styles from "../../page.module.css";
-import Link from "next/link";
+import styles from "../../../../../page.module.css";
 
-export default function ProjectForm({
-  proId,
-  handleSubmit,
-  params,
-  searchParams,
-  revalidateDelete,
-}) {
-  const userId = params.userId;
-  const defaultValue = searchParams;
-
-  async function handleDelete() {
-    const data = { message: "DELETE" };
-    confirm("Löschen?");
-
-    const response = await fetch(`/api/${userId}/projects/${proId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      console.log("ERROR DELETING");
-    }
-    if (response.ok) {
-      revalidateDelete();
-    }
-  }
-
+export default function EmpForm() {
   return (
     <>
-      <form className={styles.form} action={handleSubmit}>
+      <form className={styles.form} action="">
         <label htmlFor="name">Projekt Titel: </label>
         <input
           type="text"
@@ -109,12 +81,12 @@ export default function ProjectForm({
         />
 
         {/* <input
-          type="text"
-          id="createdBy"
-          name="createdBy"
-          value={userId}
-          hidden
-        /> */}
+      type="text"
+      id="createdBy"
+      name="createdBy"
+      value={userId}
+      hidden
+    /> */}
 
         <label htmlFor="active">Aktiv: </label>
         <input

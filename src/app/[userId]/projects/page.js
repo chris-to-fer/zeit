@@ -5,6 +5,17 @@ import Sidebar from "./components/Sidebar";
 import SelectStateProvider from "@/app/selectState-provider";
 import { revalidatePath } from "next/cache";
 
+/*
+import { getServerSession } from "next-auth";
+
+const ServerComponent = async () => {
+  const session = await getServerSession(authOptions);
+  return ()
+}
+
+
+*/
+
 export default async function Page({ children, params }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
 
@@ -24,6 +35,8 @@ export default async function Page({ children, params }) {
         {children}
         <Sidebar user={user} userId={userId} />
         <div className={styles.card_project}>
+          {/* {session && <p>Signed in as {session.user.email}</p>}
+          {!session && <p>Not signed in</p>} */}
           <ProjectCard user={user} userId={userId} />
         </div>
       </SelectStateProvider>

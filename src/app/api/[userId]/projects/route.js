@@ -10,6 +10,7 @@ export async function POST(request, { params, searchParams }, response) {
     await connectDB();
 
     const dataFromForm = await request.json();
+    console.log("server data from form", dataFromForm);
 
     const newProject = await Project.create(dataFromForm);
     await User.findByIdAndUpdate(

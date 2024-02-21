@@ -6,7 +6,11 @@ const projectSchema = new Schema(
   {
     name: { type: String, required: true },
     projectCode: { type: String, required: true },
-
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+    },
     companyName: { type: String, required: true },
     companyAddress: { type: String, required: true },
     companyPhone: Number,

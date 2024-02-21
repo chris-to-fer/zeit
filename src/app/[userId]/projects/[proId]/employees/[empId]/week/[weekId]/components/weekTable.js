@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { useParams } from "next/navigation";
 
 const columns = [
   { field: "date", headerName: "Datum", width: 19 },
@@ -43,7 +44,18 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export default function DataTable() {
+export default function DataTable({ params }) {
+  const paramsis = useParams();
+  const { userId, proId, empId } = paramsis;
+  async function fetchData() {
+    const res = await fetch(
+      `/api/${userId}/projects/${proId}/employees/${empId}/week`
+    );
+    const data = await res.json();
+  }
+  const data = fetchData() || [];
+  if (!data) return <h3>is loading</h3>;
+  console.log("data", data);
   return (
     <div style={{ height: 500, width: "100%" }}>
       <DataGrid

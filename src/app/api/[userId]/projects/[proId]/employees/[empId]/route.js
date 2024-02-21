@@ -8,8 +8,10 @@ import Time from "@/app/db/model/Time";
 export async function GET(request, { params, searchParams }) {
   await connectDB();
   const { userId, proId, empId } = params;
+  console.log("RM ", request.method);
+  if (request.method === "GET") {
+    const employee = await Employee.findById(empId).populate("times");
 
-  const employee = await Employee.findById(empId).populate("times");
-
-  return NextResponse.json({ employee }, { status: 200 });
+    return NextResponse.json({ employee }, { status: 200 });
+  }
 }

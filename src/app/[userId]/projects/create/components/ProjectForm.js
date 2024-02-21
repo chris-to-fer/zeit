@@ -110,6 +110,14 @@ export default function ProjectForm({
           defaultValue={defaultValue.invoiceAddress}
         />
 
+        {/* <input
+          type="text"
+          id="createdBy"
+          name="createdBy"
+          value={userId}
+          hidden
+        /> */}
+
         <label htmlFor="active">Aktiv: </label>
         <input
           type="radio"
@@ -119,6 +127,7 @@ export default function ProjectForm({
           defaultChecked={defaultValue.active === "true" ? true : false}
           required
         />
+
         <label htmlFor="inactive">Inaktiv: </label>
         <input
           type="radio"

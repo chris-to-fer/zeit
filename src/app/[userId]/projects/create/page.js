@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectForm from "./components/ProjectForm";
+import mongoose from "mongoose";
 
 import { headers } from "next/headers";
 
@@ -17,7 +18,11 @@ export default function Create({ params, searchParams }) {
     // e.preventDefault();
     // console.log("submi clickt");
     // const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+
+    let data = Object.fromEntries(formData);
+
+    data = { ...data, createdBy: userId };
+
     //const data = formData;
     const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
       method: "POST",

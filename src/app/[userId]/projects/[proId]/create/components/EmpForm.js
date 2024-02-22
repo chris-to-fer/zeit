@@ -9,21 +9,23 @@ export default function EmpForm({
   defaultValue,
   revalidateDelete,
   handleSubmit,
-  searchParams,
 }) {
   const router = useRouter();
-  const { proId, userId } = params;
+  const { proId, userId, empId } = params;
 
   async function handleDelete() {
     const data = { method: "DELETEEMPLOYEE" };
     confirm("Löschen?");
-    const response = await fetch(`/api/${userId}/projects/${proId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `/api/${userId}/projects/${proId}/employees/${empId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     if (!response.ok) {
       console.log("ERROR DELETING");
     }
@@ -116,7 +118,7 @@ export default function EmpForm({
 
         <p>
           <button type="submit">Änderungen Speichern</button>
-          <Link href={`/${userId}/projects/${proId}`}>
+          <Link href={`/${userId}/projects/${proId}/`}>
             <button>Abbrechen</button>
           </Link>
         </p>

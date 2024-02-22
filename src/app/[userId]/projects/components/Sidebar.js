@@ -23,7 +23,7 @@ export default function Sidebar({ params, projects, project, employee }) {
             <br></br>
             <Link
               href={{
-                pathname: `/${userId}/projects/${proId}/create`,
+                pathname: `/${userId}/projects/${proId}/employees/${empId}/edit`,
                 query: employee,
               }}
             >

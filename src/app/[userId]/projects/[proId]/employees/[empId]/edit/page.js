@@ -1,13 +1,11 @@
 import React from "react";
-import ProjectForm from "../../create/components/ProjectForm";
+import EmpForm from "../../../create/components/EmpForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 
-export default function PageEdit({ params, searchParams }) {
+export default function PageEditEmployee({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
-  const userId = params.userId;
-  const proId = params.proId;
+  const { userId, proId, empId } = params;
 
   async function handleSubmit(formData) {
     "use server";
@@ -15,10 +13,10 @@ export default function PageEdit({ params, searchParams }) {
     // console.log("submi clickt");
     //const formData = new FormData(e.target);
     const formedData = Object.fromEntries(formData);
-    const data = { ...formedData, method: "EDITPROJECT" };
+    const data = { ...formedData, method: "EDITEMPLOYEE" };
 
     const response = await fetch(
-      `${HOSTNAME}/api/${userId}/projects/${proId}`,
+      `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
       {
         method: "POST",
         headers: {
@@ -30,25 +28,24 @@ export default function PageEdit({ params, searchParams }) {
 
     if (response.ok) {
       // alert("Das Projekt wurde erstellt.");
-      console.log("edit sent", data);
-      revalidatePath(`${HOSTNAME}/${userId}/projects`);
-      redirect(`${HOSTNAME}/${userId}/projects`);
+      console.log("edit employee sent", data);
+      //   revalidatePath(`${HOSTNAME}/${userId}/projects/employees/${empId}`);
+      redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
   }
   async function revalidateDelete() {
     "use server";
     console.log("delete sent");
-    revalidatePath(`${HOSTNAME}/${userId}/projects`);
-    redirect(`${HOSTNAME}/${userId}/projects`);
+    revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}`);
+    redirect(`${HOSTNAME}/${userId}/projects/${proId}`);
   }
 
   return (
     <>
-      <ProjectForm
-        searchParams={searchParams}
+      <EmpForm
+        defaultValue={searchParams}
         params={params}
         handleSubmit={handleSubmit}
-        proId={proId}
         revalidateDelete={revalidateDelete}
       />
     </>

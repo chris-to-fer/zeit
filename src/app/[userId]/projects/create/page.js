@@ -11,7 +11,7 @@ export default function Create({ params, searchParams }) {
     "use server";
     let data = Object.fromEntries(formData);
     data = { ...data, createdBy: userId, method: "CREATEPROJECT" };
-    const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
+    const response = await fetch(`${HOSTNAME}/api/${userId}/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

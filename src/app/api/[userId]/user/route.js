@@ -10,3 +10,26 @@ export async function GET(request, { params, searchParams }) {
   const user = await User.findById(userId).populate("projects");
   return NextResponse.json({ user }, { status: 200 });
 }
+
+export async function POST(request, { params, searchParams }, response) {
+  await connectDB();
+  const data = await request.json();
+  const method = await data.method;
+  const { userId } = params;
+
+  if (method === "CREATEPROJECT") {
+    try {
+      const newProject = await Project.create(data);
+      await User.findByIdAndUpdate(
+        userId,
+        { $push: { projects: newProject._id } },
+        { new: true }
+      );
+      console.log("Server side project created");
+      return NextResponse.json({ status: 201 });
+    } catch (error) {
+      console.log("Error posting new project", error);
+      return NextResponse.json({ status: 400 });
+    }
+  }
+}

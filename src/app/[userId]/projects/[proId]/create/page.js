@@ -24,9 +24,7 @@ export default function CreateEmployees({ params, searchParams }) {
     if (response.ok) {
       console.log("create employee sent:", data);
 
-      revalidatePath(
-        `/${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
-      );
+      // revalidatePath(`/${HOSTNAME}/${userId}/projects/${proId}`);
       redirect(`/${userId}/projects/${proId}`);
     }
   }

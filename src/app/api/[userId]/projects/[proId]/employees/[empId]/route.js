@@ -40,6 +40,7 @@ export async function POST(request, { params, searchParams }, response) {
     }
   } else if (method === "CREATEEMPLOYEE") {
     // const proIdi = data.project;
+    console.log("method frióm create", data);
 
     try {
       const newEmployee = await Employee.create(data);

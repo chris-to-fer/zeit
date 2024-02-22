@@ -6,6 +6,7 @@ import Employee from "@/app/db/model/Employee";
 
 export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
+  console.log("HAAAALLLLLLOOOOOOOOOOO");
   await connectDB();
   const proId = params.proId;
   console.log("paramsss", params);
@@ -34,6 +35,7 @@ export async function POST(request, { params, searchParams }, response) {
     }
   } else if (data.method === "DELETEPROJECT") {
     //DELETE PROJECT
+
     try {
       const projectToDelete = await Project.findByIdAndDelete(proId);
       await User.findByIdAndUpdate(userId, {

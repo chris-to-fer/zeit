@@ -11,14 +11,18 @@ export default async function Page({ children, params }) {
 
   const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
     method: "GET",
-    // headers: headers(),
-    headers: {
-      "Content-Type": "application/json",
-    },
+    cache: "no-store",
   });
+  // , {
+  //   method: "GET",
+  //   // headers: headers(),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
 
   const data = await res.json();
-  if (!data) return <h3>no data</h3>;
+  if (!data) return <h3>loading</h3>;
   const {
     projects: { employees },
   } = data;

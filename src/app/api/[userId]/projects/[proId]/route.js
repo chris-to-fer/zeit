@@ -5,7 +5,7 @@ import User from "@/app/db/model/User";
 import Employee from "@/app/db/model/Employee";
 
 export async function GET(request, { params, searchParams }) {
-  //GET EMPLOYEES OVER PROJECTS POPULATE
+  //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
   await connectDB();
   const proId = params.proId;
   if (request.method === "GET") {

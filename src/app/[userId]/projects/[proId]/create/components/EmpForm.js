@@ -16,13 +16,16 @@ export default function EmpForm({
   async function handleDelete() {
     const data = { method: "DELETEEMPLOYEE" };
     confirm("Löschen?");
-    const response = await fetch(`/api/${userId}/projects/${proId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `/api/${userId}/projects/${proId}/employees/${empId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     if (!response.ok) {
       console.log("ERROR DELETING");
     }

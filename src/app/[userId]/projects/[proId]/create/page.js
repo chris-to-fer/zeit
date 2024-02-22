@@ -5,7 +5,7 @@ import EmpForm from "./components/EmpForm";
 
 export default function CreateEmployees({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
-  const { userId, proId } = params;
+  const { userId, proId, empId } = params;
 
   async function handleSubmit(formData) {
     "use server";

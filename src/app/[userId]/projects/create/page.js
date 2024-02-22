@@ -1,27 +1,16 @@
 import React from "react";
 import ProjectForm from "./components/ProjectForm";
-// import mongoose from "mongoose";
-// import { headers } from "next/headers";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default function Create({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
-  const userId = params.userId;
-  const proId = params.proId;
+  const { proId, userId } = params;
 
   async function handleSubmit(formData) {
     "use server";
-    // e.preventDefault();
-    // console.log("submi clickt");
-    // const formData = new FormData(e.target);
-
     let data = Object.fromEntries(formData);
-
-    data = { ...data, createdBy: userId };
-
-    //const data = formData;
+    data = { ...data, createdBy: userId, method: "CREATEPROJECT" };
     const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
       method: "POST",
       headers: {
@@ -31,10 +20,16 @@ export default function Create({ params, searchParams }) {
     });
 
     if (response.ok) {
+      // revalidate();
       console.log("create sent", data);
-      revalidatePath(`${HOSTNAME}/${userId}/projects`);
-      redirect(`${HOSTNAME}/${userId}/projects`);
+      revalidatePath(`/${HOSTNAME}/${userId}/projects`);
+      redirect(`/${userId}/projects`);
     }
+  }
+  async function revalidate() {
+    "use server";
+    // revalidatePath(`/${HOSTNAME}/${userId}/projects`);
+    // redirect(`/${userId}/projects`);
   }
 
   return (
@@ -42,6 +37,7 @@ export default function Create({ params, searchParams }) {
       searchParams={searchParams}
       params={params}
       handleSubmit={handleSubmit}
+      revalidateDelete={revalidate}
     />
   );
 }

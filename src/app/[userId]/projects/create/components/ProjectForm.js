@@ -2,15 +2,16 @@
 import React from "react";
 import styles from "../../page.module.css";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function ProjectForm({
   proId,
   handleSubmit,
-  params,
+
   searchParams,
   revalidateDelete,
 }) {
-  const userId = params.userId;
+  const userId = useParams().userId;
   const defaultValue = searchParams;
 
   async function handleDelete() {
@@ -28,7 +29,7 @@ export default function ProjectForm({
       console.log("ERROR DELETING");
     }
     if (response.ok) {
-      revalidateDelete();
+      revalidate();
     }
   }
 

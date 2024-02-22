@@ -58,6 +58,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   gap: 5px;
+  height: 100%;
 }
 
 .footer {

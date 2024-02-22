@@ -27,7 +27,7 @@ export default async function Page({ children, params }) {
     <>
       <SelectStateProvider>
         {children}
-        <Sidebar user={user} userId={userId} />
+        <Sidebar projects={user.projects} userId={userId} />
         <div className={styles.card_project}>
           {/* {session && <p>Signed in as {session.user.email}</p>}
           {!session && <p>Not signed in</p>} */}

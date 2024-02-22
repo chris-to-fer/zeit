@@ -55,7 +55,7 @@ export default async function Page({ params, children }) {
 
   return (
     <>
-      <Sidebar proId={proId} />
+      <Sidebar proId={proId} projectName={data.name} />
       <div className={styles.card_project}>
         <h3>
           {data.employee.name} {data.employee.lastName}, Arbeitszeiten nach

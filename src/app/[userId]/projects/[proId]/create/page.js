@@ -10,7 +10,7 @@ export default function CreateEmployees({ params }) {
   async function handleSubmit(formData) {
     "use server";
     let data = Object.fromEntries(formData);
-    // data = { ...data, createdBy: userId };
+    data = { ...data, method: "CREATEEMPLOYEE" };
     const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
       method: "POST",
       headers: {
@@ -20,15 +20,16 @@ export default function CreateEmployees({ params }) {
     });
     if (response.ok) {
       console.log("create employee sent:", data);
-      revalidatePath(`${HOSTNAME}/${userId}/projects`);
-      redirect(`${HOSTNAME}/${userId}/projects`);
+
+      revalidatePath(`/${HOSTNAME}/${userId}/projects/${proId}`);
+      redirect(`/${userId}/projects/${proId}`);
     }
   }
 
   return (
     <div>
       page um mitarbeiter hinzuzufügen
-      <EmpForm />
+      <EmpForm params={params} handleSubmit={handleSubmit} />
     </div>
   );
 }

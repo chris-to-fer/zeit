@@ -6,23 +6,19 @@ import Employee from "@/app/db/model/Employee";
 
 export async function GET(request, { params, searchParams }) {
   await connectDB();
-  const method = request.method;
-  console.log("get method:", method);
   const proId = params.proId;
-
-  const projects = await Project.findById(proId).populate("employees");
-
-  return NextResponse.json({ projects }, { status: 200 });
+  if (request.method === "GET") {
+    const projects = await Project.findById(proId).populate("employees");
+    return NextResponse.json({ projects }, { status: 200 });
+  }
 }
 
 export async function POST(request, { params, searchParams }, response) {
   await connectDB();
-  const userId = params.userId;
-  const proId = params.proId;
+  const { empId, userId, proId } = params;
   const data = await request.json();
   const method = await request.body.message;
-
-  if (data.name) {
+  if (data.projectCode) {
     try {
       const updatedProject = await Project.findByIdAndUpdate(proId, {
         $set: data,
@@ -33,7 +29,7 @@ export async function POST(request, { params, searchParams }, response) {
       console.log("Error editing project", error);
       return NextResponse.json({ status: 400 });
     }
-  } else if (data.message === "DELETE") {
+  } else if (data.projectCode && data.message === "DELETE") {
     try {
       const projectToDelete = await Project.findByIdAndDelete(proId);
       await User.findByIdAndUpdate(userId, {

@@ -22,7 +22,7 @@ export default async function Page({ children, params }) {
 
   return (
     <>
-      <Sidebar userId={userId} proId={proId} projects={[data.projects]} />
+      <Sidebar params={params} project={data.projects} />
       <div className={styles.card_project}>
         <h2>Mitarbeiter des Projekts </h2>
         <ul>

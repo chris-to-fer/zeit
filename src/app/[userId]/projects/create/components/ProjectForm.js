@@ -2,19 +2,19 @@
 import React from "react";
 import styles from "../../page.module.css";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function ProjectForm({
   proId,
   handleSubmit,
-  params,
   searchParams,
   revalidateDelete,
 }) {
-  const userId = params.userId;
+  const userId = useParams().userId;
   const defaultValue = searchParams;
 
   async function handleDelete() {
-    const data = { message: "DELETE" };
+    const data = { method: "DELETE" };
     confirm("Löschen?");
 
     const response = await fetch(`/api/${userId}/projects/${proId}`, {

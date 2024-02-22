@@ -12,7 +12,11 @@ const employeeSchema = new Schema(
 
     department: { type: String, required: true },
     position: { type: String, required: true },
-    // project: { type: String, required: true },
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+    },
     active: { type: Boolean, required: true },
     // project: {
     //   type: mongoose.Schema.Types.ObjectId,

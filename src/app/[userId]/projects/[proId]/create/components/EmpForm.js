@@ -9,10 +9,9 @@ export default function EmpForm({
   defaultValue,
   revalidateDelete,
   handleSubmit,
-  searchParams,
 }) {
   const router = useRouter();
-  const { proId, userId } = params;
+  const { proId, userId, empId } = params;
 
   async function handleDelete() {
     const data = { method: "DELETEEMPLOYEE" };
@@ -116,7 +115,7 @@ export default function EmpForm({
 
         <p>
           <button type="submit">Änderungen Speichern</button>
-          <Link href={`/${userId}/projects/${proId}`}>
+          <Link href={`/${userId}/projects/${proId}/`}>
             <button>Abbrechen</button>
           </Link>
         </p>

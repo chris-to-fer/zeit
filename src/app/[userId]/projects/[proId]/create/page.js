@@ -11,13 +11,16 @@ export default function CreateEmployees({ params, searchParams }) {
     "use server";
     let data = Object.fromEntries(formData);
     data = { ...data, method: "CREATEEMPLOYEE", project: proId };
-    const response = await fetch(`${HOSTNAME}/api/${userId}/projects/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     if (response.ok) {
       console.log("create employee sent:", data);
 

@@ -21,7 +21,7 @@ export async function POST(request, { params, searchParams }, response) {
   const data = await request.json();
   const method = data.method;
   // if (data.projectCode) {
-  if (method === "EDIT") {
+  if (method === "EDITPROJECT") {
     try {
       const updatedProject = await Project.findByIdAndUpdate(proId, {
         $set: data,
@@ -32,7 +32,7 @@ export async function POST(request, { params, searchParams }, response) {
       console.log("Error editing project", error);
       return NextResponse.json({ status: 400 });
     }
-  } else if (data.method === "DELETE") {
+  } else if (data.method === "DELETEPROJECT") {
     //DELETE PROJECT
     try {
       const projectToDelete = await Project.findByIdAndDelete(proId);

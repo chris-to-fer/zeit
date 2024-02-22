@@ -11,10 +11,10 @@ export default async function Page({ children, params }) {
 
   const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
     method: "GET",
-    headers: headers(),
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
+    // headers: headers(),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   const data = await res.json();

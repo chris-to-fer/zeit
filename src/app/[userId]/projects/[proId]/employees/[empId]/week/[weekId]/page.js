@@ -21,7 +21,7 @@ export default async function PageWeek({ params, children }) {
   if (!data) return null;
   return (
     <>
-      <Sidebar params={params} employee={data} />
+      {/* <Sidebar params={params} employee={data} /> */}
       <div className={styles.card_project}>
         <h3>Woche</h3>
         <DataTable />

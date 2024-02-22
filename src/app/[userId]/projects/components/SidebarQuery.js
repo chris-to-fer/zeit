@@ -3,6 +3,8 @@ import React from "react";
 import { useContext } from "react";
 import { selectStateContext } from "@/app/selectState-provider";
 import Link from "next/link";
+import styles from "../../../page.module.css";
+import styled from "../page.module.css";
 
 export default function SidebarQuery({ projects }) {
   const { selectedProject, setSelectedProject } =
@@ -14,10 +16,19 @@ export default function SidebarQuery({ projects }) {
 
   return (
     <>
-      {projects?.map((e) => (
-        <button key={e._id} onClick={() => handleClick(e._id)}>
-          <li>{e.name}</li>
-        </button>
+      {projects?.map((e, index) => (
+        <li key={e._id} className={styles.card}>
+          <button onClick={() => handleClick(e._id)} className={styled.button}>
+            <span>
+              <h3>{e.name}</h3>
+            </span>
+
+            <br></br>
+            <br></br>
+
+            {index === projects.length - 1 && <hr />}
+          </button>
+        </li>
       ))}
     </>
   );

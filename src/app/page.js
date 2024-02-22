@@ -74,9 +74,6 @@ export default function Home() {
             <p></p>
           </button>
         )}
-        {/* marcel button:  */}
-        {/* {session && <button onClick={() => signOut()}>Sign out</button>}
-        {!session && <button onClick={() => signIn()}>Sign in</button>} */}
       </div>
     </main>
   );

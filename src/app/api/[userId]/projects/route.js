@@ -9,12 +9,13 @@ export async function POST(request, { params, searchParams }, response) {
   await connectDB();
   const data = await request.json();
   const method = await data.method;
-  const { userId, proId, empId } = params;
+  const { userId, empId } = params;
+  let proId = params.proId;
+
   console.log("params server", params);
   console.log("method ", method);
 
   if (method === "CREATEPROJECT") {
-    console.log("trigger method:", method);
     try {
       const newProject = await Project.create(data);
       await User.findByIdAndUpdate(
@@ -29,7 +30,6 @@ export async function POST(request, { params, searchParams }, response) {
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "DELETEEMPLOYEE") {
-    console.log("trigger method:", method);
     try {
       const employeeToDelete = await Employee.findByIdAndDelete(empId);
       await Project.findByIdAndUpdate(proId, {
@@ -41,7 +41,8 @@ export async function POST(request, { params, searchParams }, response) {
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "CREATEEMPLOYEE") {
-    console.log("trigger method:", method);
+    proId = data.project;
+
     try {
       const newEmployee = await Employee.create(data);
       await Project.findByIdAndUpdate(
@@ -49,8 +50,6 @@ export async function POST(request, { params, searchParams }, response) {
         { $push: { employees: newEmployee._id } },
         { new: true }
       );
-
-      console.log("Server side Employee created");
 
       return NextResponse.json({ status: 201 });
     } catch (error) {

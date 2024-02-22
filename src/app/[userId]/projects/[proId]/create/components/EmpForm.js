@@ -9,10 +9,10 @@ export default function EmpForm({
   defaultValue,
   revalidateDelete,
   handleSubmit,
+  searchParams,
 }) {
   const router = useRouter();
   const { proId, userId } = params;
-  //   const defaultValue = searchParams;
 
   async function handleDelete() {
     const data = { method: "DELETEEMPLOYEE" };
@@ -49,7 +49,7 @@ export default function EmpForm({
           type="text"
           id="lastName"
           name="lastName"
-          defaultValue={defaultValue?.projectCode}
+          defaultValue={defaultValue?.lastName}
         />
 
         <label htmlFor="companyName">Email: </label>

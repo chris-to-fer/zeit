@@ -5,6 +5,7 @@ import User from "@/app/db/model/User";
 import Employee from "@/app/db/model/Employee";
 
 export async function GET(request, { params, searchParams }) {
+  //GET EMPLOYEES OVER PROJECTS POPULATE
   await connectDB();
   const proId = params.proId;
   if (request.method === "GET") {
@@ -14,11 +15,13 @@ export async function GET(request, { params, searchParams }) {
 }
 
 export async function POST(request, { params, searchParams }, response) {
+  //EDIT PROJECT
   await connectDB();
   const { empId, userId, proId } = params;
   const data = await request.json();
-  const method = await request.body.message;
-  if (data.projectCode) {
+  const method = data.method;
+  // if (data.projectCode) {
+  if (method === "EDIT") {
     try {
       const updatedProject = await Project.findByIdAndUpdate(proId, {
         $set: data,
@@ -29,7 +32,8 @@ export async function POST(request, { params, searchParams }, response) {
       console.log("Error editing project", error);
       return NextResponse.json({ status: 400 });
     }
-  } else if (data.projectCode && data.message === "DELETE") {
+  } else if (data.method === "DELETE") {
+    //DELETE PROJECT
     try {
       const projectToDelete = await Project.findByIdAndDelete(proId);
       await User.findByIdAndUpdate(userId, {

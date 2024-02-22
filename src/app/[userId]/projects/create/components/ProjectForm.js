@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 export default function ProjectForm({
   proId,
   handleSubmit,
-
   searchParams,
   revalidateDelete,
 }) {
@@ -15,7 +14,7 @@ export default function ProjectForm({
   const defaultValue = searchParams;
 
   async function handleDelete() {
-    const data = { message: "DELETE" };
+    const data = { method: "DELETE" };
     confirm("Löschen?");
 
     const response = await fetch(`/api/${userId}/projects/${proId}`, {
@@ -29,7 +28,7 @@ export default function ProjectForm({
       console.log("ERROR DELETING");
     }
     if (response.ok) {
-      revalidate();
+      revalidateDelete();
     }
   }
 

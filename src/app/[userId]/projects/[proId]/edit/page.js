@@ -14,7 +14,8 @@ export default function PageEdit({ params, searchParams }) {
     // e.preventDefault();
     // console.log("submi clickt");
     //const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    const formedData = Object.fromEntries(formData);
+    const data = { ...formedData, method: "EDIT" };
 
     const response = await fetch(
       `${HOSTNAME}/api/${userId}/projects/${proId}`,
@@ -22,9 +23,6 @@ export default function PageEdit({ params, searchParams }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
-          //   key: "Access-Control-Allow-Origin",
-          //   value: process.env.NEXT_PUBLIC_APP_URL,
         },
         body: JSON.stringify(data),
       }

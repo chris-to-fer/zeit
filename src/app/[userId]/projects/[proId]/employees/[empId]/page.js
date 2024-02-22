@@ -17,15 +17,12 @@ export default async function Page({ params, children }) {
     `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
     {
       method: "GET",
-      headers: headers(),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
   );
-  //   ,
-  //   {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   }
-  // );
+
   const data = await res.json();
   if (!data) return null;
 

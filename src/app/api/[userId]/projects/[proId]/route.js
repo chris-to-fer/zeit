@@ -8,10 +8,10 @@ export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
   await connectDB();
   const proId = params.proId;
-  if (request.method === "GET") {
-    const projects = await Project.findById(proId).populate("employees");
-    return NextResponse.json({ projects }, { status: 200 });
-  }
+  console.log("paramsss", params);
+
+  const projects = await Project.findById(proId).populate("employees");
+  return NextResponse.json({ projects }, { status: 200 });
 }
 
 export async function POST(request, { params, searchParams }, response) {

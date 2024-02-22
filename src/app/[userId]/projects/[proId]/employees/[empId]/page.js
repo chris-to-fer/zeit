@@ -4,21 +4,28 @@ import Sidebar from "../../../components/Sidebar";
 import styles from "../../../page.module.css";
 import makeWeeks from "@/app/lib/makeWeeks";
 import fillWeeks from "@/app/lib/fillWeeks";
+import { headers } from "next/headers";
 
 export default async function Page({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId } = params;
-  revalidatePath(
-    `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`
-  );
+  // revalidatePath(
+  //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`
+  // );
 
   const res = await fetch(
     `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
     {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: headers(),
     }
   );
+  //   ,
+  //   {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   }
+  // );
   const data = await res.json();
   if (!data) return null;
 

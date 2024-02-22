@@ -39,7 +39,7 @@ export async function POST(request, { params, searchParams }, response) {
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "CREATEEMPLOYEE") {
-    // proId = data.project;
+    // const proIdi = data.project;
 
     try {
       const newEmployee = await Employee.create(data);

@@ -17,7 +17,7 @@ export default function Sidebar({ params, projects, project, employee }) {
               </Link>
             </>
           </h4>
-        ) : empId && proId ? (
+        ) : empId && proId && !empId ? (
           <>
             {employee.name} {employee.lastName}
             <br></br>

@@ -16,8 +16,9 @@ export async function GET(request, { params, searchParams }) {
 
   if (request.method === "GET") {
     const employee = await Employee.findById(empId)
-      .populate("times")
-      .populate("project");
+      .populate("project")
+      .populate("times");
+
     // revalidatePath(request.url);
 
     return NextResponse.json({ employee }, { status: 200 });

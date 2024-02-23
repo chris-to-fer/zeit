@@ -36,8 +36,7 @@ export default function WeekTable({ params, timesheets }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const paramsis = useParams();
   const { userId, proId, empId } = paramsis;
-  const d = timesheets.date;
-  // const e = d.tolocalDateString();
+  console.log("sampledate", typeof timesheets[0].date);
 
   const dateDisplayFormat = (mongo) => {
     let day = mongo.slice(8, 10);

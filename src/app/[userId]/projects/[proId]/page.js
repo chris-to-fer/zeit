@@ -33,7 +33,7 @@ export default async function Page({ children, params }) {
     <>
       <Sidebar params={params} project={data.projects} />
       <div className={styles.card_project}>
-        <h2>Mitarbeiter des Projekts </h2>
+        <h2>Mitarbeiter von {data.projects.name}</h2>
         <ul>
           {employees.map((e) => (
             <Link

@@ -29,7 +29,9 @@ export default function PageEditEmployee({ params, searchParams }) {
     if (response.ok) {
       // alert("Das Projekt wurde erstellt.");
       console.log("edit employee sent", data);
-      //   revalidatePath(`${HOSTNAME}/${userId}/projects/employees/${empId}`);
+      revalidatePath(
+        `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
+      );
       redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
   }

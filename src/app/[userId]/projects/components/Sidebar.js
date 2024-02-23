@@ -2,9 +2,11 @@ import React from "react";
 import styles from "../page.module.css";
 import SidebarQuery from "./SidebarQuery";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Sidebar({ params, projects, project, employee }) {
   const { userId, proId, empId } = params;
+  const HOSTNAME = process.env.HOSTNAME_URL;
   return (
     <aside className={styles.aside}>
       {proId && !empId ? (
@@ -14,6 +16,8 @@ export default function Sidebar({ params, projects, project, employee }) {
             <Link href={`/${userId}/projects/${proId}/create`}>
               <button>Hinzufügen</button>
             </Link>
+            <br></br>
+            <Link href={`${HOSTNAME}/${userId}/projects`}>zurück</Link>
           </>
         </h4>
       ) : empId && proId && empId ? (
@@ -27,7 +31,9 @@ export default function Sidebar({ params, projects, project, employee }) {
             }}
           >
             <button>Mitarbeiter bearbeiten</button>
-          </Link>{" "}
+          </Link>
+          <br></br>
+          <Link href={`${HOSTNAME}/${userId}/projects/${proId}`}>zurück</Link>
         </>
       ) : userId && !proId ? (
         <>

@@ -4,20 +4,27 @@ import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
 import Employee from "@/app/db/model/Employee";
 import Time from "@/app/db/model/Time";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request, { params, searchParams }) {
   ///GET TIMES Of EMPLOYEES
   await connectDB();
+  console.log("RB", request.body);
   const { userId, proId, empId } = params;
-  console.log("RM ", request.method);
+  console.log("params GET server", params);
+  console.log("method GET side", request.method);
+
   if (request.method === "GET") {
-    const employee = await Employee.findById(empId).populate("times");
+    const employee = await Employee.findById(empId)
+      .populate("times")
+      .populate("project");
+    // revalidatePath(request.url);
 
     return NextResponse.json({ employee }, { status: 200 });
   }
 }
 
-export async function POST(request, { params, searchParams }, response) {
+export async function POST(request, { params, searchParams }) {
   await connectDB();
   const data = await request.json();
   const method = await data.method;
@@ -68,3 +75,13 @@ export async function POST(request, { params, searchParams }, response) {
     }
   }
 }
+
+/*for later auth
+const session = await getAuthSession();
+
+    if (!session) {
+        return new NextResponse(
+            JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
+        )
+    };
+    */

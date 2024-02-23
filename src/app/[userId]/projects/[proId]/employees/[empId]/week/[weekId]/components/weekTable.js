@@ -4,16 +4,16 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useParams } from "next/navigation";
 
 const columns = [
-  { field: "date", headerName: "Datum", width: 19 },
-  { field: "start", headerName: "Start", width: 130 },
-  { field: "end", headerName: "Ende", width: 130 },
-  { field: "break", headerName: "Pause", width: 70 },
-  { field: "catering", headerName: "Catering", width: 130 },
-  { field: "travelTo", headerName: "Hinreise", width: 130 },
-  { field: "travelBack", headerName: "Rückreise", width: 70 },
-  { field: "type", headerName: "Art", width: 130 },
+  { field: "date", headerName: "Datum", width: 80 },
+  { field: "start", headerName: "Start", width: 60 },
+  { field: "end", headerName: "Ende", width: 60 },
+  { field: "break", headerName: "Pause", width: 55 },
+  { field: "catering", headerName: "Catering", width: 70 },
+  { field: "travelTo", headerName: "Hinweg", width: 70 },
+  { field: "travelBack", headerName: "Rückweg", width: 70 },
+  { field: "type", headerName: "Art", width: 80 },
   { field: "place", headerName: "Ort", width: 130 },
-  { field: "isHome", headerName: "zu Hause", width: 70 },
+  { field: "isHome", headerName: "Heim", width: 30 },
 
   //   {
   //     field: "age",
@@ -32,30 +32,51 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
-export default function DataTable({ params }) {
+export default function WeekTable({ params, timesheets }) {
+  const HOSTNAME = process.env.HOSTNAME_URL;
   const paramsis = useParams();
   const { userId, proId, empId } = paramsis;
-  async function fetchData() {
-    const res = await fetch(
-      `/api/${userId}/projects/${proId}/employees/${empId}/week`
-    );
-    const data = await res.json();
-  }
-  const data = fetchData() || [];
-  if (!data) return <h3>is loading</h3>;
-  console.log("data", data);
+  const d = timesheets.date;
+  // const e = d.tolocalDateString();
+
+  const dateDisplayFormat = (mongo) => {
+    let day = mongo.slice(8, 10);
+    let month = mongo.slice(5, 7);
+    let year = mongo.slice(2, 4);
+    return day + "." + month + "." + year;
+  };
+  console.log("ts", timesheets);
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     // date: dateDisplayFormat(timesheets.date[0]),
+  //     firstName: "Jon",
+  //     age: 35,
+  //   },
+  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+
+  // ];
+  // console.log(
+  //   "date",
+  //   timesheets.map((e) => dateDisplayFormat(e.date))
+  // );
+
+  const rows = timesheets.map((e, index) => {
+    return {
+      ...e,
+      id: index,
+      date: dateDisplayFormat(e.date),
+      catering: true ? "Ja" : "Nein",
+      isHome: true ? "Ja" : "Nein",
+    };
+  });
+
+  // console.log("data", data);
   return (
     <div style={{ height: 500, width: "100%" }}>
       <DataGrid
@@ -63,10 +84,10 @@ export default function DataTable({ params }) {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 7 },
+            paginationModel: { page: 1, pageSize: 7 },
           },
         }}
-        pageSizeOptions={[7, 10]}
+        pageSizeOptions={[7]}
         checkboxSelection
       />
     </div>

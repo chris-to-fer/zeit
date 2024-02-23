@@ -10,12 +10,13 @@ export async function GET(request, { params, searchParams }) {
   await connectDB();
   const proId = params.proId;
   console.log("paramsss", params);
+  console.log("old req body", request.method);
 
   const projects = await Project.findById(proId).populate("employees");
   return NextResponse.json({ projects }, { status: 200 });
 }
 
-export async function POST(request, { params, searchParams }, response) {
+export async function POST(request, { params, searchParams }) {
   //EDIT PROJECT
   await connectDB();
   const { empId, userId, proId } = params;

@@ -2,16 +2,17 @@ import { headers } from "next/headers";
 import Sidebar from "../components/Sidebar";
 import styles from "../page.module.css";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 export default async function Page({ children, params }) {
   const userId = params.userId;
   const proId = params.proId;
-
   const HOSTNAME = process.env.HOSTNAME_URL;
+  revalidatePath(`${HOSTNAME}/api/${userId}/projects/${proId}`);
 
   const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
     method: "GET",
-    cache: "no-store",
+    // cache: "no-store",
   });
   // , {
   //   method: "GET",

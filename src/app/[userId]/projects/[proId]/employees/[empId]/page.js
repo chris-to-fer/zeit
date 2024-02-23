@@ -9,9 +9,9 @@ import { headers } from "next/headers";
 export default async function Page({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId } = params;
-  // revalidatePath(
-  //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`
-  // );
+  revalidatePath(
+    `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`
+  );
 
   const res = await fetch(
     `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
@@ -20,6 +20,7 @@ export default async function Page({ params, children }) {
       headers: {
         "Content-Type": "application/json",
       },
+      // cache: "no-store",
     }
   );
 

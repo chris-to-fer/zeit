@@ -2,6 +2,8 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useParams } from "next/navigation";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
 // import styles from "../../../../../../page.module.css";
 
@@ -35,6 +37,7 @@ const columns = [
 ];
 
 export default function WeekTable({ timesheets }) {
+  const [checkboxSelection, setCheckboxSelection] = useState(false);
   const params = useParams();
   const weekId = params.weekId;
 
@@ -60,9 +63,11 @@ export default function WeekTable({ timesheets }) {
   });
   // className={styles.table}
   // console.log("data", data);
+  console.log("CBOX", checkboxSelection);
   return (
     <div style={{ height: 500, width: "100%" }}>
       <DataGrid
+        // checkboxSelection={checkboxSelection}
         disableColumnMenu
         disableColumnFilter
         rows={rows}
@@ -73,7 +78,7 @@ export default function WeekTable({ timesheets }) {
           },
         }}
         pageSizeOptions={[7]}
-        checkboxSelection
+        checkboxSelection={checkboxSelection}
       />
     </div>
   );

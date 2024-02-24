@@ -2,7 +2,7 @@ import React from "react";
 import { revalidatePath } from "next/cache";
 import Sidebar from "@/app/[userId]/projects/components/Sidebar";
 import styles from "../../../../../page.module.css";
-import WeekTable from "./components/WeekTable";
+import WeekTable from "./components/weekTable";
 import Link from "next/link";
 
 export default async function PageWeek({ params, children, searchParams }) {

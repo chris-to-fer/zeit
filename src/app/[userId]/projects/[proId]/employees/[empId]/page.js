@@ -33,8 +33,6 @@ export default async function Page({ params, children }) {
     employee: { times },
   } = data;
 
-  console.log("times", times);
-
   const injectedTimes = times.map((e) => {
     const startYear = new Date(new Date(e.date).getFullYear(), 0, 1);
     const days = Math.floor(
@@ -54,8 +52,7 @@ export default async function Page({ params, children }) {
       weekObject[weekId].push(date);
     }
   });
-  console.log("iTi", injectedTimes);
-  console.log("WO", weekObject);
+
   // console.log("after inject", injectedTimes);
   // const helperArray = injectedTimes.map((e) => e.week);
   // const uniques = new Set(helperArray);
@@ -96,7 +93,8 @@ export default async function Page({ params, children }) {
     let year = mongo.slice(2, 4);
     return day + "." + month + "." + year;
   };
-
+  console.log("iTi", injectedTimes);
+  const encodedArray = encodeURIComponent(JSON.stringify(injectedTimes));
   return (
     <>
       <Sidebar params={params} employee={data.employee} />
@@ -106,13 +104,13 @@ export default async function Page({ params, children }) {
           Projekt {data.employee.project.name} nach Kalenderwochen:
         </h3>
         <ul>
-          {/* {injectedTimes.map((e) => (
-            <li key={e._id}>Woche {e.week}</li>
-          ))} */}
           {Object.keys(weekObject).map((e, index) => (
             <li key={index}>
               <Link
-                href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${e}`}
+                href={{
+                  pathname: `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${e}`,
+                  query: { objects: encodedArray },
+                }}
               >
                 <h4> Woche {e}: </h4>
                 {injectedTimes.map((obj) =>

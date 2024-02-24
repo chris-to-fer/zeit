@@ -1,20 +1,21 @@
 "use client";
-// import * as React from "react";
+import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useParams } from "next/navigation";
+
 // import styles from "../../../../../../page.module.css";
 
 const columns = [
   { field: "date", headerName: "Datum", width: 80, sortable: false },
   { field: "start", headerName: "Start", width: 60, sortable: false },
   { field: "end", headerName: "Ende", width: 60, sortable: false },
-  { field: "break", headerName: "Pause", width: 55, sortable: false },
-  { field: "catering", headerName: "Catering", width: 70, sortable: false },
+  { field: "break", headerName: "Pause", width: 65, sortable: false },
+  { field: "catering", headerName: "Catering", width: 75, sortable: false },
   { field: "travelTo", headerName: "Hinweg", width: 70, sortable: false },
-  { field: "travelBack", headerName: "Rückweg", width: 70, sortable: false },
+  { field: "travelBack", headerName: "Rückweg", width: 75, sortable: false },
   { field: "type", headerName: "Art", width: 80, sortable: false },
   { field: "place", headerName: "Ort", width: 130, sortable: false },
-  { field: "isHome", headerName: "Heim", width: 30, sortable: false },
+  { field: "isHome", headerName: "Heim", width: 50, sortable: false },
 
   // //   {
   // //     field: "age",
@@ -33,10 +34,9 @@ const columns = [
   },
 ];
 
-export default function WeekTable({ params, timesheets }) {
-  // const HOSTNAME = process.env.HOSTNAME_URL;
-  const paramsis = useParams();
-  // const { userId, proId, empId } = paramsis;
+export default function WeekTable({ timesheets }) {
+  const params = useParams();
+  const weekId = params.weekId;
 
   const dateDisplayFormat = (mongo) => {
     let day = mongo.slice(8, 10);
@@ -44,11 +44,12 @@ export default function WeekTable({ params, timesheets }) {
     let year = mongo.slice(2, 4);
     return day + "." + month + "." + year;
   };
-  console.log("ts", timesheets);
-  // const rows = [
-  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
 
-  const rows = timesheets.map((e, index) => {
+  const filteredTimesheets = timesheets
+    .filter((e) => e.weekId == weekId)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const rows = filteredTimesheets.map((e, index) => {
     return {
       ...e,
       id: index,

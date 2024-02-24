@@ -27,6 +27,7 @@ export default function Header({ params, session }) {
           anmelden
         </span>
       )} */}
+      <h2>zeit</h2>
       <Exit goHome={goHome} session={session} />
     </nav>
   );

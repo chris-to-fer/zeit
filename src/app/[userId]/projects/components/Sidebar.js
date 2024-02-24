@@ -10,16 +10,17 @@ export default function Sidebar({ params, projects, project, employee }) {
   return (
     <aside className={styles.aside}>
       {proId && !empId ? (
-        <h4>
-          <>
+        <>
+          <h4>
             Mitarbeiter zu {project?.name} hinzufügen<br></br>
+            <br></br>
             <Link href={`/${userId}/projects/${proId}/create`}>
-              <button>Hinzufügen</button>
+              <button className={styles.funcbutton}>HINZUFÜGEN</button>
             </Link>
             <br></br>
-            <Link href={`${HOSTNAME}/${userId}/projects`}>zurück</Link>
-          </>
-        </h4>
+          </h4>
+          <Link href={`${HOSTNAME}/${userId}/projects`}>zurück</Link>
+        </>
       ) : empId && proId && empId ? (
         <>
           {employee.name} {employee.lastName}
@@ -30,7 +31,7 @@ export default function Sidebar({ params, projects, project, employee }) {
               query: employee,
             }}
           >
-            <button>Mitarbeiter bearbeiten</button>
+            <button className={styles.funcbutton}>BEARBEITEN</button>
           </Link>
           <br></br>
           <Link href={`${HOSTNAME}/${userId}/projects/${proId}`}>zurück</Link>
@@ -39,7 +40,7 @@ export default function Sidebar({ params, projects, project, employee }) {
         <>
           <h4>Projekte:</h4>
           <Link href={`/${userId}/projects/create`}>
-            <button>Erstellen</button>
+            <button className={styles.funcbutton}> ERSTELLEN</button>
             <br></br>
           </Link>
         </>

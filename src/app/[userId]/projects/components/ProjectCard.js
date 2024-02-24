@@ -3,6 +3,8 @@ import React from "react";
 import Link from "next/link";
 import { useContext } from "react";
 import { selectStateContext } from "@/app/selectState-provider";
+import styles from "../page.module.css";
+import Image from "next/image";
 
 export default function ProjectCard({ user, userId }) {
   const { selectedProject } = useContext(selectStateContext);
@@ -25,7 +27,15 @@ export default function ProjectCard({ user, userId }) {
       <p>Email Kontakt: {project?.email}</p>
       <p>Aktiv: {project?.active ? "Ja" : "Nein"}</p>
       <Link href={`/${userId}/projects/${proId}`}>
-        <h4>Mitarbeiter ➡️</h4>
+        <span>MITARBEITER</span>
+        <Image
+          src="/right.svg"
+          alt="Vercel Logo"
+          className={styles.right}
+          width={20}
+          height={20}
+          // priority
+        />
       </Link>
       <br></br>
       {selectedProject && (
@@ -35,7 +45,7 @@ export default function ProjectCard({ user, userId }) {
             query: project,
           }}
         >
-          <button>Bearbeiten</button>
+          <button className={styles.funcbutton}>Bearbeiten</button>
         </Link>
       )}
     </>

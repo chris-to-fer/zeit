@@ -31,7 +31,8 @@ export default function CreateEmployees({ params, searchParams }) {
 
   return (
     <div>
-      page um mitarbeiter hinzuzufügen
+      <h3>Mitarbeiter hinzuzufügen</h3>
+      <br></br>
       <EmpForm
         defaultValue={searchParams}
         params={params}

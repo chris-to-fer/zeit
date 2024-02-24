@@ -15,8 +15,8 @@ export default function Header({ params, session }) {
   };
   return (
     <nav className={styles.navigation}>
-      <Link href={`${HOSTNAME}/${userId}/projects`}>Übersicht</Link>
-      {session ? (
+      <Link href={`${HOSTNAME}/${userId}/projects`}>HOME</Link>
+      {/* {session ? (
         <span>angemeldet als {session.user.name}</span>
       ) : (
         <span>
@@ -26,8 +26,8 @@ export default function Header({ params, session }) {
           </strong>
           anmelden
         </span>
-      )}
-      <Exit />
+      )} */}
+      <Exit goHome={goHome} session={session} />
     </nav>
   );
 }

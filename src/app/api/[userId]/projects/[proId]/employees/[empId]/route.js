@@ -9,10 +9,8 @@ import { revalidatePath } from "next/cache";
 export async function GET(request, { params, searchParams }) {
   ///GET TIMES Of EMPLOYEES
   await connectDB();
-  console.log("RB", request.body);
+
   const { userId, proId, empId } = params;
-  console.log("params GET server", params);
-  console.log("method GET side", request.method);
 
   if (request.method === "GET") {
     const employee = await Employee.findById(empId)

@@ -4,6 +4,9 @@ const { Schema } = mongoose;
 
 const timeSchema = new Schema(
   {
+    approved: {
+      type: Boolean,
+    },
     employeeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employee",

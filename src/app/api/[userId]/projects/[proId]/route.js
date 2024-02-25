@@ -3,14 +3,14 @@ import Project from "@/app/db/model/Project";
 import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
 import Employee from "@/app/db/model/Employee";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
-  console.log("HAAAALLLLLLOOOOOOOOOOO");
+  const HOSTNAME = process.env.HOSTNAME_URL;
+  const { proId, userId, empId } = params;
+  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
   await connectDB();
-  const proId = params.proId;
-  console.log("paramsss", params);
-  console.log("old req body", request.method);
 
   const projects = await Project.findById(proId).populate("employees");
   return NextResponse.json({ projects }, { status: 200 });

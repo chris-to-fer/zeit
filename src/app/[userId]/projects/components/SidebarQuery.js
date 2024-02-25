@@ -18,7 +18,12 @@ export default function SidebarQuery({ projects }) {
     <>
       {projects?.map((e, index) => (
         <li key={e._id} className={styles.card}>
-          <button onClick={() => handleClick(e._id)} className={styles.button}>
+          <button
+            onClick={() => handleClick(e._id)}
+            className={
+              e._id === selectedProject ? styles.button_selected : styles.button
+            }
+          >
             <span>
               <h4>{e.name}</h4>
             </span>

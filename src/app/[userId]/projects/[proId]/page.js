@@ -34,7 +34,7 @@ export default async function Page({ children, params }) {
       <Sidebar params={params} project={data.projects} />
       <div className={styles.card_project}>
         <h2>Mitarbeiter von {data.projects.name}</h2>
-        <ul>
+        <ul className={styles.ul}>
           {employees.map((e) => (
             <Link
               href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${e._id}`}

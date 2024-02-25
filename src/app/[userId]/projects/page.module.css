@@ -1,3 +1,11 @@
+.weeks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 12px;
+  gap: 12px;
+}
+
 .radio {
   display: flex;
   justify-content: space-evenly;
@@ -29,6 +37,7 @@
   margin-left: 12px;
   /* grid-area: header; */
   z-index: 1;
+  /* height: 1px; */
 }
 
 .aside {
@@ -47,7 +56,8 @@
   padding: 10px;
   margin-left: 24px;
   margin-right: 12px;
-  width: 25%;
+  /* width: 15%; */
+  flex-shrink: 1;
 
   /* grid-area: sidebar; */
 }
@@ -58,19 +68,32 @@
   padding: 12px;
   margin-left: 12px;
   margin-right: 12px;
-  width: 70%;
+  /* width: 70%; */
+  /* max-width: 400px; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-grow: 1;
+  /* justify-content: space-between; */
+  /* align-items: flex-start;*/
+  flex-grow: 2;
 }
+
+.card_project span {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card_project span p {
+  padding: 6px;
+}
+
 .main {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 5px;
   height: 100%;
+  margin: 32px;
 }
 
 .footer {
@@ -102,8 +125,9 @@
 .ul {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   list-style: none;
+  margin-top: 19px;
 }
 
 .funcbutton {
@@ -124,6 +148,7 @@
   padding: 12px;
   border-radius: 5px;
   width: 100%;
+  transition: 300ms ease-in-out;
 }
 .button_logout {
   background-color: rgb(47, 123, 255);
@@ -142,6 +167,18 @@
   background-color: rgb(219, 230, 239);
   box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
   opacity: 80%;
+}
+
+.button_selected {
+  border: none;
+  background-color: rgb(65, 186, 56);
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  color: white;
+  scale: 1.05;
+  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+  transition: 300ms ease-in-out;
 }
 
 .form {

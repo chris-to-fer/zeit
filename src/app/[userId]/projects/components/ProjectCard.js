@@ -17,15 +17,42 @@ export default function ProjectCard({ user, userId }) {
   return (
     <>
       <h2>{project?.name}</h2>
-      <p>Projektnummer: {project?.projectCode}</p>
-      <p>Firma: {project?.companyName}</p>
-      <p>Anschrift: {project?.companyAddress}</p>
-      <p>Telefon: {project?.companyPhone}</p>
-      <p>Email: {project?.companyEmail}</p>
-      <p>Rechnungsanschrift: {project?.invoiceAddress}</p>
-      <p>Kontaktperson: {project?.contact}</p>
-      <p>Email Kontakt: {project?.email}</p>
-      <p>Aktiv: {project?.active ? "Ja" : "Nein"}</p>
+      <span>
+        <p>Projektnummer: </p>
+        <p>{project?.projectCode}</p>
+      </span>
+      <span>
+        <p>Firma: </p>
+        <p>{project?.companyName}</p>
+      </span>
+      <span>
+        <p>Anschrift: </p>
+        <p>{project?.companyAddress}</p>
+      </span>
+      <span>
+        <p>Telefon: </p>
+        <p>{project?.companyPhone}</p>
+      </span>
+      <span>
+        <p>Email: </p>
+        <p>{project?.companyEmail}</p>
+      </span>
+      <span>
+        <p>Rechnungsanschrift: </p>
+        <p>{project?.invoiceAddress}</p>
+      </span>
+      <span>
+        <p>Kontaktperson: </p>
+        <p>{project?.contact}</p>
+      </span>
+      <span>
+        <p>Email Kontakt: </p>
+        <p>{project?.email}</p>
+      </span>
+      <span>
+        <p>Aktiv: </p>
+        <p>{project?.active ? "Ja" : "Nein"}</p>
+      </span>
       <Link href={`/${userId}/projects/${proId}`}>
         <span>MITARBEITER</span>
         <Image

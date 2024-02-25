@@ -13,10 +13,13 @@ export default function Header({ params, session }) {
     "use server";
     redirect(`${HOSTNAME}`);
   };
+
   return (
     <nav className={styles.navigation}>
-      <Link href={`${HOSTNAME}/${userId}/projects`}>Übersicht</Link>
-      {session ? (
+      <Link href={`${HOSTNAME}/${userId}/projects`}>HOME</Link>
+      <Exit goHome={goHome} session={session} />
+
+      {/* {session ? (
         <span>angemeldet als {session.user.name}</span>
       ) : (
         <span>
@@ -26,8 +29,7 @@ export default function Header({ params, session }) {
           </strong>
           anmelden
         </span>
-      )}
-      <Exit />
+      )} */}
     </nav>
   );
 }

@@ -4,6 +4,7 @@ import SelectStateProvider from "./selectState-provider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 // import { SessionProvider } from "next-auth/react";
 import { NextAuthProvider } from "@/session-provider";
+import SelectBurgerProvider from "./openBurger-Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({ children: { session, ...children } }) {
     <html lang="de">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <SelectStateProvider>
-            <NextAuthProvider session={session}>{children}</NextAuthProvider>
-          </SelectStateProvider>
+          <SelectBurgerProvider>
+            <SelectStateProvider>
+              <NextAuthProvider session={session}>{children}</NextAuthProvider>
+            </SelectStateProvider>
+          </SelectBurgerProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

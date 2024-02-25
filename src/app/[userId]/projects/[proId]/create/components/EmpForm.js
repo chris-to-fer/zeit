@@ -94,35 +94,45 @@ export default function EmpForm({
       value={userId}
       hidden
     /> */}
-
-        <label htmlFor="active">Aktiv: </label>
-        <input
-          type="radio"
-          id="active"
-          name="active"
-          value={true}
-          defaultChecked={defaultValue?.active === "true" ? true : false}
-          required
-        />
-
-        <label htmlFor="inactive">Inaktiv: </label>
-        <input
-          type="radio"
-          id="inactive"
-          name="active"
-          value={false}
-          defaultChecked={defaultValue?.active === "false" ? true : false}
-          required
-        />
+        <section className={styles.radio}>
+          <label htmlFor="active">Aktiv: </label>
+          <input
+            type="radio"
+            id="active"
+            name="active"
+            value={true}
+            defaultChecked={defaultValue?.active === "true" ? true : false}
+            required
+          />
+        </section>
+        <section className={styles.radio}>
+          <label htmlFor="inactive">Inaktiv: </label>
+          <input
+            type="radio"
+            id="inactive"
+            name="active"
+            value={false}
+            defaultChecked={defaultValue?.active === "false" ? true : false}
+            required
+          />
+        </section>
         {/* <p>{defaultValue.active}</p> */}
 
         <p>
-          <button type="submit">Änderungen Speichern</button>
+          <button className={styles.funcbutton} type="submit">
+            SPEICHERN
+          </button>
+        </p>
+        <p>
           <Link href={`/${userId}/projects/${proId}/`}>
-            <button>Abbrechen</button>
+            <button className={styles.funcbutton}>ABBRECHEN</button>
           </Link>
         </p>
-        <button onClick={handleDelete}>Löschen</button>
+        <p>
+          <button className={styles.button} onClick={handleDelete}>
+            LÖSCHEN
+          </button>
+        </p>
       </form>
     </>
   );

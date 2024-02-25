@@ -1,4 +1,3 @@
-import React from "react";
 import EmpForm from "../../../create/components/EmpForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";

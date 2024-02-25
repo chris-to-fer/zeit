@@ -58,14 +58,51 @@
   margin-right: 12px;
   /* width: 15%; */
   flex-shrink: 1;
+  transition: 300ms ease-in-out;
 }
 @media (max-width: 700px) {
-  .aside {
+  .aside_closed {
+    display: none;
+    transition: 300ms ease-in-out;
+  }
+  .aside_open {
     z-index: 2;
-    opacity: 50%;
+    opacity: 98%;
+    position: absolute;
+    translate: -120px -40px;
+    background-color: rgb(241, 243, 244);
+    transition: 300ms ease-in-out;
+    animation: slideIn 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+  }
+  .aside_closed {
+    display: none;
+  }
+}
+@keyframes slideIn {
+  0%,
+  100% {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+  10%,
+  90% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
+.burger {
+  /* position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10; */
+  background-color: transparent;
+  border: none;
+  border-style: none;
+}
+.burgerSymbol {
+  background-color: transparent;
+}
 .card_project_table {
   border-radius: 5px;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);

@@ -57,7 +57,7 @@ export default function ProjectCard({ user, userId }) {
         <span>MITARBEITER</span>
         <Image
           src="/right.svg"
-          alt="Vercel Logo"
+          alt=" right arrow"
           className={styles.right}
           width={20}
           height={20}

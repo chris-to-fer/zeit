@@ -29,7 +29,7 @@ export default function Sidebar({ params, projects, project, employee }) {
               </Link>
               <br></br>
             </h4>
-            <Link href={`${HOSTNAME}/${userId}/projects`}>zurück</Link>
+            <Link href={`/${userId}/projects`}>zurück</Link>
           </>
         ) : empId && proId && empId ? (
           <>
@@ -44,7 +44,7 @@ export default function Sidebar({ params, projects, project, employee }) {
               <button className={styles.funcbutton}>BEARBEITEN</button>
             </Link>
             <br></br>
-            <Link href={`${HOSTNAME}/${userId}/projects/${proId}`}>zurück</Link>
+            <Link href={`/${userId}/projects/${proId}`}>zurück</Link>
           </>
         ) : userId && !proId ? (
           <>

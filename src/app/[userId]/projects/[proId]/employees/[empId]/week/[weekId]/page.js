@@ -78,7 +78,7 @@ export default async function PageWeek({ params, children, searchParams }) {
     <>
       {/* <Sidebar params={params} employee={data} /> */}
 
-      <div className={styles.card_project}>
+      <div className={styles.card_project_table}>
         <Link
           href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
         >

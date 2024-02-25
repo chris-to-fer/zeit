@@ -8,7 +8,7 @@
 
 .radio {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .right {
@@ -58,9 +58,26 @@
   margin-right: 12px;
   /* width: 15%; */
   flex-shrink: 1;
-
-  /* grid-area: sidebar; */
 }
+@media (max-width: 700px) {
+  .aside {
+    z-index: 2;
+    opacity: 50%;
+  }
+}
+
+.card_project_table {
+  border-radius: 5px;
+  box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
+  background-color: rgb(252, 252, 252);
+  /* padding: 12px; */
+  /* margin-left: 12px;
+  margin-right: 12px; */
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
+
 .card_project {
   border-radius: 5px;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
@@ -68,7 +85,8 @@
   padding: 12px;
   margin-left: 12px;
   margin-right: 12px;
-  /* width: 70%; */
+  max-width: 80%;
+  /* width: 50%; */
   /* max-width: 400px; */
   display: flex;
   flex-direction: column;
@@ -137,10 +155,12 @@
   border-radius: 5px;
   width: 100%;
   color: white;
+  transition: 300ms ease-in-out;
 }
 .funcbutton:hover {
   box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
   opacity: 80%;
+  transition: 300ms ease-in-out;
 }
 .button {
   border: none;
@@ -187,6 +207,7 @@
   gap: 12px;
   margin-bottom: 12px;
   font-style: italic;
+  /* width: 400px; */
   /* 
   
   */

@@ -15,6 +15,7 @@ export default function Header({ params, session }) {
   };
   return (
     <nav className={styles.navigation}>
+      <button>Burger</button>
       <Link href={`${HOSTNAME}/${userId}/projects`}>HOME</Link>
       {/* {session ? (
         <span>angemeldet als {session.user.name}</span>

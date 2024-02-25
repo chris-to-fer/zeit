@@ -126,7 +126,8 @@ export default function ProjectForm({
             defaultChecked={defaultValue.active === "true" ? true : false}
             required
           />
-
+        </section>
+        <section className={styles.radio}>
           <label htmlFor="inactive">Inaktiv: </label>
           <input
             type="radio"

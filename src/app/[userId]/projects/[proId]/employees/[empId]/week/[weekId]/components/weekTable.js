@@ -140,9 +140,9 @@ export default function WeekTable({ timesheets }) {
       router.refresh();
     }
   }
-
+  // style={{ , width: "100%" }}
   return (
-    <div style={{ height: 500, width: "100%", overflowX: "auto" }}>
+    <div className={styles.table} style={{ height: 500, width: "100%" }}>
       <DataGrid
         checkboxSelection
         onRowSelectionModelChange={(id) => {
@@ -153,17 +153,17 @@ export default function WeekTable({ timesheets }) {
         disableColumnFilter
         rows={rows}
         columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 1, pageSize: 7 },
-          },
-        }}
-        pageSize={7}
+        // initialState={{
+        //   pagination: {
+        //     paginationModel: { page: 1, pageSize: 7 },
+        //   },
+        // }}
+        // pageSize={7}
         // pageSizeOptions={[7]}
         // getRowId={getRowId}
         // getRowClassName={getRowClassName}
-        autoHeight
-        // autoPageSize
+        // autoHeight
+        autoPageSize
       />
 
       <Button

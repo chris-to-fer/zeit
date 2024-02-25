@@ -104,7 +104,8 @@ export default function EmpForm({
             defaultChecked={defaultValue?.active === "true" ? true : false}
             required
           />
-
+        </section>
+        <section className={styles.radio}>
           <label htmlFor="inactive">Inaktiv: </label>
           <input
             type="radio"

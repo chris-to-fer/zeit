@@ -41,7 +41,8 @@ export default async function Page({ children, params }) {
               key={e._id}
             >
               <li>
-                {e.name} {e.lastName} <strong>{e.position}</strong>
+                {e.name} {e.lastName} <i>{e.department}:</i> <i>{e.position}</i>{" "}
+                <strong>{e.active ? "aktiv" : "nicht aktiv"}</strong>
               </li>
             </Link>
           ))}

@@ -5,8 +5,9 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import { useContext } from "react";
 import { selectBurgerContext } from "@/app/openBurger-Provider";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Exit({ goHome, session }) {
+export default function Exit({ goHome, session, userId }) {
   const { open, setOpen } = useContext(selectBurgerContext);
   console.log("open", open);
 
@@ -26,7 +27,7 @@ export default function Exit({ goHome, session }) {
           // priority
         />
       </button>
-
+      <Link href={`/${userId}/projects`}>HOME</Link>
       <button
         className={session ? styles.button_logout : styles.button}
         onClick={signOutandToHome}

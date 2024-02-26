@@ -20,11 +20,11 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
+        {/* <p>
           New here?&nbsp;
           <code className={styles.code}>register</code>
           {session && "you are logged in"}
-        </p>
+        </p> */}
         {/* <div>
           <a href="https://google.de" target="_blank" rel="noopener noreferrer">
             By{" "}
@@ -46,7 +46,7 @@ export default function Home() {
       {session && <p>Signed in as {session.user.email}</p>}
       {/* {!session && <p>Not signed in</p>} */}
 
-      <div className={styles.grid}>
+      <div>
         {/* <a
           href="https://google.de"
           className={styles.card}
@@ -60,17 +60,13 @@ export default function Home() {
         </a> */}
         {!session && (
           <button onClick={() => signIn()} className={styles.card}>
-            <h2>
-              Login <span>-&gt;</span>
-            </h2>
+            <h2>Login</h2>
             <p></p>
           </button>
         )}
         {session && (
           <button onClick={() => signOut()} className={styles.card}>
-            <h2>
-              Logout <span>-&gt;</span>
-            </h2>
+            <h2>Logout</h2>
             <p></p>
           </button>
         )}

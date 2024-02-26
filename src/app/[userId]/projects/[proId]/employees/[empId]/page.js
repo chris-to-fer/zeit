@@ -63,7 +63,7 @@ export default async function Page({ params, children }) {
         <h3>
           Arbeitszeiten von {data.employee.name} {data.employee.lastName} im
           Projekt {data.employee.project.name} nach Kalenderwochen:
-        </h3>
+        </h3>{" "}
         <ul className={styles.ul}>
           {Object.keys(weekObject).map((e, index) => (
             <li key={index}>

@@ -1,5 +1,10 @@
 import React from "react";
+import TimeForm from "./components/TimeForm";
 
 export default function TimesheetCreatePage() {
-  return <div>TimesheetCreatePage</div>;
+  return (
+    <>
+      <TimeForm />
+    </>
+  );
 }

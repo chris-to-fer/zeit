@@ -1,7 +1,7 @@
 .weeks {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   padding: 12px;
   gap: 12px;
 }
@@ -33,7 +33,7 @@
   z-index: 1;
 }
 
-.aside {
+.aside_open {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -45,7 +45,25 @@
   flex-shrink: 1;
   transition: 300ms ease-in-out;
 }
-@media (max-width: 600px) {
+
+.aside_closed {
+  display: none;
+}
+
+.burger {
+  /* position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10; */
+  background-color: transparent;
+  border: none;
+  border-style: none;
+}
+.burgerSymbol {
+  background-color: transparent;
+  /* display: none; */
+}
+@media (max-width: 735px) {
   .aside_closed {
     display: none;
     transition: 300ms ease-in-out;
@@ -66,6 +84,10 @@
   .aside_closed {
     display: none;
   }
+  .burgerSymbol {
+    display: block;
+    background-color: transparent;
+  }
 }
 @keyframes slideIn {
   0% {
@@ -79,28 +101,14 @@
   }
 }
 
-.burger {
-  /* position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10; */
-  background-color: transparent;
-  border: none;
-  border-style: none;
-}
-.burgerSymbol {
-  background-color: transparent;
-}
 .card_project_table {
   border-radius: 5px;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
-  /* padding: 12px; */
-  /* margin-left: 12px;
-  margin-right: 12px; */
   width: 95vw;
   display: flex;
   flex-direction: column;
+  padding-right: 35px;
 }
 
 .card_project {

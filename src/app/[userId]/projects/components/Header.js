@@ -16,8 +16,7 @@ export default function Header({ params, session }) {
 
   return (
     <nav className={styles.navigation}>
-      <Link href={`${HOSTNAME}/${userId}/projects`}>HOME</Link>
-      <Exit goHome={goHome} session={session} />
+      <Exit goHome={goHome} session={session} userId={userId} />
 
       {/* {session ? (
         <span>angemeldet als {session.user.name}</span>

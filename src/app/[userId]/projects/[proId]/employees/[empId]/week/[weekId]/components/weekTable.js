@@ -142,7 +142,7 @@ export default function WeekTable({ timesheets }) {
   }
   // style={{ , width: "100%" }}
   return (
-    <div className={styles.table} style={{ height: 500, width: "100%" }}>
+    <div className={styles.table} style={{ height: 500, width: "80vw" }}>
       <DataGrid
         checkboxSelection
         onRowSelectionModelChange={(id) => {

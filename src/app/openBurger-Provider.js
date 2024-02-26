@@ -6,7 +6,7 @@ import useLocalStorageState from "use-local-storage-state";
 export const selectBurgerContext = createContext();
 
 export default function SelectBurgerProvider({ children }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <>

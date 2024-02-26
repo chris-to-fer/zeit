@@ -54,15 +54,17 @@ export default function ProjectCard({ user, userId }) {
         <p>{project?.active ? "Ja" : "Nein"}</p>
       </span>
       <Link href={`/${userId}/projects/${proId}`}>
-        <span>MITARBEITER</span>
-        <Image
-          src="/right.svg"
-          alt=" right arrow"
-          className={styles.right}
-          width={20}
-          height={20}
-          // priority
-        />
+        <button className={styles.button}>
+          MITARBEITER
+          <Image
+            src="/right.svg"
+            alt=" right arrow"
+            className={styles.right}
+            width={20}
+            height={20}
+            // priority
+          />
+        </button>
       </Link>
       <br></br>
       {selectedProject && (

@@ -33,7 +33,7 @@ export default async function PageWeek({ params, children, searchParams }) {
       1
     ).getFullYear();
     const weekId = `${getWeekOfYear(new Date(e.date))}-${yearOnly}`;
-    console.log("WID", weekId);
+
     return (e = { ...e, weekId: weekId });
   });
 

@@ -13,6 +13,7 @@ export default function Sidebar({ params, projects, project, employee }) {
   const { open, setOpen } = useContext(selectBurgerContext);
   console.log("opensidebar", open);
 
+  //burger closed on mobile initially though on desktop open
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth > 735) {
@@ -28,6 +29,12 @@ export default function Sidebar({ params, projects, project, employee }) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  //off click burger close
+  // document.addEventListener("click", function (e) {
+  //   if (e.target && e.target.className == "aside_open") {
+  //     open ? setOpen(false) : setOpen(true);
+  //   }
+  // });
 
   return (
     <>

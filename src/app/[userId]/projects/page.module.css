@@ -76,6 +76,11 @@
     z-index: 2;
     opacity: 97%;
     position: fixed;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     /* translate: -120px -40px; */
     left: -12px;

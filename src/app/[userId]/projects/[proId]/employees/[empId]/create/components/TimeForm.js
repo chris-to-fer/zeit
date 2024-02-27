@@ -32,7 +32,11 @@ export default function TimeForm({
       console.log("ERROR DELETING");
     }
     if (response.ok) {
-      router.push(`/${userId}/projects/${proId}/employees/${empId}`);
+      revalidatePath(
+        `/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
+      );
+
+      // router.push(`/${userId}/projects/${proId}/employees/${empId}`);
       //   revalidateDelete();
     }
   }

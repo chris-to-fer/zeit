@@ -38,6 +38,8 @@ export default function TimesheetCreatePage({ params }) {
       revalidatePath(
         `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
       );
+      // revalidatePath(
+      // `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`)
       redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
     if (response.status > 399) {

@@ -39,6 +39,9 @@ export default function page({ params, searchParams }) {
       revalidatePath(
         `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
       );
+      // revalidatePath(
+      //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
+      // );
       redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
     if (response.status > 399) {

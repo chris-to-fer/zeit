@@ -27,13 +27,34 @@ export default async function PageWeek({ params, children, searchParams }) {
   if (!data) return null;
 
   const injectedTimes = data.employee.times.map((e) => {
-    const startYear = new Date(new Date(e.date).getFullYear(), 0, 1);
-    const days = Math.floor(
-      (new Date(e.date) - startYear) / (24 * 60 * 60 * 1000)
-    );
-    const weekId = Math.ceil(days / 7);
+    const yearOnly = new Date(
+      new Date(e.date).getFullYear(),
+      0,
+      1
+    ).getFullYear();
+    const weekId = `${getWeekOfYear(new Date(e.date))}-${yearOnly}`;
+    console.log("WID", weekId);
     return (e = { ...e, weekId: weekId });
   });
+
+  function getWeekOfYear(date) {
+    const target = new Date(date);
+    const dayNr = (date.getDay() + 6) % 7; // ISO day of week with Monday as 0
+    target.setDate(target.getDate() - dayNr + 3);
+    const firstThursday = target.valueOf();
+    target.setMonth(0, 1);
+    if (target.getDay() !== 4) {
+      target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
+    }
+    return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 is 7 days in milliseconds
+  }
+  //   const startYear = new Date(new Date(e.date).getFullYear(), 0, 1);
+  //   const days = Math.floor(
+  //     (new Date(e.date) - startYear) / (24 * 60 * 60 * 1000)
+  //   );
+  //   const weekId = Math.ceil(days / 7);
+  //   return (e = { ...e, weekId: weekId });
+  // });
 
   const timesheets = injectedTimes;
 
@@ -72,7 +93,7 @@ export default async function PageWeek({ params, children, searchParams }) {
   //     //   redirect(`${HOSTNAME}/${userId}/projects`);
   //   }
   // }
-
+  console.log("data", data.employee.position);
   return (
     <>
       <Sidebar params={params} employee={data} />
@@ -84,9 +105,14 @@ export default async function PageWeek({ params, children, searchParams }) {
         </Link>
         <br></br>
         <h3>
-          Wochenzeiten von {data.employee.name} {data.employee.lastname} im
-          Projekt {data.employee.project.name}
+          Wochenzeiten der Woche {weekId} von {data.employee.name}{" "}
+          {data.employee.lastName}
         </h3>
+        <p>Projekt:{data.employee.project.name}</p>
+        <p>Produktion: {data.employee.project.companyName}</p>
+        <span>
+          {data.employee?.department} / {data.employee?.position}{" "}
+        </span>
 
         <WeekTable timesheets={timesheets} />
       </div>

@@ -84,7 +84,7 @@ export default async function Page({ params, children }) {
     return day + "." + month + "." + year;
   };
 
-  const encodedArray = encodeURIComponent(JSON.stringify(injectedTimes));
+  // const encodedArray = encodeURIComponent(JSON.stringify(injectedTimes));
   return (
     <>
       <Sidebar params={params} employee={data.employee} />
@@ -111,7 +111,7 @@ export default async function Page({ params, children }) {
                 </h4>
               </Link>
 
-              <section className={styles.weeks}>
+              <span className={styles.weeks}>
                 {injectedTimes.map((obj) =>
                   obj.weekId == e ? (
                     <Link
@@ -128,7 +128,7 @@ export default async function Page({ params, children }) {
                     ""
                   )
                 )}
-              </section>
+              </span>
             </li>
           ))}
         </ul>

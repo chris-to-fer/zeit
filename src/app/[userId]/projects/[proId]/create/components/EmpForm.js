@@ -129,9 +129,13 @@ export default function EmpForm({
           </Link>
         </p>
         <p>
-          <button className={styles.button} onClick={handleDelete}>
-            LÖSCHEN
-          </button>
+          {!defaultValue._id ? (
+            ""
+          ) : (
+            <button className={styles.button} onClick={handleDelete}>
+              LÖSCHEN
+            </button>
+          )}
         </p>
       </form>
     </>

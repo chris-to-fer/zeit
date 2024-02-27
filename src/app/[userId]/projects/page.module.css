@@ -28,8 +28,8 @@
   background-color: rgb(252, 252, 252);
   border-radius: 5px;
   padding: 3%;
-  margin-right: 12px;
-  margin-left: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
   z-index: 1;
 }
 
@@ -51,10 +51,6 @@
 }
 
 .burger {
-  /* position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10; */
   background-color: transparent;
   border: none;
   border-style: none;
@@ -105,10 +101,11 @@
   border-radius: 5px;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
-  width: 95vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  padding-right: 35px;
+  /* padding-right: 35px; */
+  padding: 12px;
 }
 
 .card_project {
@@ -116,9 +113,9 @@
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
   padding: 12px;
-  margin-left: 12px;
-  margin-right: 12px;
-  max-width: 80%;
+  /* margin-left: 12px;
+  margin-right: 12px; */
+  /* max-width: 80%; */
   /* width: 50%; */
   /* max-width: 400px; */
   display: flex;
@@ -144,7 +141,8 @@
   justify-content: center;
   gap: 5px;
   height: 100%;
-  margin: 32px;
+  margin: 12px;
+  /* margin-bottom: 32px; */
 }
 
 .footer {
@@ -196,6 +194,15 @@
   width: 100%;
   transition: 300ms ease-in-out;
 }
+.button_week {
+  border: none;
+  background-color: rgb(241, 241, 243);
+  padding: 12px;
+  border-radius: 5px;
+  width: 17%;
+  transition: 300ms ease-in-out;
+  box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
+}
 .button_logout {
   background-color: rgba(0, 56, 225, 0.801);
   border: none;
@@ -210,6 +217,11 @@
 }
 
 .button:hover {
+  background-color: rgb(219, 230, 239);
+  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+  opacity: 80%;
+}
+.button_week:hover {
   background-color: rgb(219, 230, 239);
   box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
   opacity: 80%;
@@ -239,6 +251,13 @@
   */
 }
 .form input {
+  padding: 6px;
+  border-radius: 3px;
+  border-width: 0.5px;
+  min-width: 300px;
+}
+
+.form select {
   padding: 6px;
   border-radius: 3px;
   border-width: 0.5px;

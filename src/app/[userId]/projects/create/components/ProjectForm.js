@@ -70,7 +70,7 @@ export default function ProjectForm({
 
         <label htmlFor="companyPhone">Telefon: </label>
         <input
-          type="number"
+          type="tel"
           id="companyPhone"
           name="companyPhone"
           defaultValue={defaultValue.companyPhone}
@@ -152,9 +152,13 @@ export default function ProjectForm({
           </Link>
         </p>
         <p>
-          <button className={styles.button} onClick={handleDelete}>
-            Löschen
-          </button>
+          {!searchParams._id ? (
+            ""
+          ) : (
+            <button className={styles.button} onClick={handleDelete}>
+              Löschen
+            </button>
+          )}
         </p>
       </form>
     </>

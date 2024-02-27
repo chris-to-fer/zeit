@@ -57,6 +57,14 @@ export default function Sidebar({ params, projects, project, employee }) {
               <button className={styles.funcbutton}>BEARBEITEN</button>
             </Link>
             <br></br>
+            Stundenzettel:
+            <Link
+              href={`/${userId}/projects/${proId}/employees/${empId}/create`}
+            >
+              <button className={styles.funcbutton}> ERSTELLEN</button>
+              <br></br>
+            </Link>
+            <br></br>
             <Link href={`/${userId}/projects/${proId}`}>zurück</Link>
           </>
         ) : userId && !proId ? (
@@ -69,17 +77,7 @@ export default function Sidebar({ params, projects, project, employee }) {
           </>
         ) : userId && proId && empId && weekId ? (
           <>
-            <h4>Stundenzettel:</h4>
-            <Link
-              href={`/${userId}/projects/${proId}/employees/${empId}/create`}
-            >
-              <button className={styles.funcbutton}> ERSTELLEN</button>
-              <br></br>
-            </Link>
-            <br></br>
-            <Link href={`/${userId}/projects/${proId}/employees/${empId}`}>
-              zurück
-            </Link>
+            <h4>Nothing yet:</h4>
           </>
         ) : (
           ""

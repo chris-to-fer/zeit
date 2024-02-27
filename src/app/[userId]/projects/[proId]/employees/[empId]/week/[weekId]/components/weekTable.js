@@ -142,30 +142,44 @@ export default function WeekTable({ timesheets }) {
   }
   // style={{ , width: "100%" }}
   return (
-    <div className={styles.table} style={{ height: 500, width: "80vw" }}>
-      <DataGrid
-        checkboxSelection
-        onRowSelectionModelChange={(id) => {
-          setRowSelectionModel(id);
-        }}
-        rowSelectionModel={rowSelectionModel}
-        disableColumnMenu
-        disableColumnFilter
-        rows={rows}
-        columns={columns}
-        // initialState={{
-        //   pagination: {
-        //     paginationModel: { page: 1, pageSize: 7 },
-        //   },
-        // }}
-        // pageSize={7}
-        // pageSizeOptions={[7]}
-        // getRowId={getRowId}
-        // getRowClassName={getRowClassName}
-        // autoHeight
-        autoPageSize
-      />
-
+    <>
+      <div className={styles.table} style={{ height: 500, width: "90vw" }}>
+        <DataGrid
+          checkboxSelection
+          onRowSelectionModelChange={(id) => {
+            setRowSelectionModel(id);
+          }}
+          rowSelectionModel={rowSelectionModel}
+          disableColumnMenu
+          disableColumnFilter
+          rows={rows}
+          columns={columns}
+          // initialState={{
+          //   pagination: {
+          //     paginationModel: { page: 1, pageSize: 7 },
+          //   },
+          // }}
+          // pageSize={7}
+          // pageSizeOptions={[7]}
+          // getRowId={getRowId}
+          // getRowClassName={getRowClassName}
+          // autoHeight
+          autoPageSize
+        />
+        {/* <Button
+          className={styles.func_button}
+          onClick={() => handleApprove(approvedTimes)}
+          // disabled={rowSelectionModel[0] ? false : true}
+        >
+          {!rowSelectionModel[0] ? (
+            <h3>Alle Genehmigungen zurücksetzen</h3>
+          ) : rowSelectionModel.length === filteredTimesheets.length ? (
+            <h3>Alle genehmigen</h3>
+          ) : (
+            <h3>Nur markierte genehmigen und andere nicht</h3>
+          )}
+        </Button> */}
+      </div>
       <Button
         className={styles.func_button}
         onClick={() => handleApprove(approvedTimes)}
@@ -179,6 +193,6 @@ export default function WeekTable({ timesheets }) {
           <h3>Nur markierte genehmigen und andere nicht</h3>
         )}
       </Button>
-    </div>
+    </>
   );
 }

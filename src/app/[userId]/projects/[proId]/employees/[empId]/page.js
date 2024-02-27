@@ -54,7 +54,7 @@ export default async function Page({ params, children }) {
     let year = mongo.slice(2, 4);
     return day + "." + month + "." + year;
   };
-  console.log("iTi", injectedTimes);
+
   const encodedArray = encodeURIComponent(JSON.stringify(injectedTimes));
   return (
     <>
@@ -74,16 +74,26 @@ export default async function Page({ params, children }) {
                 }}
               >
                 <h4> Kalenderwoche {e}: </h4>
-                <section className={styles.weeks}>
-                  {injectedTimes.map((obj) =>
-                    obj.weekId == e ? (
-                      <p key={obj.date}>{dateDisplayFormat(obj.date)}</p>
-                    ) : (
-                      ""
-                    )
-                  )}
-                </section>
               </Link>
+
+              <section className={styles.weeks}>
+                {injectedTimes.map((obj) =>
+                  obj.weekId == e ? (
+                    <Link
+                      href={{
+                        pathname: `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/${obj._id}/edit`,
+                        query: obj,
+                      }}
+                      key={obj.date}
+                    >
+                      {" "}
+                      <p>{dateDisplayFormat(obj.date)}</p>
+                    </Link>
+                  ) : (
+                    ""
+                  )
+                )}
+              </section>
             </li>
           ))}
         </ul>

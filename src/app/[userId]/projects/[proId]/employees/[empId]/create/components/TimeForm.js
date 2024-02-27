@@ -4,17 +4,19 @@ import styles from "../../../../../page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export default function TimeForm({
   defaultValue,
-  revalidateDelete,
+
   handleSubmit,
 }) {
   const router = useRouter();
-  const { proId, userId, empId } = useParams();
+  const { proId, userId, empId, timeId } = useParams();
+  const HOSTNAME = process.env.HOSTNAME_URL;
 
   async function handleDelete() {
-    const data = { method: "DELETEEMPLOYEE" };
+    const data = { method: "DELETETIMESHEET", timeId: timeId };
     confirm("Löschen?");
     const response = await fetch(
       `/api/${userId}/projects/${proId}/employees/${empId}`,
@@ -30,8 +32,8 @@ export default function TimeForm({
       console.log("ERROR DELETING");
     }
     if (response.ok) {
-      // router.push(`/${userId}/projects/${proId}`);
-      revalidateDelete();
+      router.push(`/${userId}/projects/${proId}/employees/${empId}`);
+      //   revalidateDelete();
     }
   }
 
@@ -42,8 +44,8 @@ export default function TimeForm({
         <input
           type="date"
           id="date"
-          name="name"
-          defaultValue={defaultValue?.date}
+          name="date"
+          defaultValue={defaultValue?.date.slice(0, 10)}
           required
         />
 
@@ -103,14 +105,14 @@ export default function TimeForm({
 
         <label htmlFor="travelTo">Hinreise:</label>
         <input
-          type="number"
+          type="time"
           id="travelTo"
           name="travelTo"
           defaultValue={defaultValue?.travelTo}
         />
         <label htmlFor="travelBack">Rückreise:</label>
         <input
-          type="number"
+          type="time"
           id="travelBack"
           name="travelBack"
           defaultValue={defaultValue?.travelBack}
@@ -141,14 +143,14 @@ export default function TimeForm({
           name="comment"
           defaultValue={defaultValue?.travelTo}
         />
-        <label htmlFor="workplace">Arbeitsort:</label>
+        <label htmlFor="place">Arbeitsort:</label>
         <textarea
           rows="2"
           cols="30"
           type="text"
-          id="workplace"
-          name="workplace"
-          defaultValue={defaultValue?.workplace}
+          id="place"
+          name="place"
+          defaultValue={defaultValue?.place}
         />
 
         <label htmlFor="isHome">Arbeitsort ist:</label>
@@ -175,13 +177,12 @@ export default function TimeForm({
           />
         </section>
 
-        {/* <input
-      type="text"
-      id="createdBy"
-      name="createdBy"
-      value={userId}
-      hidden
-    /> */}
+        <input
+          id="timeId"
+          name="timeId"
+          defaultValue={timeId ? timeId : ""}
+          hidden
+        />
 
         {/* <p>{defaultValue.active}</p> */}
 

@@ -33,10 +33,7 @@ export async function POST(request, { params, searchParams }) {
     approved: e.approved,
   }));
 
-  console.log("server end", approvedObjects, method);
-
   if (method === "APPROVETIMESHEETS") {
-    // proId = data.project;
     revalidatePath(
       `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
     );
@@ -52,7 +49,6 @@ export async function POST(request, { params, searchParams }) {
         );
       });
 
-      console.log("approve worked fine");
       return NextResponse.json({ status: 201 });
     } catch (error) {
       console.log("Error approving timesheets", error);

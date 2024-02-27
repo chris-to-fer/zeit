@@ -27,10 +27,9 @@ export async function POST(request, { params, searchParams }) {
   await connectDB();
   const data = await request.json();
   const method = await data.method;
-  const { userId, empId, proId } = params;
+  const { userId, empId, proId, timeId } = params;
   // let proId = params.proId;
 
-  console.log("params server", params);
   console.log("method ", method);
 
   if (method === "DELETEEMPLOYEE") {
@@ -70,6 +69,46 @@ export async function POST(request, { params, searchParams }) {
       return NextResponse.json({ status: 201 });
     } catch (error) {
       console.log("Error editing employee", error);
+      return NextResponse.json({ status: 400 });
+    }
+  } else if (method === "CREATETIMESHEET") {
+    //
+
+    try {
+      const newTimesheet = await Time.create(data);
+      await Employee.findByIdAndUpdate(
+        empId,
+        { $push: { times: newTimesheet._id } },
+        { new: true }
+      );
+
+      return NextResponse.json({ status: 200 });
+    } catch (error) {
+      console.log("Error creating new Timesheet", error);
+      return NextResponse.json({ error }, { status: 400 });
+    }
+  } else if (method === "EDITTIMESHEET") {
+    //
+
+    try {
+      await Time.findByIdAndUpdate(data.timeId, data);
+
+      return NextResponse.json({ status: 201 });
+    } catch (error) {
+      console.log("Error editing  Timesheet", error);
+      return NextResponse.json({ error }, { status: 400 });
+    }
+  } else if (method === "DELETETIMESHEET") {
+    console.log("hit server");
+    try {
+      const timesheetToDelete = await Time.findByIdAndDelete(data.timeId);
+      console.log("time ID: ", data.timeId);
+      await Employee.findByIdAndUpdate(empId, {
+        $pull: { times: data.timeId },
+      });
+      return NextResponse.json({ status: 201 });
+    } catch (error) {
+      console.log("Error deleting timesheet", error);
       return NextResponse.json({ status: 400 });
     }
   }

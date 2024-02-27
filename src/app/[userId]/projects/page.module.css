@@ -28,8 +28,8 @@
   background-color: rgb(252, 252, 252);
   border-radius: 5px;
   padding: 3%;
-  margin-right: 12px;
-  margin-left: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
   z-index: 1;
 }
 
@@ -51,10 +51,6 @@
 }
 
 .burger {
-  /* position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10; */
   background-color: transparent;
   border: none;
   border-style: none;
@@ -105,10 +101,11 @@
   border-radius: 5px;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
-  width: 95vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  padding-right: 35px;
+  /* padding-right: 35px; */
+  padding: 12px;
 }
 
 .card_project {
@@ -116,9 +113,9 @@
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
   padding: 12px;
-  margin-left: 12px;
-  margin-right: 12px;
-  max-width: 80%;
+  /* margin-left: 12px;
+  margin-right: 12px; */
+  /* max-width: 80%; */
   /* width: 50%; */
   /* max-width: 400px; */
   display: flex;
@@ -144,7 +141,8 @@
   justify-content: center;
   gap: 5px;
   height: 100%;
-  margin: 32px;
+  margin: 12px;
+  /* margin-bottom: 32px; */
 }
 
 .footer {

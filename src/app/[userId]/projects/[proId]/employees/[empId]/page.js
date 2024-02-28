@@ -3,10 +3,17 @@ import { revalidatePath } from "next/cache";
 import Sidebar from "../../../components/Sidebar";
 import styles from "../../../page.module.css";
 import Link from "next/link";
+import getWeekOfYear from "@/app/lib/getWeekOfYear";
 
 export default async function Page({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId } = params;
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
 
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
 
@@ -29,20 +36,6 @@ export default async function Page({ params, children }) {
   } = data;
 
   const injectedTimes = times.map((e) => {
-    // const startYear = new Date(new Date(e.date).getFullYear(), 0, 1);
-    // const yearOnly = startYear.getFullYear();
-    // console.log("startyear", startYear);
-    // const days = Math.floor(
-    //   (new Date(e.date) - startYear) / (24 * 60 * 60 * 1000)
-    // );
-    // let weekId = "";
-
-    // if ((0 == yearOnly % 4 && 0 != yearOnly % 100) || 0 == yearOnly % 400) {
-    //   weekId = `${Math.floor(days / 7) + 1} - ${yearOnly}`;
-    // } else {
-    //   weekId = `${Math.ceil(days / 7)} - ${yearOnly}`;
-    //   console.log("WID", weekId);
-    // }
     const yearOnly = new Date(
       new Date(e.date).getFullYear(),
       0,
@@ -53,17 +46,17 @@ export default async function Page({ params, children }) {
     return (e = { ...e, weekId: weekId });
   });
 
-  function getWeekOfYear(date) {
-    const target = new Date(date);
-    const dayNr = (date.getDay() + 6) % 7; // ISO day of week with Monday as 0
-    target.setDate(target.getDate() - dayNr + 3);
-    const firstThursday = target.valueOf();
-    target.setMonth(0, 1);
-    if (target.getDay() !== 4) {
-      target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
-    }
-    return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 is 7 days in milliseconds
-  }
+  // function getWeekOfYear(date) {
+  //   const target = new Date(date);
+  //   const dayNr = (date.getDay() + 6) % 7; // ISO day of week with Monday as 0
+  //   target.setDate(target.getDate() - dayNr + 3);
+  //   const firstThursday = target.valueOf();
+  //   target.setMonth(0, 1);
+  //   if (target.getDay() !== 4) {
+  //     target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
+  //   }
+  //   return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 is 7 days in milliseconds
+  // }
 
   injectedTimes.sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -122,7 +115,13 @@ export default async function Page({ params, children }) {
                       key={obj.date}
                     >
                       {" "}
-                      <p>{dateDisplayFormat(obj.date)}</p>
+                      <p>
+                        {" "}
+                        {new Date(obj.date).toLocaleDateString(
+                          "de-DE",
+                          options
+                        )}
+                      </p>
                     </Link>
                   ) : (
                     ""

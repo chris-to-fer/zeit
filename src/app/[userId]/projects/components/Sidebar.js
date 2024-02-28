@@ -6,11 +6,19 @@ import Link from "next/link";
 import { useContext } from "react";
 import { selectBurgerContext } from "@/app/openBurger-Provider";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Sidebar({ params, projects, project, employee }) {
+export default function Sidebar({
+  trigger,
+  params,
+  projects,
+  project,
+  employee,
+}) {
   const { userId, proId, empId, weekId } = params;
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { open, setOpen } = useContext(selectBurgerContext);
+  const router = useRouter();
 
   //burger closed on mobile initially though on desktop open
   useEffect(() => {
@@ -38,7 +46,18 @@ export default function Sidebar({ params, projects, project, employee }) {
   return (
     <>
       <aside className={`${open ? styles.aside_open : styles.aside_closed}`}>
-        {proId && !empId ? (
+        {trigger ? (
+          <>
+            <h4>
+              Diese Tage müssen noch genehmigt werden:<br></br>
+              <br></br>
+              <br></br>
+            </h4>
+            <button className={styles.button} onClick={() => router.back()}>
+              zurück
+            </button>
+          </>
+        ) : proId && !empId ? (
           <>
             <h4>
               Mitarbeiter zu {project?.name} hinzufügen<br></br>
@@ -48,7 +67,9 @@ export default function Sidebar({ params, projects, project, employee }) {
               </Link>
               <br></br>
             </h4>
-            <Link href={`/${userId}/projects`}>zurück</Link>
+            <Link className={styles.button} href={`/${userId}/projects`}>
+              zurück
+            </Link>
           </>
         ) : empId && proId && empId && !weekId ? (
           <>
@@ -71,7 +92,12 @@ export default function Sidebar({ params, projects, project, employee }) {
               <br></br>
             </Link>
             <br></br>
-            <Link href={`/${userId}/projects/${proId}`}>zurück</Link>
+            <Link
+              className={styles.button}
+              href={`/${userId}/projects/${proId}`}
+            >
+              zurück
+            </Link>
           </>
         ) : userId && !proId ? (
           <>
@@ -83,7 +109,7 @@ export default function Sidebar({ params, projects, project, employee }) {
           </>
         ) : userId && proId && empId && weekId ? (
           <>
-            <h4>Nothing yet:</h4>
+            <h4>Features:</h4>
           </>
         ) : (
           ""

@@ -3,10 +3,13 @@ import Project from "@/app/db/model/Project";
 import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
 import Employee from "@/app/db/model/Employee";
+import Time from "@/app/db/model/Time";
 import { revalidatePath } from "next/cache";
+import NextAuth from "next-auth/next";
 
 export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
+
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
@@ -21,7 +24,8 @@ export async function POST(request, { params, searchParams }) {
   await connectDB();
   const { empId, userId, proId } = params;
   const data = await request.json();
-  const method = data.method;
+  const method = await data.method;
+
   // if (data.projectCode) {
   if (method === "EDITPROJECT") {
     try {

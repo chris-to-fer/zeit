@@ -26,7 +26,7 @@ export default async function PageWeek({ params, children, searchParams }) {
   const data = await res.json();
   if (!data) return null;
 
-  const injectedTimes = data.employee.times.map((e) => {
+  const injectedTimes = data.employee?.times.map((e) => {
     const yearOnly = new Date(
       new Date(e.date).getFullYear(),
       0,

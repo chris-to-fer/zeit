@@ -17,7 +17,7 @@ export default async function Page({ children, params }) {
 
   revalidatePath(`${HOSTNAME}/`);
 
-  const res = await fetch(`${HOSTNAME}/api/${userId}/user`);
+  const res = await fetch(`${HOSTNAME}/api/${userId}/user/`);
   const data = (await res.json()) || [];
   if (!data) return <h3>Data is loading..</h3>;
 

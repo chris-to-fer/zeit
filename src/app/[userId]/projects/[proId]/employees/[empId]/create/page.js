@@ -32,6 +32,7 @@ export default function TimesheetCreatePage({ params }) {
       travelTo: data.travelTo.toString(),
       travelBack: data.travelBack.toString(),
       break: data.break.toString(),
+      approved: false,
     };
 
     const checkDouble = await fetch(

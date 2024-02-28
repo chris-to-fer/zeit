@@ -11,7 +11,6 @@ export default function Sidebar({ params, projects, project, employee }) {
   const { userId, proId, empId, weekId } = params;
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { open, setOpen } = useContext(selectBurgerContext);
-  console.log("opensidebar", open);
 
   //burger closed on mobile initially though on desktop open
   useEffect(() => {

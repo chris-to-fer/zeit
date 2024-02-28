@@ -9,9 +9,6 @@ export default function Home() {
   const router = useRouter();
   const [seen, setSeen] = useState(false);
   const { data: session, status, user } = useSession();
-  console.log("session", session);
-  console.log("user", user);
-  console.log("status", status);
 
   useEffect(() => {
     session && router.push(`/${session?.user.userId}/projects`);

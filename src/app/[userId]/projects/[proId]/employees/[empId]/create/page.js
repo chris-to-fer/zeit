@@ -1,15 +1,26 @@
+"use client";
 import React from "react";
 import TimeForm from "./components/TimeForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import ModalDoubleDate from "@/app/lib/ModalDoubleDate";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function TimesheetCreatePage({ params }) {
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const router = useRouter();
+  function handleShowError() {
+    setErrorModalOpen(true);
+  }
+  function handleCloseError() {
+    setErrorModalOpen(false);
+  }
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId } = params;
-  let trigger = null;
 
   async function handleSubmit(formData) {
-    "use server";
+    // "use server";
     let data = Object.fromEntries(formData);
     data = {
       ...data,
@@ -22,8 +33,22 @@ export default function TimesheetCreatePage({ params }) {
       travelBack: data.travelBack.toString(),
       break: data.break.toString(),
     };
+
+    const checkDouble = await fetch(
+      `/api/${userId}/projects/${proId}/employees/${empId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, check: true }),
+      }
+    );
+    const answer = await checkDouble?.json();
+    if (answer.message === "DATUM") return handleShowError();
+
     const response = await fetch(
-      `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
+      `/api/${userId}/projects/${proId}/employees/${empId}`,
       {
         method: "POST",
         headers: {
@@ -32,22 +57,20 @@ export default function TimesheetCreatePage({ params }) {
         body: JSON.stringify(data),
       }
     );
+    const error = await response?.json();
+    if (error.message === "FUTURE") return handleShowError();
 
     if (response.status === 200) {
-      console.log("create timesheet sent:", data);
-      revalidatePath(
-        `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
-      );
+      router.refresh();
       // revalidatePath(
+      //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
+      // );
+
       // `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`)
-      redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
+      redirect(`/${userId}/projects/${proId}/employees/${empId}`);
     }
     if (response.status > 399) {
-      console.log("response", response);
-
-      // alert(
-      //   "Um ein existierendes Datum zu ändern: Im Datum Bearbeiten wählen. Hier können nur Zeiten für ein neues Datum erfasst werden!"
-      // );
+      console.log(error);
     }
     if (response.error) {
       throw new Error(error);
@@ -57,6 +80,11 @@ export default function TimesheetCreatePage({ params }) {
   return (
     <>
       <div>
+        <ModalDoubleDate
+          isOpen={errorModalOpen}
+          message="Datum existiert schon oder liegt in der Zukunft."
+          onRequestClose={handleCloseError}
+        />
         <h3>Geben Sie Ihre Zeiten ein:</h3>
         <br></br>
         <TimeForm handleSubmit={handleSubmit} />

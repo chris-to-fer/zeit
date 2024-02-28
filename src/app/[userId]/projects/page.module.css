@@ -11,10 +11,11 @@
 .radio {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 8px;
 }
 
 .right {
-  transform: translate(30%, 17%);
+  transform: translate(40%, 22%);
 }
 
 .navigation {
@@ -77,12 +78,10 @@
     opacity: 97%;
     position: fixed;
     top: 0;
-    bottom: 0;
+    bottom: 25%;
     position: fixed;
     overflow-y: scroll;
     overflow-x: hidden;
-
-    /* translate: -120px -40px; */
     left: -12px;
     top: 78px;
     background-color: rgb(241, 243, 244);
@@ -127,15 +126,8 @@
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(252, 252, 252);
   padding: 12px;
-  /* margin-left: 12px;
-  margin-right: 12px; */
-  /* max-width: 80%; */
-  /* width: 50%; */
-  /* max-width: 400px; */
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* align-items: flex-start;*/
   flex-grow: 2;
 }
 
@@ -166,15 +158,12 @@
   justify-content: space-between;
   gap: 12px;
   align-items: center;
-
   border-radius: 5px;
-
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
   background-color: rgb(245, 245, 245);
   padding: 3%12px;
   margin-left: 12px;
   margin-right: 12px;
-
   width: 100%;
 }
 
@@ -184,7 +173,7 @@
   gap: 10px;
   list-style: none;
   margin-top: 19px;
-  max-width: max-content;
+  /* max-width: inherit; */
 }
 
 .funcbutton {
@@ -214,7 +203,7 @@
   background-color: rgb(241, 241, 243);
   padding: 12px;
   border-radius: 5px;
-
+  width: 100%;
   transition: 300ms ease-in-out;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
 }
@@ -260,12 +249,13 @@
   gap: 12px;
   margin-bottom: 12px;
   font-style: italic;
+  width: 95vw;
 }
 .form input {
   padding: 6px;
   border-radius: 3px;
   border-width: 0.5px;
-  min-width: 300px;
+  /* min-width: 300px; */
 }
 
 .form select {

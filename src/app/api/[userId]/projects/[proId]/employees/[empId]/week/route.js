@@ -51,7 +51,6 @@ export async function POST(request, { params, searchParams }) {
 
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error approving timesheets", error);
       return NextResponse.json({ status: 400 });
     }
   }

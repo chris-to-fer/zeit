@@ -25,10 +25,8 @@ export async function POST(request, { params, searchParams }, response) {
         { $push: { projects: newProject._id } },
         { new: true }
       );
-      console.log("Server side project created");
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error posting new project", error);
       return NextResponse.json({ status: 400 });
     }
   }

@@ -27,7 +27,7 @@ export default function PageEditEmployee({ params, searchParams }) {
 
     if (response.ok) {
       // alert("Das Projekt wurde erstellt.");
-      console.log("edit employee sent", data);
+
       revalidatePath(
         `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
       );
@@ -36,7 +36,7 @@ export default function PageEditEmployee({ params, searchParams }) {
   }
   async function revalidateDelete() {
     "use server";
-    console.log("delete sent");
+
     revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}`);
     redirect(`${HOSTNAME}/${userId}/projects/${proId}`);
   }

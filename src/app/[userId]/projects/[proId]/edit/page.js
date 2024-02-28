@@ -11,9 +11,7 @@ export default function PageEdit({ params, searchParams }) {
 
   async function handleSubmit(formData) {
     "use server";
-    // e.preventDefault();
-    // console.log("submi clickt");
-    //const formData = new FormData(e.target);
+
     const formedData = Object.fromEntries(formData);
     const data = { ...formedData, method: "EDITPROJECT" };
 
@@ -30,14 +28,14 @@ export default function PageEdit({ params, searchParams }) {
 
     if (response.ok) {
       // alert("Das Projekt wurde erstellt.");
-      console.log("edit sent", data);
+
       revalidatePath(`${HOSTNAME}/${userId}/projects`);
       redirect(`${HOSTNAME}/${userId}/projects`);
     }
   }
   async function revalidateDelete() {
     "use server";
-    console.log("delete sent");
+
     revalidatePath(`${HOSTNAME}/${userId}/projects`);
     redirect(`${HOSTNAME}/${userId}/projects`);
   }

@@ -27,7 +27,6 @@ export default function EmpForm({
       }
     );
     if (!response.ok) {
-      console.log("ERROR DELETING");
     }
     if (response.ok) {
       // router.push(`/${userId}/projects/${proId}`);

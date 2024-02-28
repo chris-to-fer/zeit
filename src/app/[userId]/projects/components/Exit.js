@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default function Exit({ goHome, session, userId }) {
   const { open, setOpen } = useContext(selectBurgerContext);
-  console.log("open", open);
 
   const signOutandToHome = () => {
     signOut();

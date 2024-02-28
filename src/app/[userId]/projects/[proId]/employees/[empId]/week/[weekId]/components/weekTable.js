@@ -87,7 +87,7 @@ export default function WeekTable({ timesheets }) {
       }
     })
     .filter(Boolean);
-  console.log("INST", initialState);
+
   const [rowSelectionModel, setRowSelectionModel] = useState(initialState);
 
   const rows = filteredTimesheets.map((e, index) => {
@@ -115,9 +115,6 @@ export default function WeekTable({ timesheets }) {
     })
     .filter(Boolean);
 
-  console.log("rsm", rowSelectionModel);
-  console.log("esel", approvedTimes);
-
   async function handleApprove(approvedTimes) {
     if (!approvedTimes[0]) {
       return;
@@ -136,7 +133,7 @@ export default function WeekTable({ timesheets }) {
 
     if (response.ok) {
       alert("Ausgeführt");
-      console.log("Approval sent", data);
+
       router.refresh();
     }
   }

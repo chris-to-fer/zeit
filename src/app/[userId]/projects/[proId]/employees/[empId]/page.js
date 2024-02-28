@@ -49,7 +49,7 @@ export default async function Page({ params, children }) {
       1
     ).getFullYear();
     const weekId = `${getWeekOfYear(new Date(e.date))}-${yearOnly}`;
-    console.log("WID", weekId);
+
     return (e = { ...e, weekId: weekId });
   });
 

@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 export default function Header({ params, session }) {
   const userId = params.userId;
   const HOSTNAME = process.env.HOSTNAME_URL;
-  console.log("header session", session);
 
   const goHome = async () => {
     "use server";

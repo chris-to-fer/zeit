@@ -28,10 +28,9 @@ export async function POST(request, { params, searchParams }) {
       const updatedProject = await Project.findByIdAndUpdate(proId, {
         $set: data,
       });
-      console.log("Server side project edited");
+
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error editing project", error);
       return NextResponse.json({ status: 400 });
     }
   } else if (data.method === "DELETEPROJECT") {
@@ -44,7 +43,6 @@ export async function POST(request, { params, searchParams }) {
       });
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error deleting project", error);
       return NextResponse.json({ status: 400 });
     }
   }

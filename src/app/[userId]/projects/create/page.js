@@ -21,7 +21,7 @@ export default function Create({ params, searchParams }) {
 
     if (response.ok) {
       // revalidate();
-      console.log("create sent", data);
+
       revalidatePath(`/${HOSTNAME}/${userId}/projects`);
       redirect(`/${userId}/projects`);
     }

@@ -93,7 +93,7 @@ export default async function PageWeek({ params, children, searchParams }) {
   //     //   redirect(`${HOSTNAME}/${userId}/projects`);
   //   }
   // }
-  console.log("data", data.employee.position);
+
   return (
     <>
       <Sidebar params={params} employee={data} />

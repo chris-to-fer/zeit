@@ -25,7 +25,6 @@ export default function ProjectForm({
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-      console.log("ERROR DELETING");
     }
     if (response.ok) {
       revalidateDelete();

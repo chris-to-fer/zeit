@@ -30,8 +30,6 @@ export async function POST(request, { params, searchParams }) {
   const { userId, empId, proId, timeId } = params;
   // let proId = params.proId;
 
-  console.log("method ", method);
-
   if (method === "DELETEEMPLOYEE") {
     try {
       const employeeToDelete = await Employee.findByIdAndDelete(empId);
@@ -40,12 +38,10 @@ export async function POST(request, { params, searchParams }) {
       });
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error deleting employee", error);
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "CREATEEMPLOYEE") {
     // const proIdi = data.project;
-    console.log("method frióm create", data);
 
     try {
       const newEmployee = await Employee.create(data);
@@ -57,7 +53,6 @@ export async function POST(request, { params, searchParams }) {
 
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error creating new employee", error);
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "EDITEMPLOYEE") {
@@ -68,12 +63,22 @@ export async function POST(request, { params, searchParams }) {
 
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error editing employee", error);
       return NextResponse.json({ status: 400 });
     }
+  } else if (data.check === true) {
+    const existingDocument = await Time.findOne({
+      date: new Date(data.date),
+      projectId: proId,
+      employeeId: empId,
+    });
+    if (existingDocument) {
+      return NextResponse.json({ message: "DATUM" }, { status: 400 });
+    }
+    return NextResponse.json({ status: 200 });
   } else if (method === "CREATETIMESHEET") {
-    //
-
+    if (new Date(data.date) > new Date()) {
+      return NextResponse.json({ message: "FUTURE" }, { status: 400 });
+    }
     try {
       const newTimesheet = await Time.create(data);
       await Employee.findByIdAndUpdate(
@@ -84,7 +89,6 @@ export async function POST(request, { params, searchParams }) {
 
       return NextResponse.json({ status: 200 });
     } catch (error) {
-      console.log("Error creating new Timesheet", error);
       return NextResponse.json({ error }, { status: 400 });
     }
   } else if (method === "EDITTIMESHEET") {
@@ -95,20 +99,16 @@ export async function POST(request, { params, searchParams }) {
 
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error editing  Timesheet", error);
       return NextResponse.json({ error }, { status: 400 });
     }
   } else if (method === "DELETETIMESHEET") {
-    console.log("hit server");
     try {
       const timesheetToDelete = await Time.findByIdAndDelete(data.timeId);
-      console.log("time ID: ", data.timeId);
       await Employee.findByIdAndUpdate(empId, {
         $pull: { times: data.timeId },
       });
       return NextResponse.json({ status: 201 });
     } catch (error) {
-      console.log("Error deleting timesheet", error);
       return NextResponse.json({ status: 400 });
     }
   }

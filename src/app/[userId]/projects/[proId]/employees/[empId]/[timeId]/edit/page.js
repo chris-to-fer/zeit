@@ -35,7 +35,6 @@ export default function page({ params, searchParams }) {
     );
 
     if (response.status === 200) {
-      console.log("edit timesheet sent :", data);
       revalidatePath(
         `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
       );
@@ -45,8 +44,6 @@ export default function page({ params, searchParams }) {
       redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
     if (response.status > 399) {
-      console.log("response", response);
-
       // alert(
       //   "Um ein existierendes Datum zu ändern: Im Datum Bearbeiten wählen. Hier können nur Zeiten für ein neues Datum erfasst werden!"
       // );

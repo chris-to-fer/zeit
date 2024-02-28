@@ -4,13 +4,9 @@ import styles from "../../../../../page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import revalidateDelete from "./revalidateDelete";
 
-export default function TimeForm({
-  defaultValue,
-
-  handleSubmit,
-}) {
+export default function TimeForm({ defaultValue, handleSubmit }) {
   const router = useRouter();
   const { proId, userId, empId, timeId } = useParams();
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -28,16 +24,11 @@ export default function TimeForm({
         body: JSON.stringify(data),
       }
     );
-    if (!response.ok) {
-      console.log("ERROR DELETING");
-    }
-    if (response.ok) {
-      revalidatePath(
-        `/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
-      );
 
-      // router.push(`/${userId}/projects/${proId}/employees/${empId}`);
-      //   revalidateDelete();
+    if (response.status < 300) {
+      revalidateDelete();
+
+      router.push(`/${userId}/projects/${proId}/employees/${empId}`);
     }
   }
 
@@ -105,7 +96,6 @@ export default function TimeForm({
             required
           />
         </section>
-        <hr></hr>
 
         <label htmlFor="travelTo">Hinreise:</label>
         <input
@@ -128,14 +118,13 @@ export default function TimeForm({
           name="type"
           defaultValue={defaultValue?.type}
         >
-          <option value="work">Arbeit</option>
-          <option value="travel">Reise</option>
-          <option value="ill">Krankheit</option>
-          <option value="holiday">Urlaub</option>
-          <option value="pubHoliday">Feiertag</option>
-          <option value="off">Frei</option>
-          <option value="sub">Ausgleichstag</option>
-          <option value="pubHoliday">Feiertag</option>
+          <option value="Arbeit">Arbeit</option>
+          <option value="Reise">Reise</option>
+          <option value="Krankheit">Krankheit</option>
+          <option value="Urlaub">Urlaub</option>
+          <option value="Feiertag">Feiertag</option>
+          <option value="Frei">Frei</option>
+          <option value="Ausgleichstag">Ausgleichstag</option>
           <option value="aux">Laden/Testen</option>
         </select>
         <label htmlFor="comment">Bemerkung:</label>

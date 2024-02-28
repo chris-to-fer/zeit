@@ -19,7 +19,7 @@ const timeSchema = new Schema(
       required: true,
     },
 
-    date: { type: Date, unique: true },
+    date: { type: Date, required: true },
 
     start: { type: String, required: true },
     end: { type: String, required: true },

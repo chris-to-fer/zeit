@@ -13,7 +13,9 @@ export default function ProjectCard({ user, userId }) {
   const proId = project?._id;
 
   if (!project)
-    return <h4>Bitte links ein Projekt wählen oder ein neues erstellen.</h4>;
+    return (
+      <h4>Bitte links ein Projekt wählen oder ein neues Projekt erstellen.</h4>
+    );
   return (
     <>
       <h2>{project?.name}</h2>

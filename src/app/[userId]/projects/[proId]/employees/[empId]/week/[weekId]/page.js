@@ -9,6 +9,7 @@ import Link from "next/link";
 export default async function PageWeek({ params, children, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId, weekId } = params;
+  console.log("psms", params);
 
   revalidatePath(
     `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
@@ -25,8 +26,8 @@ export default async function PageWeek({ params, children, searchParams }) {
   );
   const data = await res.json();
   if (!data) return null;
-
-  const injectedTimes = data.employee.times.map((e) => {
+  console.log("DAAAAAA", data);
+  const injectedTimes = data.employee?.times.map((e) => {
     const yearOnly = new Date(
       new Date(e.date).getFullYear(),
       0,

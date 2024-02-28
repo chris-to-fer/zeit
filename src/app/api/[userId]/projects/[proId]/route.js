@@ -9,7 +9,7 @@ import NextAuth from "next-auth/next";
 
 export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
-  console.log("hit");
+
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
@@ -25,8 +25,6 @@ export async function POST(request, { params, searchParams }) {
   const { empId, userId, proId } = params;
   const data = await request.json();
   const method = await data.method;
-  console.log("me", method);
-  console.log("da", data);
 
   // if (data.projectCode) {
   if (method === "EDITPROJECT") {

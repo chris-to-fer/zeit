@@ -12,7 +12,7 @@ export async function GET(request, { params, searchParams }) {
   const { proId, userId, empId } = params;
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/approve`);
   await connectDB();
-  console.log("server proid", proId);
+
   const notApproved = await Time.find({
     approved: false,
     projectId: proId,

@@ -37,7 +37,9 @@ export default function PageEditEmployee({ params, searchParams }) {
   async function revalidateDelete() {
     "use server";
 
-    revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}`);
+    revalidatePath(
+      `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
+    );
     redirect(`${HOSTNAME}/${userId}/projects/${proId}`);
   }
 

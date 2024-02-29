@@ -65,6 +65,7 @@ const columns = [
 ];
 
 export default function WeekTable({ timesheets }) {
+  const HOSTNAME = process.env.HOSTNAME_URL;
   const router = useRouter();
   const params = useParams();
   const { userId, empId, proId, weekId } = params;
@@ -130,11 +131,10 @@ export default function WeekTable({ timesheets }) {
         body: JSON.stringify(data),
       }
     );
-
+    router.refresh();
     if (response.ok) {
       alert("Ausgeführt");
-
-      router.refresh();
+      router.refresh(`/api/${userId}/projects/${proId}/approve`);
     }
   }
   // style={{ , width: "100%" }}

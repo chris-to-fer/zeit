@@ -4,6 +4,7 @@ import Sidebar from "../../../components/Sidebar";
 import styles from "../../../page.module.css";
 import Link from "next/link";
 import getWeekOfYear from "@/app/lib/getWeekOfYear";
+import { redirect } from "next/navigation";
 
 export default async function Page({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -34,8 +35,10 @@ export default async function Page({ params, children }) {
   const {
     employee: { times },
   } = data;
-
-  const injectedTimes = times.map((e) => {
+  if (!times) {
+    redirect(`${HOSTNAME}/api/${userId}/projects/${proId}`);
+  }
+  const injectedTimes = times?.map((e) => {
     const yearOnly = new Date(
       new Date(e.date).getFullYear(),
       0,

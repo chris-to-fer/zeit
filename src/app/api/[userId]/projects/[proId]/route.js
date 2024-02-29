@@ -45,6 +45,14 @@ export async function POST(request, { params, searchParams }) {
       await User.findByIdAndUpdate(userId, {
         $pull: { projects: proId },
       });
+      const deletedCount = await Time.deleteMany({
+        projectId: proId,
+      });
+      projectToDelete.employees.map(async (e) => {
+        await Employee.findByIdAndUpdate(e, {
+          $pull: { projectId: proId },
+        });
+      });
       return NextResponse.json({ status: 201 });
     } catch (error) {
       return NextResponse.json({ status: 400 });

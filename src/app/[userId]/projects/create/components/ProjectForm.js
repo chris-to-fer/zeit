@@ -27,7 +27,7 @@ export default function ProjectForm({
     if (!response.ok) {
     }
     if (response.ok) {
-      revalidateDelete();
+      revalidateDelete(userId);
     }
   }
 

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { selectBurgerContext } from "@/app/openBurger-Provider";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { displayNumberContext } from "@/app/displayNumber-Provider";
 
 export default function Sidebar({
   trigger,
@@ -14,10 +15,13 @@ export default function Sidebar({
   projects,
   project,
   employee,
+  displayNumber,
 }) {
   const { userId, proId, empId, weekId } = params;
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { open, setOpen } = useContext(selectBurgerContext);
+  const { number, setNumber } = useContext(displayNumberContext);
+  setNumber(displayNumber);
   const router = useRouter();
 
   //burger closed on mobile initially though on desktop open

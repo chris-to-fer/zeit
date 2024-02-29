@@ -6,10 +6,18 @@ import Employee from "@/app/db/model/Employee";
 import Time from "@/app/db/model/Time";
 import { revalidatePath } from "next/cache";
 import NextAuth from "next-auth/next";
+import ServerComponent from "@/app/session-action";
 
 export async function GET(request, { params, searchParams }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
-
+  const session = ServerComponent();
+  if (!session) {
+    return NextResponse.json(
+      { message: "You must be logged in." },
+      { status: 401 }
+    );
+  }
+  console.log("sessioOn", session);
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);

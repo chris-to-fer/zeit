@@ -257,6 +257,12 @@
   border-width: 0.5px;
   /* min-width: 300px; */
 }
+.form input[type="time"] {
+  padding: 6px;
+  border-radius: 3px;
+  border-width: 0.5px;
+  /* min-width: 300px; */
+}
 
 .form select {
   padding: 6px;

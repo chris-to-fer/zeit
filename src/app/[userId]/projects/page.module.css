@@ -258,11 +258,11 @@
   /* min-width: 300px; */
 }
 @media (max-width: 735px) {
-  .form input[type="time"] {
+  .form input[type="time"]::-webkit-datetime-edit-fields-wrapper {
     padding: 6px;
     border-radius: 3px;
     border-width: 0.5px;
-    /* min-width: 300px; */
+    min-width: 300px;
   }
 }
 

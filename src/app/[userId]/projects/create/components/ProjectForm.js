@@ -40,6 +40,7 @@ export default function ProjectForm({
           id="name"
           name="name"
           defaultValue={defaultValue.name}
+          required
         />
 
         <label htmlFor="projectCode">Projekt Nummer: </label>
@@ -48,6 +49,7 @@ export default function ProjectForm({
           id="projectCode"
           name="projectCode"
           defaultValue={defaultValue.projectCode}
+          required
         />
 
         <label htmlFor="companyName">Firma: </label>
@@ -56,6 +58,7 @@ export default function ProjectForm({
           id="companyName"
           name="companyName"
           defaultValue={defaultValue.companyName}
+          required
         />
 
         <label htmlFor="companyAddress">Anschrift: </label>
@@ -65,6 +68,7 @@ export default function ProjectForm({
           id="companyAddress"
           name="companyAddress"
           defaultValue={defaultValue.companyAddress}
+          required
         />
 
         <label htmlFor="companyPhone">Telefon: </label>
@@ -81,6 +85,7 @@ export default function ProjectForm({
           id="companyEmail"
           name="companyEmail"
           defaultValue={defaultValue.companyEmail}
+          required
         />
 
         <label htmlFor="contact">Kontaktperson: </label>
@@ -89,6 +94,7 @@ export default function ProjectForm({
           id="contact"
           name="contact"
           defaultValue={defaultValue.contact}
+          required
         />
 
         <label htmlFor="email">Email: </label>
@@ -97,6 +103,7 @@ export default function ProjectForm({
           id="email"
           name="email"
           defaultValue={defaultValue.email}
+          required
         />
 
         <label htmlFor="invoiceAddress">Rechnungsaddresse: </label>
@@ -105,6 +112,7 @@ export default function ProjectForm({
           id="invoiceAddress"
           name="invoiceAddress"
           defaultValue={defaultValue.invoiceAddress}
+          required
         />
 
         {/* <input

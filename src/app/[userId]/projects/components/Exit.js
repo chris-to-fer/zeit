@@ -13,7 +13,7 @@ import { displayNumberContext } from "@/app/displayNumber-Provider";
 export default function Exit({ goHome, session, userId }) {
   const { open, setOpen } = useContext(selectBurgerContext);
   const { number, setNumber } = useContext(displayNumberContext);
-  // const { proId } = useParams();
+  const checkEmpty = useParams().proId;
   const { selectedProject } = useContext(selectStateContext);
   const proId = selectedProject;
 
@@ -34,9 +34,11 @@ export default function Exit({ goHome, session, userId }) {
         />
       </button>
       <Link href={`/${userId}/projects`}>HOME</Link>
-      <Link href={`/${userId}/projects/${proId}/approve`}>
-        Genehmigen {number}
-      </Link>
+      {checkEmpty && (
+        <Link href={`/${userId}/projects/${proId}/approve`}>
+          Genehmigen {number}
+        </Link>
+      )}
       <button
         className={session ? styles.button_logout : styles.button}
         onClick={signOutandToHome}

@@ -17,7 +17,7 @@ export async function GET(request, { params, searchParams }) {
       { status: 401 }
     );
   }
-  console.log("sessioOn", session);
+  // console.log("sessioOn", session);
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
@@ -29,6 +29,16 @@ export async function GET(request, { params, searchParams }) {
 
 export async function POST(request, { params, searchParams }) {
   //EDIT PROJECT
+
+  // const session = await ServerComponent();
+  // console.log("sessioOn", session);
+  // if (!session) {
+  //   return NextResponse.json(
+  //     { message: "You must be logged in." },
+  //     { status: 401 }
+  //   );
+  // }
+
   await connectDB();
   const { empId, userId, proId } = params;
   const data = await request.json();

@@ -18,6 +18,7 @@ export default async function page({ params }) {
     console.log("error fetching not approved");
   }
   const data = await res.json();
+  if (!data) return null;
   const trigger = true;
   if (res.status > 299) {
     throw new Error("fetch approve error");

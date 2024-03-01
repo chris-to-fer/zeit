@@ -76,7 +76,6 @@
   .aside_open {
     z-index: 2;
     opacity: 97%;
-    position: fixed;
     top: 0;
     bottom: 25%;
     position: fixed;

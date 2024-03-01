@@ -10,7 +10,7 @@ export async function GET(request, { params, searchParams }) {
 
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
-  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/approve`);
+  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/approve`);
   await connectDB();
 
   const notApproved = await Time.find({

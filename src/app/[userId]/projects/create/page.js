@@ -2,7 +2,7 @@ import React from "react";
 import ProjectForm from "./components/ProjectForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-// import { headers } from "next/headers";
+import { headers } from "next/headers";
 
 export default function Create({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;

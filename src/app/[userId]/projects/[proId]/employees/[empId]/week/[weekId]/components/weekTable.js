@@ -28,6 +28,8 @@ const columns = [
   { field: "start", headerName: "Start", width: 60, sortable: false },
   { field: "end", headerName: "Ende", width: 60, sortable: false },
   { field: "break", headerName: "Pause", width: 65, sortable: false },
+  { field: "zeit", headerName: "Arbeitszeit", width: 120, sortable: false },
+  { field: "25", headerName: "25%", width: 65, sortable: false },
   {
     field: "catering",
     headerName: "Catering",
@@ -91,6 +93,46 @@ export default function WeekTable({ timesheets }) {
 
   const [rowSelectionModel, setRowSelectionModel] = useState(initialState);
 
+  function StringToNumber(string) {
+    const [HH, MM] = string.split(":");
+    const H = parseInt(HH);
+    console.log("H", H);
+    const M = parseInt(MM);
+    return new Date(1970, 1, 1, H, M, 0);
+  }
+  function formatDate(difference) {
+    //Arrange the difference of date in days, hours, minutes, and seconds format
+    let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    hours =
+      hours === 0 && days === 0
+        ? 24
+        : days
+        ? hours + 24
+        : hours < 10
+        ? "0" + hours
+        : hours;
+
+    minutes = minutes < 0 ? minutes : minutes <= 10 ? 0 + minutes : minutes;
+    seconds = seconds < 10 ? 0 + seconds : seconds;
+    if (days) {
+      return hours + ":" + minutes;
+    }
+    return hours + ":" + minutes;
+  }
+
+  function twoFive(diff) {
+    const h = parseInt(diff.slice(0, 2)) - 12;
+    const m =
+      parseInt(diff.slice(2, 3)) !== 0 ? parseInt(diff.slice(2, 4)) : "00";
+    return h + ":" + m;
+  }
+
   const rows = filteredTimesheets.map((e, index) => {
     return {
       ...e,
@@ -99,6 +141,12 @@ export default function WeekTable({ timesheets }) {
       date: dateDisplayFormat(e.date),
       // catering: true ? "Ja" : "Nein",
       // isHome: true ? "Ja" : "Nein",
+      zeit: formatDate(
+        StringToNumber(e.end) -
+          StringToNumber(e.break) +
+          StringToNumber(e.start)
+      ),
+      25: twoFive(formatDate(StringToNumber(e.end) - StringToNumber(e.start))),
     };
   });
 

@@ -10,9 +10,10 @@ export default function ModalDoubleDate({ isOpen, message, onRequestClose }) {
         isOpen={isOpen}
         onRequestClose={onRequestClose}
         contentLabel="Error Modal"
+        ariaHideApp={false}
       >
         <p>{message}</p>
-        <button onClick={onRequestClose}>Cancel</button>
+        <button onClick={onRequestClose}>Abbrechen</button>
       </Modal>
     </>
   );

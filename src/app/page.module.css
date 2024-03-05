@@ -7,28 +7,33 @@
   min-height: 100vh;
 }
 .modal {
-  position: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: center;
-  margin-top: 15%;
-  margin-left: 42%;
-  gap: 133px;
-
-  /* z-index: 22; */
-  /* margin-top: 250;
-  translate: 40% 100%; */
+  margin-top: 200px;
+  gap: 12px;
+  transition: 300ms ease-in-out;
+  background-color: rgb(241, 241, 243);
+  border-radius: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 8px;
 }
 .modal button {
   border: none;
-  background-color: rgb(241, 241, 243);
+  background-color: rgb(184, 184, 187);
   justify-content: center;
   padding: 12px;
   border-radius: 5px;
   width: max-content;
-  transition: 300ms ease-in-out;
+  transition: 200ms ease-in-out;
 }
+.modal button:hover {
+  box-shadow: 4px 3px 7px 2px rgb(196, 194, 194);
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

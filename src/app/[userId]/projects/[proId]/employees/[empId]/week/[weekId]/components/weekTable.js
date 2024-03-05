@@ -152,7 +152,22 @@ export default function WeekTable({ timesheets }) {
       id: e._id,
       date: dateDisplayFormat(e.date),
       zeit: formatDate(workTime),
-      over: workTime - 36000000 < 0 ? 0 : formatDate(workTime - 36000000),
+      // over: workTime - 36000000 < 0 ? 0 : formatDate(workTime - 36000000),
+      over:
+        workTime - 36000000 < 0
+          ? 0
+          : new Date(
+              1990,
+              0,
+              1,
+              0,
+              0,
+              0,
+              workTime - 36000000
+            ).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
       25:
         workTime - 36000000 < 0
           ? 0

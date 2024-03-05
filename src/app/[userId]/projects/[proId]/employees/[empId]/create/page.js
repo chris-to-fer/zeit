@@ -62,12 +62,7 @@ export default function TimesheetCreatePage({ params }) {
     if (error.message === "FUTURE") return handleShowError();
 
     if (response.status === 200) {
-      router.refresh();
-      // revalidatePath(
-      //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
-      // );
-
-      // `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`)
+      router.refresh(`/${userId}/projects/${proId}/employees/${empId}`);
       redirect(`/${userId}/projects/${proId}/employees/${empId}`);
     }
     if (response.status > 399) {

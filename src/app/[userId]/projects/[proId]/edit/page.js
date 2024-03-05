@@ -11,6 +11,8 @@ export default function PageEdit({ params, searchParams }) {
 
   async function handleSubmit(formData) {
     "use server";
+    // console.log(headers());
+    // const authorization = headers().get("authorization");
 
     const formedData = Object.fromEntries(formData);
     const data = { ...formedData, method: "EDITPROJECT" };

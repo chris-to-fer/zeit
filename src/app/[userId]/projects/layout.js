@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import { SWRProvider } from "@/app/swr-provider";
 import ServerComponent from "@/app/session-action";
 import { redirect } from "next/navigation";
+import DisplayNumberProvider from "@/app/displayNumber-Provider";
+import Login from "@/app/components/Login";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,11 +28,13 @@ export default async function RootLayout({ params, children }) {
   return (
     <>
       <SWRProvider>
-        <Header params={params} session={session} />
+        <DisplayNumberProvider>
+          <Header params={params} session={session} />
 
-        <main className={styles.main}>{children}</main>
+          <main className={styles.main}>{children}</main>
 
-        <Footer params={params} />
+          <Footer params={params} />
+        </DisplayNumberProvider>
       </SWRProvider>
     </>
   );

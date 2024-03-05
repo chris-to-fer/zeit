@@ -18,6 +18,7 @@ export default async function page({ params }) {
     console.log("error fetching not approved");
   }
   const data = await res.json();
+  if (!data) return null;
   const trigger = true;
   if (res.status > 299) {
     throw new Error("fetch approve error");
@@ -26,6 +27,7 @@ export default async function page({ params }) {
   // console.log("not Approved", data.notApproved[0].date);
 
   const injectedTimes = injectWeekId(data.notApproved);
+  const displayNumber = injectedTimes.length;
   // console.log("intti", injectedTimes);
   injectedTimes?.sort((a, b) => new Date(a.date) - new Date(b.date));
   // let weekObject = {};
@@ -42,7 +44,12 @@ export default async function page({ params }) {
 
   return (
     <>
-      <Sidebar trigger={trigger} params={params} project={data.project} />
+      <Sidebar
+        displayNumber={displayNumber}
+        trigger={trigger}
+        params={params}
+        project={data.project}
+      />
       <WeekOverview
         injectedTimes={injectedTimes}
         HOSTNAME={HOSTNAME}

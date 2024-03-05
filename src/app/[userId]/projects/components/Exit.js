@@ -8,10 +8,12 @@ import { selectBurgerContext } from "@/app/openBurger-Provider";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { displayNumberContext } from "@/app/displayNumber-Provider";
 
 export default function Exit({ goHome, session, userId }) {
   const { open, setOpen } = useContext(selectBurgerContext);
-  // const { proId } = useParams();
+  const { number, setNumber } = useContext(displayNumberContext);
+  const checkEmpty = useParams().proId;
   const { selectedProject } = useContext(selectStateContext);
   const proId = selectedProject;
 
@@ -32,7 +34,11 @@ export default function Exit({ goHome, session, userId }) {
         />
       </button>
       <Link href={`/${userId}/projects`}>HOME</Link>
-      <Link href={`/${userId}/projects/${proId}/approve`}>Genehmigen</Link>
+      {checkEmpty && (
+        <Link href={`/${userId}/projects/${proId}/approve`}>
+          Genehmigen {number}
+        </Link>
+      )}
       <button
         className={session ? styles.button_logout : styles.button}
         onClick={signOutandToHome}

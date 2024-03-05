@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
+//defining the columns
 const columns = [
   {
     field: "approved",
@@ -22,12 +23,17 @@ const columns = [
   {
     field: "date",
     headerName: "Datum",
-    width: 80,
+    width: 110,
     sortable: false,
   },
   { field: "start", headerName: "Start", width: 60, sortable: false },
   { field: "end", headerName: "Ende", width: 60, sortable: false },
   { field: "break", headerName: "Pause", width: 65, sortable: false },
+  { field: "zeit", headerName: "Arbeitszeit", width: 120, sortable: false },
+  { field: "over", headerName: "Überstunden", width: 110, sortable: false },
+  { field: "25", headerName: "25%", width: 65, sortable: false },
+  { field: "60", headerName: "60%", width: 65, sortable: false },
+  { field: "100", headerName: "100%", width: 65, sortable: false },
   {
     field: "catering",
     headerName: "Catering",
@@ -65,21 +71,28 @@ const columns = [
 ];
 
 export default function WeekTable({ timesheets }) {
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
+  const HOSTNAME = process.env.HOSTNAME_URL;
   const router = useRouter();
   const params = useParams();
   const { userId, empId, proId, weekId } = params;
 
+  //bring mongo date to correct display format
   const dateDisplayFormat = (mongo) => {
-    let day = mongo.slice(8, 10);
-    let month = mongo.slice(5, 7);
-    let year = mongo.slice(2, 4);
-    return day + "." + month + "." + year;
+    return new Date(mongo).toLocaleDateString("de-DE", options);
   };
 
+  //filter timesgeet info for correct week and sort descending in date
   const filteredTimesheets = timesheets
     .filter((e) => e.weekId == weekId)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
+  //set initial state of checkboxes to the correct approved ids
   const initialState = filteredTimesheets
     .map((e) => {
       if (e.approved === true) {
@@ -90,14 +103,84 @@ export default function WeekTable({ timesheets }) {
 
   const [rowSelectionModel, setRowSelectionModel] = useState(initialState);
 
+  //make dates out of mongo strings of start and end
+  function StringToNumber(string) {
+    const [HH, MM] = string.split(":");
+    const H = parseInt(HH) === 0 ? 0 : parseInt(HH);
+    const M = parseInt(MM);
+    return new Date(1990, 0, 1, H, M, 0);
+  }
+  //format milliseconds of date difference for display in HH:MM
+  function formatDate(difference) {
+    let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    hours =
+      hours === 0 && days === 0
+        ? 0
+        : days
+        ? hours + 24
+        : hours < 10
+        ? 0 + hours
+        : hours;
+
+    minutes = minutes < 0 ? minutes : minutes <= 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return hours + ":" + minutes;
+  }
+  //creating the rows from the timesheet information
   const rows = filteredTimesheets.map((e, index) => {
+    const workTime =
+      new Date(
+        1990,
+        0,
+        1,
+        0,
+        0,
+        0,
+        StringToNumber(e.end) - StringToNumber(e.start)
+      ) - StringToNumber(e.break);
+
     return {
       ...e,
       ///important: this is how the mui table knows the _id of the timesheet. id is a fix term for that table and tied up with the checkbox event
       id: e._id,
       date: dateDisplayFormat(e.date),
-      // catering: true ? "Ja" : "Nein",
-      // isHome: true ? "Ja" : "Nein",
+      zeit: formatDate(workTime),
+      // over: workTime - 36000000 < 0 ? 0 : formatDate(workTime - 36000000),
+      over:
+        workTime - 36000000 < 0
+          ? 0
+          : new Date(
+              1990,
+              0,
+              1,
+              0,
+              0,
+              0,
+              workTime - 36000000
+            ).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+      25:
+        workTime - 36000000 < 0
+          ? 0
+          : workTime - 36000000 <= 7200000
+          ? formatDate(workTime - 36000000)
+          : "02:00",
+      60:
+        workTime - 43200000 < 0
+          ? 0
+          : workTime - 43200000 <= 3600000
+          ? formatDate(workTime - 43200000)
+          : "01:00",
+      100: workTime - 46800000 < 0 ? 0 : formatDate(workTime - 46800000),
     };
   });
 
@@ -130,11 +213,10 @@ export default function WeekTable({ timesheets }) {
         body: JSON.stringify(data),
       }
     );
-
+    router.refresh();
     if (response.ok) {
       alert("Ausgeführt");
-
-      router.refresh();
+      router.refresh(`/api/${userId}/projects/${proId}/approve`);
     }
   }
   // style={{ , width: "100%" }}
@@ -163,19 +245,6 @@ export default function WeekTable({ timesheets }) {
           // autoHeight
           autoPageSize
         />
-        {/* <Button
-          className={styles.func_button}
-          onClick={() => handleApprove(approvedTimes)}
-          // disabled={rowSelectionModel[0] ? false : true}
-        >
-          {!rowSelectionModel[0] ? (
-            <h3>Alle Genehmigungen zurücksetzen</h3>
-          ) : rowSelectionModel.length === filteredTimesheets.length ? (
-            <h3>Alle genehmigen</h3>
-          ) : (
-            <h3>Nur markierte genehmigen und andere nicht</h3>
-          )}
-        </Button> */}
       </div>
       <Button
         className={styles.func_button}

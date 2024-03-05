@@ -2,8 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
 import Project from "@/app/db/model/Project";
+import ServerComponent from "@/app/session-action";
 
-export async function GET(request, { params, searchParams }) {
+export async function GET(request, { params, searchParams }, response) {
+  const session = await ServerComponent();
+  if (!session) {
+    return NextResponse.json(
+      { message: "You must be logged in." },
+      { status: 401 }
+    );
+  }
+  // console.log("sessioOn", session);
   await connectDB();
   const { userId, proId, empId } = params;
 

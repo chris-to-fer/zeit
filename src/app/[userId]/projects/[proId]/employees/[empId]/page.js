@@ -16,7 +16,7 @@ export default async function Page({ params, children }) {
     day: "numeric",
   };
 
-  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
+  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
 
   const res = await fetch(
     `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
@@ -49,18 +49,6 @@ export default async function Page({ params, children }) {
     return (e = { ...e, weekId: weekId });
   });
 
-  // function getWeekOfYear(date) {
-  //   const target = new Date(date);
-  //   const dayNr = (date.getDay() + 6) % 7; // ISO day of week with Monday as 0
-  //   target.setDate(target.getDate() - dayNr + 3);
-  //   const firstThursday = target.valueOf();
-  //   target.setMonth(0, 1);
-  //   if (target.getDay() !== 4) {
-  //     target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
-  //   }
-  //   return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 is 7 days in milliseconds
-  // }
-
   injectedTimes.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   let weekObject = {};
@@ -73,12 +61,12 @@ export default async function Page({ params, children }) {
     }
   });
 
-  const dateDisplayFormat = (mongo) => {
-    let day = mongo.slice(8, 10);
-    let month = mongo.slice(5, 7);
-    let year = mongo.slice(2, 4);
-    return day + "." + month + "." + year;
-  };
+  // const dateDisplayFormat = (mongo) => {
+  //   let day = mongo.slice(8, 10);
+  //   let month = mongo.slice(5, 7);
+  //   let year = mongo.slice(2, 4);
+  //   return day + "." + month + "." + year;
+  // };
 
   // const encodedArray = encodeURIComponent(JSON.stringify(injectedTimes));
   return (

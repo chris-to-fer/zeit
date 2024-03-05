@@ -29,7 +29,7 @@ export default function EmpForm({
     if (!response.ok) {
     }
     if (response.ok) {
-      revalidateDelete(proId, userId, empId);
+      revalidateDelete();
       router.push(`/${userId}/projects/${proId}`);
     }
   }

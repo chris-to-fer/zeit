@@ -39,7 +39,7 @@ export default function PageEdit({ params, searchParams }) {
     "use server";
 
     revalidatePath(`${HOSTNAME}/${userId}/projects`);
-    redirect(`${HOSTNAME}/${userId}/projects`);
+    // redirect(`${HOSTNAME}/${userId}/projects`);
   }
 
   return (

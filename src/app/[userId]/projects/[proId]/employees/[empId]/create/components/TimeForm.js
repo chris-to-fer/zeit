@@ -26,9 +26,8 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
     );
 
     if (response.status < 300) {
-      revalidateDelete(proId, empId, userId);
-
-      router.push(`/${userId}/projects/${proId}/employees/${empId}`);
+      // revalidateDelete(proId, empId, userId);
+      // router.push(`/${userId}/projects/${proId}/employees/${empId}`);
     }
   }
 

@@ -37,9 +37,6 @@
 }
 .sidebar_container {
   position: absolute;
-  /* position: sticky;
-  top: 320;
-  align-self: flex-start; */
   height: 100%;
 }
 .aside_open {
@@ -57,6 +54,7 @@
 
 .aside_closed {
   display: none;
+  transition: 300ms ease-in-out;
 }
 
 .burger {
@@ -70,28 +68,25 @@
 }
 @media (max-width: 735px) {
   .aside_closed {
-    display: none;
-    transition: 300ms ease-in-out;
+    animation: slideOut 300ms ease-in-out;
+    animation-fill-mode: forwards;
   }
   .aside_open {
     z-index: 2;
-    opacity: 97%;
-    top: 0;
+    /* opacity: 97%; */
+
     bottom: 25%;
     position: fixed;
     overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     left: -12px;
     top: 78px;
     background-color: rgb(241, 243, 244);
-    transition: 300ms ease-in-out;
-    animation: fadeIn 1s ease-in-out 3s;
+    animation: slideIn 300ms ease-in-out;
     animation-fill-mode: forwards;
     max-width: 45vw;
   }
-  .aside_closed {
-    display: none;
-  }
+
   .burgerSymbol {
     display: block;
     background-color: transparent;
@@ -99,13 +94,24 @@
 }
 @keyframes slideIn {
   0% {
-    transform: translateY(-150%);
+    transform: translateX(-150%);
     opacity: 0;
   }
 
   100% {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
+  }
+}
+@keyframes slideOut {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-150%);
+    opacity: 0;
   }
 }
 

@@ -23,8 +23,13 @@ const columns = [
   {
     field: "date",
     headerName: "Datum",
-    width: 110,
+    width: 85,
     sortable: false,
+    // valueGetter: (params) =>
+    //   params.value
+    //     ? params.value.toString().slice(0, 3) +
+    //       (params.value.toString().length > 3 ? "..." : " ")
+    //     : params.value,
   },
   { field: "start", headerName: "Start", width: 60, sortable: false },
   { field: "end", headerName: "Ende", width: 60, sortable: false },
@@ -72,7 +77,7 @@ const columns = [
 
 export default function WeekTable({ timesheets }) {
   const options = {
-    weekday: "short",
+    weekday: "long",
     year: "numeric",
     month: "numeric",
     day: "numeric",
@@ -232,6 +237,8 @@ export default function WeekTable({ timesheets }) {
           disableColumnMenu
           disableColumnFilter
           rows={rows}
+          // rowHeight={52}
+          getRowHeight={() => "auto"}
           columns={columns}
           // initialState={{
           //   pagination: {

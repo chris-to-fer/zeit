@@ -32,19 +32,24 @@ export default function Sidebar({
         setOpen(false);
       }
     }
-
     handleResize();
-
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, [setOpen]);
-  //off click burger close
-  // document.addEventListener("click", function (e) {
-  //   if (e.target && e.target.className == "aside_open") {
-  //     open ? setOpen(false) : setOpen(true);
-  //   }
-  // });
+  // off click burger close
+  useEffect(() => {
+    const closeSidebarOnAnyClickClick = (e) => {
+      const sidebarOpen = document.getElementsByClassName(
+        `${styles.aside_open}`
+      );
+      if (window.innerWidth < 735 && sidebarOpen) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("click", closeSidebarOnAnyClickClick);
+    return () =>
+      document.removeEventListener("click", closeSidebarOnAnyClickClick);
+  }, [open]);
 
   return (
     <>

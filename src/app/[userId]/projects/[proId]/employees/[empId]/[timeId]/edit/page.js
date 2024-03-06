@@ -35,19 +35,15 @@ export default function page({ params, searchParams }) {
     );
 
     if (response.status === 200) {
-      revalidatePath(
-        `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
-      );
+      // revalidatePath(
+      //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`
+      // );
       // revalidatePath(
       //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
       // );
       redirect(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
     }
-    if (response.status > 399) {
-      // alert(
-      //   "Um ein existierendes Datum zu ändern: Im Datum Bearbeiten wählen. Hier können nur Zeiten für ein neues Datum erfasst werden!"
-      // );
-    }
+
     if (response.error) {
       throw new Error(error);
     }

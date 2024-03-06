@@ -6,12 +6,12 @@ import ServerComponent from "@/app/session-action";
 
 export async function GET(request, { params, searchParams }, response) {
   const session = await ServerComponent();
-  if (!session) {
-    return NextResponse.json(
-      { message: "You must be logged in." },
-      { status: 401 }
-    );
-  }
+  // if (!session) {
+  //   return NextResponse.json(
+  //     { message: "You must be logged in." },
+  //     { status: 401 }
+  //   );
+  // }
   // console.log("sessioOn", session);
   await connectDB();
   const { userId, proId, empId } = params;

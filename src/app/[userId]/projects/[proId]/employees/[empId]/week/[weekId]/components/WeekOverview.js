@@ -49,9 +49,9 @@ export default function WeekOverview({ HOSTNAME, params, injectedTimes }) {
                 {new Date(e.date).toLocaleDateString("de-DE", options)}
               </Link>
             </p>
-            <italics>
+            <i>
               {e.employeeId.name} {e.employeeId.lastName}
-            </italics>
+            </i>
             {}
           </li>
         ))}

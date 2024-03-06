@@ -40,10 +40,13 @@ export default async function Page({ children, params }) {
               href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${e._id}`}
               key={e._id}
             >
-              <li>
-                {e.name} {e.lastName} <i>{e.department}:</i> <i>{e.position}</i>{" "}
-                <strong>{e.active ? "aktiv" : "nicht aktiv"}</strong>
-              </li>
+              <button className={styles.button}>
+                <li>
+                  {e.name} {e.lastName} <i>{e.department}:</i>{" "}
+                  <i>{e.position}</i>{" "}
+                  <strong>{e.active ? "aktiv" : "nicht aktiv"}</strong>
+                </li>
+              </button>
             </Link>
           ))}
         </ul>

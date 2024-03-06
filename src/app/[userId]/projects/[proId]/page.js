@@ -12,7 +12,7 @@ export default async function Page({ children, params }) {
 
   const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
     method: "GET",
-    headers: headers(),
+    // headers: headers(),
     // cache: "no-store",
   });
   // , {

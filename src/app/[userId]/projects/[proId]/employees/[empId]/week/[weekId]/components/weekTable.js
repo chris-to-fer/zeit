@@ -5,75 +5,73 @@ import { useParams } from "next/navigation";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import styles from "../../../../../../page.module.css";
-import { useEffect } from "react";
-// import { set } from "mongoose";
-// import { Fascinate_Inline } from "next/font/google";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
+import makeColumns from "@/app/lib/makeColumns";
 
 //defining the columns
-const columns = [
-  {
-    field: "approved",
-    headerName: "Genehmigt",
-    width: 90,
-    sortable: false,
-    valueGetter: (params) => (params.row.approved ? "Ja" : "Nein"),
-  },
-  {
-    field: "date",
-    headerName: "Datum",
-    width: 85,
-    sortable: false,
-    // valueGetter: (params) =>
-    //   params.value
-    //     ? params.value.toString().slice(0, 3) +
-    //       (params.value.toString().length > 3 ? "..." : " ")
-    //     : params.value,
-  },
-  { field: "start", headerName: "Start", width: 60, sortable: false },
-  { field: "end", headerName: "Ende", width: 60, sortable: false },
-  { field: "break", headerName: "Pause", width: 65, sortable: false },
-  { field: "zeit", headerName: "Arbeitszeit", width: 120, sortable: false },
-  { field: "over", headerName: "Überstunden", width: 110, sortable: false },
-  { field: "25", headerName: "25%", width: 65, sortable: false },
-  { field: "60", headerName: "60%", width: 65, sortable: false },
-  { field: "100", headerName: "100%", width: 65, sortable: false },
-  {
-    field: "catering",
-    headerName: "Catering",
-    width: 75,
-    sortable: false,
-    valueGetter: (params) => (params.row.catering ? "Ja" : "Nein"),
-  },
-  { field: "travelTo", headerName: "Hinweg", width: 70, sortable: false },
-  { field: "travelBack", headerName: "Rückweg", width: 88, sortable: false },
-  { field: "type", headerName: "Art", width: 80, sortable: false },
-  { field: "place", headerName: "Ort", width: 130, sortable: false },
-  {
-    field: "isHome",
-    headerName: "Heim",
-    width: 60,
-    sortable: false,
-    valueGetter: (params) => (params.row.isHome ? "Ja" : "Nein"),
-  },
+const columns = makeColumns();
+// const columns = [
+//   {
+//     field: "approved",
+//     headerName: "Genehmigt",
+//     width: 90,
+//     sortable: false,
+//     valueGetter: (params) => (params.row.approved ? "Ja" : "Nein"),
+//   },
+//   {
+//     field: "date",
+//     headerName: "Datum",
+//     width: 100,
+//     sortable: false,
+//     // valueGetter: (params) =>
+//     //   params.value
+//     //     ? params.value.toString().slice(0, 3) +
+//     //       (params.value.toString().length > 3 ? "..." : " ")
+//     //     : params.value,
+//   },
+//   { field: "start", headerName: "Start", width: 60, sortable: false },
+//   { field: "end", headerName: "Ende", width: 60, sortable: false },
+//   { field: "break", headerName: "Pause", width: 65, sortable: false },
+//   { field: "zeit", headerName: "Arbeitszeit", width: 120, sortable: false },
+//   { field: "over", headerName: "Überstunden", width: 110, sortable: false },
+//   { field: "25", headerName: "25%", width: 65, sortable: false },
+//   { field: "60", headerName: "60%", width: 65, sortable: false },
+//   { field: "100", headerName: "100%", width: 65, sortable: false },
+//   {
+//     field: "catering",
+//     headerName: "Catering",
+//     width: 75,
+//     sortable: false,
+//     valueGetter: (params) => (params.row.catering ? "Ja" : "Nein"),
+//   },
+//   { field: "travelTo", headerName: "Hinweg", width: 70, sortable: false },
+//   { field: "travelBack", headerName: "Rückweg", width: 88, sortable: false },
+//   { field: "type", headerName: "Art", width: 80, sortable: false },
+//   { field: "place", headerName: "Ort", width: 130, sortable: false },
+//   {
+//     field: "isHome",
+//     headerName: "Heim",
+//     width: 60,
+//     sortable: false,
+//     valueGetter: (params) => (params.row.isHome ? "Ja" : "Nein"),
+//   },
 
-  // //   {
-  // //     field: "age",
-  // //     headerName: "Age",
-  // //     type: "number",
-  // //     width: 90,
-  // //   },
-  {
-    field: "comment",
-    headerName: "Kommentar",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
+//   // //   {
+//   // //     field: "age",
+//   // //     headerName: "Age",
+//   // //     type: "number",
+//   // //     width: 90,
+//   // //   },
+//   {
+//     field: "comment",
+//     headerName: "Kommentar",
+//     description: "This column has a value getter and is not sortable.",
+//     sortable: false,
+//     width: 160,
+//     valueGetter: (params) =>
+//       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+//   },
+// ];
 
 export default function WeekTable({ timesheets }) {
   const options = {
@@ -106,86 +104,81 @@ export default function WeekTable({ timesheets }) {
     })
     .filter(Boolean);
 
+  //setting state for checkbox and give array of all selected  _ids of rows as initial state
   const [rowSelectionModel, setRowSelectionModel] = useState(initialState);
 
   //make dates out of mongo strings of start and end
-  function StringToNumber(string) {
+  function StringToDate(string) {
     const [HH, MM] = string.split(":");
     const H = parseInt(HH) === 0 ? 0 : parseInt(HH);
-    const M = parseInt(MM);
-    return new Date(1990, 0, 1, H, M, 0);
+    const M = parseInt(MM) === 0 ? 0 : parseInt(MM);
+    return new Date(1970, 0, 1, H, M, 0);
   }
-  //format milliseconds of date difference for display in HH:MM
-  function formatDate(difference) {
-    let days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    let hours = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    hours =
-      hours === 0 && days === 0
-        ? 0
-        : days
-        ? hours + 24
-        : hours < 10
-        ? 0 + hours
-        : hours;
-
-    minutes = minutes < 0 ? minutes : minutes <= 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    return hours + ":" + minutes;
+  //bring ms difference of times in displayable format
+  function hhmmDisplayOfDifference(a, b) {
+    return new Date(1970, 0, 1, 0, 0, 0, a - b).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   }
+
+  //calculate worktime
+  function getWorktime(end, start, breaks) {
+    const workTime =
+      StringToDate(end) > StringToDate(start)
+        ? new Date(
+            1970,
+            0,
+            1,
+            0,
+            0,
+            0,
+            StringToDate(end) - StringToDate(start)
+          ) - StringToDate(breaks)
+        : new Date(
+            1970,
+            0,
+            1,
+            0,
+            0,
+            0,
+
+            24 * 60 * 60 * 1000 - (StringToDate(start) - StringToDate(end))
+          ) - StringToDate(breaks);
+    return workTime;
+  }
+
   //creating the rows from the timesheet information
   const rows = filteredTimesheets.map((e, index) => {
-    const workTime =
-      new Date(
-        1990,
-        0,
-        1,
-        0,
-        0,
-        0,
-        StringToNumber(e.end) - StringToNumber(e.start)
-      ) - StringToNumber(e.break);
-
+    const workTime = getWorktime(e.end, e.start, e.break);
     return {
       ...e,
       ///important: this is how the mui table knows the _id of the timesheet. id is a fix term for that table and tied up with the checkbox event
       id: e._id,
       date: dateDisplayFormat(e.date),
-      zeit: formatDate(workTime),
-      // over: workTime - 36000000 < 0 ? 0 : formatDate(workTime - 36000000),
+      zeit: hhmmDisplayOfDifference(workTime, 0),
       over:
-        workTime - 36000000 < 0
-          ? 0
-          : new Date(
-              1990,
-              0,
-              1,
-              0,
-              0,
-              0,
-              workTime - 36000000
-            ).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            }),
+        workTime - 36000000 <= 0
+          ? ""
+          : hhmmDisplayOfDifference(workTime, 36000000),
+
       25:
-        workTime - 36000000 < 0
-          ? 0
+        workTime - 36000000 <= 0
+          ? ""
           : workTime - 36000000 <= 7200000
-          ? formatDate(workTime - 36000000)
+          ? hhmmDisplayOfDifference(workTime, 36000000)
           : "02:00",
       60:
-        workTime - 43200000 < 0
-          ? 0
+        workTime - 43200000 <= 0
+          ? ""
           : workTime - 43200000 <= 3600000
-          ? formatDate(workTime - 43200000)
+          ? hhmmDisplayOfDifference(workTime, 43200000)
           : "01:00",
-      100: workTime - 46800000 < 0 ? 0 : formatDate(workTime - 46800000),
+      100:
+        workTime - 46800000 <= 0
+          ? ""
+          : hhmmDisplayOfDifference(workTime, 46800000),
     };
   });
 
@@ -224,7 +217,7 @@ export default function WeekTable({ timesheets }) {
       router.refresh(`/api/${userId}/projects/${proId}/approve`);
     }
   }
-  // style={{ , width: "100%" }}
+
   return (
     <>
       <div className={styles.table} style={{ height: 500, width: "90vw" }}>

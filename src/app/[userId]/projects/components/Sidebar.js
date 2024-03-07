@@ -38,7 +38,7 @@ export default function Sidebar({
   }, [setOpen]);
   // off click burger close
   useEffect(() => {
-    const closeSidebarOnAnyClickClick = (e) => {
+    const closeSidebarOnAnyClickClick = () => {
       const sidebarOpen = document.getElementsByClassName(
         `${styles.aside_open}`
       );
@@ -49,7 +49,7 @@ export default function Sidebar({
     document.addEventListener("click", closeSidebarOnAnyClickClick);
     return () =>
       document.removeEventListener("click", closeSidebarOnAnyClickClick);
-  }, [open]);
+  }, [open, setOpen]);
 
   return (
     <>

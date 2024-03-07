@@ -25,7 +25,7 @@ export default async function Page({ params, children }) {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
+      // cache: "no-store",
     }
   );
 

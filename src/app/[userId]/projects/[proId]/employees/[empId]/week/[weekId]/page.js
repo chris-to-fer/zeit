@@ -24,7 +24,8 @@ export default async function PageWeek({ params, children, searchParams }) {
     }
   );
   const data = await res.json();
-  if (!data) return null;
+  let isLoading = true;
+  if (data) isLoading = false;
 
   const injectedTimes = data.employee?.times.map((e) => {
     const yearOnly = new Date(
@@ -48,15 +49,9 @@ export default async function PageWeek({ params, children, searchParams }) {
     }
     return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 is 7 days in milliseconds
   }
-  //   const startYear = new Date(new Date(e.date).getFullYear(), 0, 1);
-  //   const days = Math.floor(
-  //     (new Date(e.date) - startYear) / (24 * 60 * 60 * 1000)
-  //   );
-  //   const weekId = Math.ceil(days / 7);
-  //   return (e = { ...e, weekId: weekId });
-  // });
 
   const timesheets = injectedTimes;
+  // if (!injectedTimes) return <h3>...loading</h3>;
 
   // const timesheets = JSON.parse(decodeURIComponent(searchParams.objects));
 
@@ -114,7 +109,7 @@ export default async function PageWeek({ params, children, searchParams }) {
           {data.employee?.department} / {data.employee?.position}{" "}
         </span>
 
-        <WeekTable timesheets={timesheets} />
+        <WeekTable timesheets={timesheets} isLoading={isLoading} />
       </div>
       {children}
     </>

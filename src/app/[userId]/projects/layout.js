@@ -7,7 +7,6 @@ import { SWRProvider } from "@/app/swr-provider";
 import ServerComponent from "@/app/session-action";
 import { redirect } from "next/navigation";
 import DisplayNumberProvider from "@/app/displayNumber-Provider";
-import Login from "@/app/components/Login";
 
 const inter = Inter({ subsets: ["latin"] });
 

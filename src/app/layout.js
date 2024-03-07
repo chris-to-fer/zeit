@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SelectStateProvider from "./selectState-provider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-// import { SessionProvider } from "next-auth/react";
 import { NextAuthProvider } from "@/session-provider";
 import SelectBurgerProvider from "./openBurger-Provider";
 

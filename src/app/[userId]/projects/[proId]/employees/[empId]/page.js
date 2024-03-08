@@ -16,7 +16,7 @@ export default async function Page({ params, children }) {
     day: "numeric",
   };
 
-  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
+  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
 
   const res = await fetch(
     `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
@@ -30,6 +30,7 @@ export default async function Page({ params, children }) {
   );
 
   const data = await res.json();
+  console.log("data", data);
   if (!data) return null;
 
   const {

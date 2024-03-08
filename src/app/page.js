@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -43,7 +44,7 @@ export default function Home() {
       {session && <p>Signed in as {session.user.email}</p>}
       {/* {!session && <p>Not signed in</p>} */}
 
-      <div>
+      <div className={styles.loginButtonsContainer}>
         {/* <a
           href="https://google.de"
           className={styles.card}
@@ -56,13 +57,20 @@ export default function Home() {
           <p>Quick overview and demo.</p>
         </a> */}
         {!session && (
-          <button onClick={() => signIn("github")} className={styles.card}>
+          <button onClick={() => signIn("github")} className={styles.button}>
+            <Image
+              src="/github-mark.png"
+              alt="Github-Logo"
+              width={30}
+              height={30}
+            />
             <h2>Sign in with Github</h2>
             <p></p>
           </button>
         )}
         {!session && (
-          <button onClick={() => signIn("google")} className={styles.card}>
+          <button onClick={() => signIn("google")} className={styles.button}>
+            <Image src="/google.png" alt="Github-Logo" width={30} height={30} />
             <h2>Sign in with Google</h2>
             <p></p>
           </button>

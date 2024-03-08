@@ -56,17 +56,23 @@ export default function Home() {
           <p>Quick overview and demo.</p>
         </a> */}
         {!session && (
-          <button onClick={() => signIn()} className={styles.card}>
-            <h2>Login</h2>
+          <button onClick={() => signIn("github")} className={styles.card}>
+            <h2>Sign in with Github</h2>
             <p></p>
           </button>
         )}
-        {session && (
+        {!session && (
+          <button onClick={() => signIn("google")} className={styles.card}>
+            <h2>Sign in with Google</h2>
+            <p></p>
+          </button>
+        )}
+        {/* {session && (
           <button onClick={() => signOut()} className={styles.card}>
             <h2>Logout</h2>
             <p></p>
           </button>
-        )}
+        )} */}
       </div>
     </main>
   );

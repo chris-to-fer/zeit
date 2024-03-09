@@ -1,3 +1,9 @@
+.testDiv {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .weeks {
   display: flex;
   flex-direction: row;

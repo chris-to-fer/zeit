@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import revalidateDelete from "./revalidateDelete";
+import timeInput from "./timeInput";
 
 export default function TimeForm({ defaultValue, handleSubmit }) {
   const router = useRouter();
@@ -31,6 +32,22 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
     }
   }
 
+  const makeHourOptions = () => {
+    const hourArray = [];
+    for (let i = 0; i < 24; i++) {
+      hourArray.push(i);
+    }
+    return hourArray;
+  };
+
+  const makeMinuteOptions = () => {
+    const minuteArray = [];
+    for (let i = 0; i < 60; i += 5) {
+      minuteArray.push(i);
+    }
+    return minuteArray;
+  };
+
   return (
     <>
       <form className={styles.form} action={handleSubmit}>
@@ -42,12 +59,35 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
           defaultValue={defaultValue?.date.slice(0, 10)}
           required
         />
+        <div className={styles.testDiv}>
+          <label htmlFor="hourbox">Stunden: </label>
+          <select id="hourbox">
+            {makeHourOptions().map((e) => {
+              return (
+                <option value={e} key={e}>
+                  {e}
+                </option>
+              );
+            })}
+          </select>
+          <label htmlFor="minutebox">Minuten: </label>
+          <select id="minutebox">
+            {makeMinuteOptions().map((e) => {
+              return (
+                <option value={e} key={e}>
+                  {e}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
         <label htmlFor="lastName">Start: </label>
         <input
           type="time"
           id="start"
           name="start"
+          step="300"
           defaultValue={defaultValue?.start}
           required
         />

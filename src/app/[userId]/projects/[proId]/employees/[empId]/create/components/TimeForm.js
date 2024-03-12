@@ -4,8 +4,6 @@ import styles from "../../../../../page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
@@ -47,11 +45,17 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
           defaultValue={defaultValue?.date.slice(0, 10)}
           required
         />
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-        <TimePicker format="HH:mm" ampm={false} minutesStep="5" />
-        {/* </LocalizationProvider> */}
+
+        <TimePicker
+          format="HH:mm"
+          ampm={false}
+          minutesStep={5}
+          ref={this.inputs.start}
+        />
+
         <label htmlFor="lastName">Start: </label>
         <input
+          ref={start}
           type="time"
           id="start"
           name="start"

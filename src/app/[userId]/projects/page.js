@@ -14,7 +14,7 @@ export default async function Page({ children, params }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const userId = params.userId;
 
-  if (!session) return <h3>Please login.</h3>;
+  // if (!session) return <h3>Please login.</h3>;
 
   revalidatePath(`${HOSTNAME}/`);
 

@@ -3,7 +3,11 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import GithubProvider from "next-auth/providers/github";
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "../../../db/mongoClient.js";
+import connectDB from "@/app/db/connectDB.js";
+import User from "@/app/db/model/User.js";
+import bcrypt from "bcrypt";
 
 // export async function auth(req, res) {
 // Do whatever you want here, before the request is passed down to `NextAuth`
@@ -13,6 +17,7 @@ export const authOptions = {
 
   providers: [
     GithubProvider({
+      id: "github",
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       //You can add properties to the user object in the database by adding a profile function to your provider object, like this:
@@ -31,25 +36,63 @@ export const authOptions = {
       // },
     }),
     GoogleProvider({
+      id: "google",
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      id: "credentials",
+      name: "credentials",
+      credentials: {},
+      async authorize(credentials) {
+        const { email, password } = credentials;
+
+        try {
+          await connectDB();
+          const user = await User.findOne({ email });
+          if (!user) {
+            return null;
+          }
+
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+          if (!passwordsMatch) {
+            console.log("password wrong");
+            return null;
+          }
+          return user;
+        } catch (error) {
+          console.log("Error", error);
+        }
+      },
+    }),
     // ...add more providers here
   ],
+
   callbacks: {
-    async session({ session, user }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
       // The user object from the database contains the ID of the user in your database
-
-      session.user.userId = user.id;
-
+      // session.user.uid = token.uid;
+      session.user.userId = token.id;
       // With the code above you can add the user ID to the session object and use it in your pages
-
       // Make sure you console.log the session and user objects to see what they contain
 
       return session;
     },
   },
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.JWT_SECRET,
+  pages: {
+    signIn: "/",
+  },
 };
 // }
 

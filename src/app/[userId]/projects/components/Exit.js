@@ -39,12 +39,15 @@ export default function Exit({ goHome, session, userId }) {
           Genehmigen {number}
         </Link>
       )}
-      <button
-        className={session ? styles.button_logout : styles.button}
-        onClick={signOutandToHome}
-      >
-        LOGOUT
-      </button>
+      <div>
+        <h6>{session.user.name}</h6>
+        <button
+          className={session ? styles.button_logout : styles.button}
+          onClick={signOutandToHome}
+        >
+          LOGOUT
+        </button>
+      </div>
     </>
   );
 }

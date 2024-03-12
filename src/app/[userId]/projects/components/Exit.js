@@ -19,7 +19,7 @@ export default function Exit({ goHome, session, userId }) {
 
   const signOutandToHome = () => {
     signOut();
-    goHome();
+    // goHome();
   };
   return (
     <>

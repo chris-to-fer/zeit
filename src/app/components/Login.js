@@ -57,12 +57,13 @@ export default function Login({ seen, setSeen }) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button type="submit">Login</button>
-
-          <button type="button" onClick={() => setSeen(!seen)}>
-            Close
-          </button>
-          {error && <p>{error}</p>}
+          <div className={styles.btnContainer}>
+            <button type="submit">Login</button>
+            <button type="button" onClick={() => setSeen(!seen)}>
+              Close
+            </button>
+          </div>
+          {error && <p className={styles.error}>{error}</p>}
         </form>
 
         <p>

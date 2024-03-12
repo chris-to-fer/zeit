@@ -58,11 +58,11 @@ export default function Login({ seen, setSeen }) {
             />
           </label>
           <button type="submit">Login</button>
-          {error && <p>{error}</p>}
 
           <button type="button" onClick={() => setSeen(!seen)}>
             Close
           </button>
+          {error && <p>{error}</p>}
         </form>
 
         <p>

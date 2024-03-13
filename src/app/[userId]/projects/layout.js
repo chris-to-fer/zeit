@@ -21,8 +21,9 @@ export default async function RootLayout({ params, children }) {
 
   const session = await ServerComponent();
 
-  if (!session || session.user.userId !== params.userId) {
-    // redirect(`${HOSTNAME}`);
+  if (session.user.userId !== params.userId) {
+    // return <h2 className={styles.main}>no permission</h2>;
+    redirect(`${HOSTNAME}`);
   }
 
   return (

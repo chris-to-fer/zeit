@@ -3,20 +3,40 @@ import connectDB from "@/app/db/connectDB";
 import User from "@/app/db/model/User";
 import Project from "@/app/db/model/Project";
 import ServerComponent from "@/app/session-action";
+import { getToken } from "next-auth/jwt";
+import { auth } from "../../auth/[...nextauth]/route";
 
-export async function GET(request, { params, searchParams }, response) {
-  const session = await ServerComponent();
-  // if (!session) {
-  //   return NextResponse.json(
-  //     { message: "You must be logged in." },
-  //     { status: 401 }
-  //   );
+const secret = process.env.NEXTAUTH_SECRET;
+
+export async function GET(req, { params, searchParams }, response) {
+  // const token = await getToken({ req, secret });
+  // const session = await auth();
+  // console.log("jwt: ", session);
+
+  // if (token) {
+  //   // Signed in
+  //   console.log("JSON Web Token", JSON.stringify(token.accessToken, null, 2));
+  //   console.log("at", token.accessToken);
+  // } else {
+  //   console.log("Not Signed in");
+  //   console.log("at", token);
+  // res.status(401)
   // }
-  // console.log("sessioOn", session);
+  const session = await ServerComponent();
+  if (!session) {
+    return NextResponse.json(
+      { message: "You must be logged in." },
+      { status: 401 }
+    );
+  }
+  console.log("sessioOn", session);
   await connectDB();
   const { userId, proId, empId } = params;
 
   const user = await User.findById(userId).populate("projects");
+  if (!user) {
+    return NextResponse.json({ status: 414 });
+  }
   return NextResponse.json({ user }, { status: 200 });
 }
 

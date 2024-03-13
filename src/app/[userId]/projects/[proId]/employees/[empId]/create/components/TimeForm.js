@@ -50,12 +50,12 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
           format="HH:mm"
           ampm={false}
           minutesStep={5}
-          ref={this.inputs.start}
+          // ref={this.inputs.start}
         />
 
         <label htmlFor="lastName">Start: </label>
         <input
-          ref={start}
+          // ref={start}
           type="time"
           id="start"
           name="start"

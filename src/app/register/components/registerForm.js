@@ -38,6 +38,9 @@ export default function RegisterForm() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        alert(
+          "Registrierung agbeschlossen! Bitte auf der Startseite mit Email einloggen."
+        );
         router.push("/");
       } else {
         console.log("user registration failed");
@@ -75,11 +78,14 @@ export default function RegisterForm() {
       </form>
       {error && <p className={styles.error}>{error}</p>}
       <Link href="/">
-        <button className={styles.button}>Abbrechen</button>
+        <button className={styles.buttonAbbort}>Abbrechen</button>
       </Link>
       <p>
         Bereits registriert?
-        <Link href="/"> Einloggen</Link>
+        <Link className={styles.toLoggin} href="/">
+          {" "}
+          Einloggen
+        </Link>
       </p>
     </>
   );

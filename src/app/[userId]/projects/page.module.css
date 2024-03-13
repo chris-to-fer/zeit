@@ -189,7 +189,8 @@
 
 .funcbutton {
   border: none;
-  background-color: rgba(0, 56, 225, 0.801);
+  background-color: #4caf50;
+  /* background-color: rgba(0, 56, 225, 0.801); */
   padding: 8px;
   border-radius: 5px;
   width: 100%;
@@ -219,7 +220,9 @@
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
 }
 .button_logout {
-  background-color: rgba(0, 56, 225, 0.801);
+  background-color: #da190b;
+  /* background-color: #4caf50; */
+  /* background-color: rgba(0, 56, 225, 0.801); */
   border: none;
   padding: 8px;
   border-radius: 5px;
@@ -244,7 +247,8 @@
 
 .button_selected {
   border: none;
-  background-color: rgba(0, 56, 225, 0.801);
+  background-color: #4caf50;
+  /* background-color: rgba(0, 56, 225, 0.801); */
   padding: 12px;
   border-radius: 5px;
   width: 100%;

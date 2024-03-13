@@ -91,7 +91,7 @@ export const authOptions = {
       //session.user.userId = user.id;
       // With the code above you can add the user ID to the session object and use it in your pages
       // Make sure you console.log the session and user objects to see what they contain
-      return { ...session, token: token };
+      return { ...session, token: token?.accessToken };
     },
   },
 

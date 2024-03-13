@@ -23,12 +23,12 @@ export async function GET(req, { params, searchParams }, response) {
   // res.status(401)
   // }
   const session = await ServerComponent();
-  if (!session) {
-    return NextResponse.json(
-      { message: "You must be logged in." },
-      { status: 401 }
-    );
-  }
+  // if (!session) {
+  //   return NextResponse.json(
+  //     { message: "You must be logged in." },
+  //     { status: 401 }
+  //   );
+  // }
   console.log("sessioOn", session);
   await connectDB();
   const { userId, proId, empId } = params;

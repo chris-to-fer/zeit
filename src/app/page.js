@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
+      <div className={styles.button}>
         {!session && (
           <p>
             Neu hier?&nbsp;
@@ -81,9 +81,11 @@ export default function Home() {
             anmelden mit Google
           </button>
         )}
-        <button className={styles.button} onClick={() => setSeen(true)}>
-          Email Login
-        </button>
+        {!session && (
+          <button className={styles.button} onClick={() => setSeen(true)}>
+            Email Login
+          </button>
+        )}
         {/* {session && (
           <button onClick={() => signOut()} className={styles.card}>
             <h2>Logout</h2>

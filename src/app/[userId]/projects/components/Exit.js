@@ -40,7 +40,7 @@ export default function Exit({ goHome, session, userId }) {
         </Link>
       )}
       <div>
-        <h6>{session.user.name}</h6>
+        <h6>{session?.user.name}</h6>
         <button
           className={session ? styles.button_logout : styles.button}
           onClick={signOutandToHome}

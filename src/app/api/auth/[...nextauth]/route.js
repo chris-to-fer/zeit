@@ -8,7 +8,7 @@ import clientPromise from "../../../db/mongoClient.js";
 import connectDB from "@/app/db/connectDB.js";
 import User from "@/app/db/model/User.js";
 import bcrypt from "bcrypt";
-
+import { getServerSession } from "next-auth";
 // export async function auth(req, res) {
 // Do whatever you want here, before the request is passed down to `NextAuth`
 //this is next auth docu with me filling in provider and github
@@ -67,28 +67,34 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      return token;
-    },
-
-    async session({ session, token }) {
-      // The user object from the database contains the ID of the user in your database
-      // session.user.uid = token.uid;
-      session.user.userId = token.id;
-      // With the code above you can add the user ID to the session object and use it in your pages
-      // Make sure you console.log the session and user objects to see what they contain
-
-      return session;
-    },
-  },
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+        if (user.role) {
+          token.role = user.role;
+        }
+        if (account && account.access_token) {
+          token.accessToken = account.access_token; // <-- adding the access_token here
+        }
+      }
+
+      return token;
+    },
+    async session({ session, token, user }) {
+      // The user object from the database contains the ID of the user in your database
+      // session.user.uid = token.uid;
+      session.user.userId = token.id;
+      //session.user.userId = user.id;
+      // With the code above you can add the user ID to the session object and use it in your pages
+      // Make sure you console.log the session and user objects to see what they contain
+      return { ...session, token: token };
+    },
+  },
+
   secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/",
@@ -99,6 +105,12 @@ export const authOptions = {
 export const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+
+function auth(...args) {
+  return getServerSession(...args, authOptions);
+}
+
+export { auth };
 
 /* for api:
 import { authOptions } from 'pages/api/auth/[...nextauth]'

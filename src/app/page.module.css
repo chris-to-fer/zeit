@@ -12,6 +12,11 @@
   margin-bottom: 100px;
   gap: 20px;
 }
+.backgroundHeadline {
+  display: flex;
+  align-self: center;
+  margin-top: 20px;
+}
 
 .card_register span {
   display: flex;
@@ -45,6 +50,9 @@
     border-width: 0.5px;
     /* min-width: 300px; */
   }
+  .card_register {
+    width: 95vw;
+  }
 }
 
 .form select {
@@ -66,15 +74,35 @@
   display: flex;
   gap: 12px;
   border: none;
-  background-color: rgb(241, 241, 243);
+  background-color: #4caf50;
+  /* background-color: rgb(241, 241, 243); */
   padding: 12px;
   border-radius: 5px;
   width: 100%;
   transition: 300ms ease-in-out;
   justify-content: center;
+  color: white;
 }
 .button:hover {
-  background-color: rgb(219, 230, 239);
+  background-color: #45a049;
+  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+  opacity: 80%;
+}
+.buttonAbbort {
+  display: flex;
+  gap: 12px;
+  border: none;
+  background-color: #f44336;
+  /* background-color: rgb(241, 241, 243); */
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  transition: 300ms ease-in-out;
+  justify-content: center;
+  color: white;
+}
+.buttonAbbort:hover {
+  background-color: #da190b;
   box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
   opacity: 80%;
 }
@@ -93,6 +121,9 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+.toLoggin:hover {
+  color: #45a049;
 }
 .modal {
   display: flex;

@@ -22,7 +22,7 @@ export default async function RootLayout({ params, children }) {
   const session = await ServerComponent();
 
   if (!session || session.user.userId !== params.userId) {
-    redirect(`${HOSTNAME}`);
+    // redirect(`${HOSTNAME}`);
   }
 
   return (

@@ -4,16 +4,15 @@ import ProjectCard from "./components/ProjectCard";
 import Sidebar from "./components/Sidebar";
 import SelectStateProvider from "@/app/selectState-provider";
 import { revalidatePath } from "next/cache";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ServerComponent from "@/app/session-action";
 import { cookies } from "next/headers";
+import User from "@/app/db/model/User";
 
 export default async function Page({ children, params }) {
   // Get sessionToken object
-  const cookieStore = cookies();
-  let sessionTokenCookie = cookieStore.get("next-auth.session-token");
-  let sessionToken = sessionTokenCookie.value;
+  // const cookieStore = cookies();
+  // let sessionTokenCookie = cookieStore.get("next-auth.session-token");
+  // let sessionToken = sessionTokenCookie.value;
   const session = await ServerComponent();
   const HOSTNAME = process.env.HOSTNAME_URL;
   const userId = params.userId;
@@ -22,17 +21,26 @@ export default async function Page({ children, params }) {
 
   revalidatePath(`${HOSTNAME}/`);
 
-  const res = await fetch(`${HOSTNAME}/api/${userId}/user/`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `next-auth.session-token=${sessionToken};path=/;expires=Session`,
-    },
-  });
-  const data = (await res.json()) || [];
-  if (!data) return <h3>Data is loading..</h3>;
-
-  const user = data.user;
+  // const res = await fetch(`${HOSTNAME}/api/${userId}/user/`, {
+  // method: "GET",
+  // headers: {
+  //   "Content-Type": "application/json",
+  //   Cookie: `next-auth.session-token=${sessionToken};path=/;expires=Session`,
+  // },
+  // });
+  // const data = (await res.json()) || [];
+  // if (!data) return <h3>Data is loading..</h3>;
+  // const user = data.user;
+  let user = null;
+  try {
+    const res = await User.findById(userId).populate("projects").lean();
+    if (!res) {
+      throw new Error("No user found");
+    }
+    user = JSON.parse(JSON.stringify(res));
+  } catch (error) {
+    throw new Error(error);
+  }
 
   return (
     <>

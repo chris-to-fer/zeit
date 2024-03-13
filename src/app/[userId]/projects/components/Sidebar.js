@@ -23,6 +23,21 @@ export default function Sidebar({
   // setNumber(displayNumber);
   const router = useRouter();
 
+  async function tryout() {
+    const res = await fetch(`/api/${userId}/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = (await res.json()) || [];
+    if (!data) return <h3>Data is loading..</h3>;
+
+    return data;
+  }
+  const esel = tryout();
+  console.log("esel", esel);
+
   //burger closed on mobile initially though on desktop open
   useEffect(() => {
     function handleResize() {

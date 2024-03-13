@@ -8,6 +8,7 @@ import ServerComponent from "@/app/session-action";
 import { cookies } from "next/headers";
 import User from "@/app/db/model/User";
 import connectDB from "@/app/db/connectDB";
+import Project from "@/app/db/model/Project";
 
 export default async function Page({ children, params }) {
   // Get sessionToken object

@@ -34,7 +34,7 @@ export default async function Page({ children, params }) {
   // const user = data.user;
   let user = null;
   try {
-    connectDB();
+    await connectDB();
     const res = await User.findById(userId).populate("projects").lean();
     if (!res) {
       throw new Error("No user found");

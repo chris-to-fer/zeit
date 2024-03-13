@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import ServerComponent from "@/app/session-action";
 import { cookies } from "next/headers";
 import User from "@/app/db/model/User";
+import connectDB from "@/app/db/connectDB";
 
 export default async function Page({ children, params }) {
   // Get sessionToken object
@@ -33,6 +34,7 @@ export default async function Page({ children, params }) {
   // const user = data.user;
   let user = null;
   try {
+    connectDB();
     const res = await User.findById(userId).populate("projects").lean();
     if (!res) {
       throw new Error("No user found");

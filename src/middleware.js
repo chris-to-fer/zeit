@@ -1,6 +1,6 @@
 export { default } from "next-auth/middleware";
 export const config = {
-  matcher: "/((?!api/register|register|favicon.ico|$).*)",
+  matcher: "/((?!api/auth|api/register|register|favicon.ico|$).*)",
 };
 
 // import { withAuth } from "next-auth/middleware";

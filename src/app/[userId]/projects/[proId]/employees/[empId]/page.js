@@ -5,6 +5,10 @@ import styles from "../../../page.module.css";
 import Link from "next/link";
 import getWeekOfYear from "@/app/lib/getWeekOfYear";
 import { redirect } from "next/navigation";
+import connectDB from "@/app/db/connectDB";
+import Employee from "@/app/db/model/Employee";
+import Project from "@/app/db/model/Project";
+import Time from "@/app/db/model/Time";
 
 export default async function Page({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -18,21 +22,35 @@ export default async function Page({ params, children }) {
 
   revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
 
-  const res = await fetch(
-    `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // cache: "no-store",
+  // const res = await fetch(
+  //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  // const data = await res.json();
+  // if (!data) return null;
+  let data = null;
+  try {
+    await connectDB();
+    const res = await Employee.findById(empId)
+      .populate("project")
+      .populate("times");
+
+    if (!res) {
+      throw new Error("Employee not found");
     }
-  );
+    data = JSON.parse(JSON.stringify(res));
+  } catch (error) {
+    throw new Error(error);
+  } finally {
+  }
 
-  const data = await res.json();
-  console.log("data", data);
-  if (!data) return null;
-
+  const newData = { employee: { ...data } };
+  data = newData;
   const {
     employee: { times },
   } = data;

@@ -3,6 +3,8 @@ import ProjectForm from "../../create/components/ProjectForm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import Project from "@/app/db/model/Project";
+import connectDB from "@/app/db/connectDB";
 
 export default function PageEdit({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -17,20 +19,27 @@ export default function PageEdit({ params, searchParams }) {
     const formedData = Object.fromEntries(formData);
     const data = { ...formedData, method: "EDITPROJECT" };
 
-    const response = await fetch(
-      `${HOSTNAME}/api/${userId}/projects/${proId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    // const response = await fetch(
+    //   `${HOSTNAME}/api/${userId}/projects/${proId}`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   }
+    // );
+    try {
+      await connectDB();
+      const updatedProject = await Project.findByIdAndUpdate(proId, {
+        $set: data,
+      });
+      if (!updatedProject) {
+        throw new Error("Editing Project went wrong.");
       }
-    );
-
-    if (response.ok) {
-      // alert("Das Projekt wurde erstellt.");
-
+    } catch (error) {
+      throw new Error(error);
+    } finally {
       revalidatePath(`${HOSTNAME}/${userId}/projects`);
       redirect(`${HOSTNAME}/${userId}/projects`);
     }

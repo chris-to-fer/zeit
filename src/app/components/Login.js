@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Login({ seen, setSeen }) {
   const { data: session } = useSession();
-  console.log("session", session);
+  // console.log("session", session);
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -29,7 +29,7 @@ export default function Login({ seen, setSeen }) {
         return;
       }
       setSeen(false);
-      console.log("res", res);
+
       router.replace("/");
     } catch (error) {
       console.log(error);

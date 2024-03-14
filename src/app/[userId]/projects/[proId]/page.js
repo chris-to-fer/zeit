@@ -36,12 +36,12 @@ export default async function Page({ children, params }) {
       throw new Error("Projects could not be fetched.");
     }
     data = await JSON.parse(JSON.stringify(res));
-    console.log("data", data);
   } catch (error) {
     throw new Error(error);
   }
   const newData = { projects: { ...data } };
   data = newData;
+
   const {
     projects: { employees },
   } = data;

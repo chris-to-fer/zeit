@@ -40,9 +40,10 @@ export async function POST(request, { params, searchParams }) {
         employeeId: empId,
         projectId: proId,
       });
-
-      return NextResponse.json({ deletedCount }, { status: 201 });
+      return NextResponse.json({ status: 201 });
+      // return NextResponse.json({ deletedCount }, { status: 201 });
     } catch (error) {
+      console.log("employee delete error");
       return NextResponse.json({ status: 400 });
     }
   } else if (method === "CREATEEMPLOYEE") {

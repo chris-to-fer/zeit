@@ -13,7 +13,8 @@ export default function EmpForm({
   const router = useRouter();
   const { proId, userId, empId } = params;
 
-  async function handleDelete() {
+  async function handleDelete(e) {
+    e.preventDefault();
     const data = { method: "DELETEEMPLOYEE" };
     confirm("Löschen?");
     const response = await fetch(
@@ -26,12 +27,12 @@ export default function EmpForm({
         body: JSON.stringify(data),
       }
     );
+
     if (!response.ok) {
+      throw new Error("Error deleting employee", response);
     }
-    if (response.ok) {
-      revalidateDelete();
-      router.push(`/${userId}/projects/${proId}`);
-    }
+    revalidateDelete();
+    // router.push(`/${userId}/projects/${proId}`);
   }
 
   return (

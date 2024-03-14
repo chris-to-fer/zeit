@@ -3,6 +3,10 @@ import Sidebar from "../components/Sidebar";
 import styles from "../page.module.css";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import connectDB from "@/app/db/connectDB";
+import Project from "@/app/db/model/Project";
+import Employee from "@/app/db/model/Employee";
+import { doesSectionFormatHaveLeadingZeros } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 
 export default async function Page({ children, params }) {
   const userId = params.userId;
@@ -10,11 +14,11 @@ export default async function Page({ children, params }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   revalidatePath(`${HOSTNAME}/api/${userId}/projects/${proId}`);
 
-  const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
-    method: "GET",
-    // headers: headers(),
-    // cache: "no-store",
-  });
+  // const res = await fetch(`${HOSTNAME}/api/${userId}/projects/${proId}`, {
+  // method: "GET",
+  // headers: headers(),
+  // cache: "no-store",
+  // });
   // , {
   //   method: "GET",
   //   // headers: headers(),
@@ -22,9 +26,22 @@ export default async function Page({ children, params }) {
   //     "Content-Type": "application/json",
   //   },
   // });
+  // const data = await res.json();
 
-  const data = await res.json();
-  if (!data) return <h3>loading</h3>;
+  let data = null;
+  try {
+    await connectDB();
+    const res = await Project.findById(proId).populate("employees");
+    if (!res) {
+      throw new Error("Projects could not be fetched.");
+    }
+    data = await JSON.parse(JSON.stringify(res));
+    console.log("data", data);
+  } catch (error) {
+    throw new Error(error);
+  }
+  const newData = { projects: { ...data } };
+  data = newData;
   const {
     projects: { employees },
   } = data;

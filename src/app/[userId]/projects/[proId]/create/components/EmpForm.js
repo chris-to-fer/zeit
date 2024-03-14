@@ -124,7 +124,13 @@ export default function EmpForm({
           </button>
         </p>
         <p>
-          <Link href={`/${userId}/projects/${proId}/`}>
+          <Link
+            href={
+              empId
+                ? `/${userId}/projects/${proId}/employees/${empId}`
+                : `/${userId}/projects/${proId}`
+            }
+          >
             <button className={styles.funcbutton}>ABBRECHEN</button>
           </Link>
         </p>

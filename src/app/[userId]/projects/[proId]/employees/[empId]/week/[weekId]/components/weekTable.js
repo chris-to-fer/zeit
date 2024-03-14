@@ -1,6 +1,14 @@
 "use client";
 import * as React from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+
 import { useParams } from "next/navigation";
 import Button from "@mui/material/Button";
 import { useState } from "react";
@@ -8,6 +16,7 @@ import styles from "../../../../../../page.module.css";
 import { useRouter } from "next/navigation";
 import makeColumns from "@/app/lib/makeColumns";
 import getWorktime from "@/app/lib/getWorktime";
+// import { LinearProgress } from "@mui/material";
 
 //defining the columns
 const columns = makeColumns();
@@ -121,6 +130,19 @@ export default function WeekTable({ timesheets, isLoading }) {
     }
   }
 
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarExport />
+      </GridToolbarContainer>
+    );
+  }
+  function CustomNoRowsOverlay() {
+    return <div>Hallo</div>;
+  }
+
   return (
     <>
       <div className={styles.table} style={{ height: 500, width: "90vw" }}>
@@ -136,8 +158,12 @@ export default function WeekTable({ timesheets, isLoading }) {
           // rowHeight={52}
           getRowHeight={() => "auto"}
           columns={columns}
-          loading={isLoading}
-          slots={{ toolbar: GridToolbar }}
+          loading={rows ? false : true}
+          slots={{
+            toolbar: CustomToolbar,
+
+            noRowsOverlay: CustomNoRowsOverlay,
+          }}
           // initialState={{
           //   pagination: {
           //     paginationModel: { page: 1, pageSize: 7 },

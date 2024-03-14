@@ -4,6 +4,11 @@ import Sidebar from "@/app/[userId]/projects/components/Sidebar";
 import styles from "../../../../../page.module.css";
 import WeekTable from "./components/weekTable";
 import Link from "next/link";
+import Project from "@/app/db/model/Project";
+import Time from "@/app/db/model/Time";
+import Employee from "@/app/db/model/Employee";
+import connectDB from "@/app/db/connectDB";
+
 // import handleApprove from "@/app/lib/handleApprove";
 
 export default async function PageWeek({ params, children, searchParams }) {
@@ -14,16 +19,31 @@ export default async function PageWeek({ params, children, searchParams }) {
     `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
   );
 
-  const res = await fetch(
-    `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  // const res = await fetch(
+  //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  // const data = await res.json();
+  let data = null;
+  try {
+    await connectDB();
+    const res = await Employee.findById(empId)
+      .populate("project")
+      .populate("times");
+    if (!res) {
+      throw new Error("Error fetching Employees Times");
     }
-  );
-  const data = await res.json();
+    data = JSON.parse(JSON.stringify(res));
+    data = { employee: { ...data } };
+  } catch (error) {
+    throw new Error(error);
+  }
+
   let isLoading = true;
   if (data) isLoading = false;
 

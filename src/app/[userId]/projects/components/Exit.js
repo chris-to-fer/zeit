@@ -39,7 +39,7 @@ export default function Exit({ goHome, session, userId }) {
           Genehmigen {number}
         </Link>
       )}
-      <div>
+      <div className={styles.logout_container}>
         <h6>{session?.user.name}</h6>
         <button
           className={session ? styles.button_logout : styles.button}

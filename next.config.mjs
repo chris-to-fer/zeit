@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  image: {
+  images: {
     domains: ["https://zeit-iota.vercel.app/"],
   },
 };

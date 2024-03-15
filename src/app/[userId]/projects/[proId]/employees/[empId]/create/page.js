@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import ModalDoubleDate from "@/app/lib/ModalDoubleDate";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "../../../../page.module.css";
 
 export default function TimesheetCreatePage({ params }) {
   const [errorModalOpen, setErrorModalOpen] = useState(false);
@@ -75,15 +76,18 @@ export default function TimesheetCreatePage({ params }) {
 
   return (
     <>
-      <div>
-        <ModalDoubleDate
-          isOpen={errorModalOpen}
-          message="Datum existiert schon oder liegt in der Zukunft."
-          onRequestClose={handleCloseError}
-        />
-        <h3>Geben Sie Ihre Zeiten ein:</h3>
-        <br></br>
-        <TimeForm handleSubmit={handleSubmit} />
+      <ModalDoubleDate
+        isOpen={errorModalOpen}
+        message="Datum existiert schon oder liegt in der Zukunft."
+        onRequestClose={handleCloseError}
+      />
+
+      <div className={styles.form_container}>
+        <h2>Zeiten erfassen:</h2>
+        <div className={styles.card_forms}>
+          <br></br>
+          <TimeForm handleSubmit={handleSubmit} />
+        </div>
       </div>
     </>
   );

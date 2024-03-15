@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import connectDB from "@/app/db/connectDB";
 import Project from "@/app/db/model/Project";
 import User from "@/app/db/model/User";
+import styles from "../page.module.css";
 
 export default function Create({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -49,11 +50,16 @@ export default function Create({ params, searchParams }) {
   }
 
   return (
-    <ProjectForm
-      searchParams={searchParams}
-      params={params}
-      handleSubmit={handleSubmit}
-      revalidateDelete={revalidate}
-    />
+    <div className={styles.form_container}>
+      <h2>Projekt erstellen:</h2>
+      <div className={styles.card_forms}>
+        <ProjectForm
+          searchParams={searchParams}
+          params={params}
+          handleSubmit={handleSubmit}
+          revalidateDelete={revalidate}
+        />
+      </div>
+    </div>
   );
 }

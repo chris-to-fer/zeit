@@ -6,6 +6,8 @@ import getWeekOfYear from "@/app/lib/getWeekOfYear";
 import injectWeekId from "@/app/lib/injectWeekId";
 import WeekOverview from "../employees/[empId]/week/[weekId]/components/WeekOverview";
 import Time from "@/app/db/model/Time";
+import Employee from "@/app/db/model/Employee";
+import Project from "@/app/db/model/Project";
 import connectDB from "@/app/db/connectDB";
 
 export default async function page({ params }) {
@@ -38,8 +40,8 @@ export default async function page({ params }) {
       .populate("projectId");
     data = JSON.parse(JSON.stringify(res));
     trigger = true;
-    if (!data) {
-      throw new Error("Error finding approved");
+    if (!res) {
+      throw new Error("Error checking approved");
     }
   } catch (error) {
     throw new Error(error);

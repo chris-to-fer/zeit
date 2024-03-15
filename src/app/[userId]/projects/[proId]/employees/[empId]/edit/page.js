@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import connectDB from "@/app/db/connectDB";
 import Employee from "@/app/db/model/Employee";
+import styles from "../../../../page.module.css";
 
 export default function PageEditEmployee({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -51,12 +52,17 @@ export default function PageEditEmployee({ params, searchParams }) {
 
   return (
     <>
-      <EmpForm
-        defaultValue={searchParams}
-        params={params}
-        handleSubmit={handleSubmit}
-        revalidateDelete={revalidateDelete}
-      />
+      <div className={styles.form_container}>
+        <h2>Mitarbeiter bearbeiten:</h2>
+        <div className={styles.card_forms}>
+          <EmpForm
+            defaultValue={searchParams}
+            params={params}
+            handleSubmit={handleSubmit}
+            revalidateDelete={revalidateDelete}
+          />
+        </div>
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import Project from "@/app/db/model/Project";
 import connectDB from "@/app/db/connectDB";
+import styles from "../../page.module.css";
 
 export default function PageEdit({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -53,13 +54,18 @@ export default function PageEdit({ params, searchParams }) {
 
   return (
     <>
-      <ProjectForm
-        searchParams={searchParams}
-        params={params}
-        handleSubmit={handleSubmit}
-        proId={proId}
-        revalidateDelete={revalidateDelete}
-      />
+      <div className={styles.form_container}>
+        <h2>Projekt bearbeiten:</h2>
+        <div className={styles.card_forms}>
+          <ProjectForm
+            searchParams={searchParams}
+            params={params}
+            handleSubmit={handleSubmit}
+            proId={proId}
+            revalidateDelete={revalidateDelete}
+          />
+        </div>
+      </div>
     </>
   );
 }

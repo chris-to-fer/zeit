@@ -5,6 +5,7 @@ import EmpForm from "./components/EmpForm";
 import connectDB from "@/app/db/connectDB";
 import Employee from "@/app/db/model/Employee";
 import Project from "@/app/db/model/Project";
+import styles from "../../page.module.css";
 
 export default function CreateEmployees({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -44,14 +45,16 @@ export default function CreateEmployees({ params, searchParams }) {
   }
 
   return (
-    <div>
-      <h3>Mitarbeiter hinzuzufügen</h3>
-      <br></br>
-      <EmpForm
-        defaultValue={searchParams}
-        params={params}
-        handleSubmit={handleSubmit}
-      />
+    <div className={styles.form_container}>
+      <h2>Mitarbeiter erstellen:</h2>
+      <div className={styles.card_forms}>
+        <br></br>
+        <EmpForm
+          defaultValue={searchParams}
+          params={params}
+          handleSubmit={handleSubmit}
+        />
+      </div>
     </div>
   );
 }

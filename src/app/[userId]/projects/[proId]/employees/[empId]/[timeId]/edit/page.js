@@ -6,6 +6,7 @@ import connectDB from "@/app/db/connectDB";
 import Time from "@/app/db/model/Time";
 import { headers } from "next/headers";
 import ModalServ from "@/app/lib/ModalServ";
+import styles from "../../../../../page.module.css";
 
 export default function page({ params, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
@@ -87,11 +88,16 @@ export default function page({ params, searchParams }) {
       {showError && (
         <ModalServ params={params} HOSTNAME={HOSTNAME} timeId={timeId} />
       )}
-      <TimeForm
-        defaultValue={defaultValue}
-        params={params}
-        handleSubmit={handleSubmit}
-      />
+      <div className={styles.form_container}>
+        <h2>Zeiten bearbeiten:</h2>
+        <div className={styles.card_forms}>
+          <TimeForm
+            defaultValue={defaultValue}
+            params={params}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      </div>
     </>
   );
 }

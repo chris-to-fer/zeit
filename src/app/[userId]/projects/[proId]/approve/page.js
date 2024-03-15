@@ -44,10 +44,8 @@ export default async function page({ params }) {
   } catch (error) {
     throw new Error(error);
   }
-  console.log("data", data);
+
   data = { notApproved: [...data] };
-  console.log("data2", data);
-  console.log("not Approved", data.notApproved[0].date);
 
   const injectedTimes = injectWeekId(data.notApproved);
   const displayNumber = injectedTimes.length;

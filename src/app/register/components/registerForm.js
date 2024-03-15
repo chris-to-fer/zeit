@@ -47,6 +47,7 @@ export default function RegisterForm() {
       }
     } catch (error) {
       console.log("Error during registration", error);
+      throw new Error(error);
     }
   };
 

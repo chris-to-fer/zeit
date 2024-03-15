@@ -239,6 +239,12 @@
   transition: 300ms ease-in-out;
   box-shadow: 6px 5px 5px 1px rgba(243, 243, 245, 0.2);
 }
+.logout_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
 .button_logout {
   background-color: #da190b;
   /* background-color: #4caf50; */

@@ -8,6 +8,7 @@ import { selectBurgerContext } from "@/app/openBurger-Provider";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { displayNumberContext } from "@/app/displayNumber-Provider";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Sidebar({
   trigger,
@@ -77,7 +78,7 @@ export default function Sidebar({
               <br></br>
             </h4>
             <button className={styles.button} onClick={() => router.back()}>
-              zurück
+              <ArrowBackIosIcon />
             </button>
           </>
         ) : proId && !empId ? (
@@ -91,7 +92,7 @@ export default function Sidebar({
               <br></br>
             </h4>
             <Link className={styles.button} href={`/${userId}/projects`}>
-              zurück
+              <ArrowBackIosIcon />
             </Link>
           </>
         ) : empId && proId && empId && !weekId ? (
@@ -119,7 +120,7 @@ export default function Sidebar({
               className={styles.button}
               href={`/${userId}/projects/${proId}`}
             >
-              zurück
+              <ArrowBackIosIcon />
             </Link>
           </>
         ) : userId && !proId ? (
@@ -133,6 +134,12 @@ export default function Sidebar({
         ) : userId && proId && empId && weekId ? (
           <>
             <h4>Features:</h4>
+            <Link
+              className={styles.button}
+              href={`/${userId}/projects/${proId}/employees/${empId}`}
+            >
+              <ArrowBackIosIcon />
+            </Link>
           </>
         ) : (
           ""

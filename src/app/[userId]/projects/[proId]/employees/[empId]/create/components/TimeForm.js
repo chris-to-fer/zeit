@@ -16,7 +16,9 @@ export default function TimeForm({ defaultValue, handleSubmit }) {
 
   async function handleDelete() {
     const data = { method: "DELETETIMESHEET", timeId: timeId };
-    confirm("Löschen?");
+    if (confirm("Löschen?") === false) {
+      return;
+    }
     const response = await fetch(
       `/api/${userId}/projects/${proId}/employees/${empId}`,
       {

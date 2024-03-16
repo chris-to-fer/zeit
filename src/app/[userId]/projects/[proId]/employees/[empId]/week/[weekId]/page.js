@@ -13,7 +13,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 // import handleApprove from "@/app/lib/handleApprove";
 
-export default async function PageWeek({ params, children }) {
+export default async function PageWeek({ params, children, searchParams }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId, weekId } = params;
 

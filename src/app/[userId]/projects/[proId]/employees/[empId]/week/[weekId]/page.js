@@ -8,7 +8,7 @@ import Project from "@/app/db/model/Project";
 import Time from "@/app/db/model/Time";
 import Employee from "@/app/db/model/Employee";
 import connectDB from "@/app/db/connectDB";
-import { Suspense } from "react";
+
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 // import handleApprove from "@/app/lib/handleApprove";
@@ -17,9 +17,9 @@ export default async function PageWeek({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId, weekId } = params;
 
-  revalidatePath(
-    `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
-  );
+  // revalidatePath(
+  //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
+  // );
 
   // const res = await fetch(
   //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
@@ -133,9 +133,8 @@ export default async function PageWeek({ params, children }) {
             </span>
           </section>
         </div>
-        <Suspense fallback={<p>Daten werden geladen...</p>}>
-          <WeekTable timesheets={timesheets} isLoading={isLoading} />
-        </Suspense>
+
+        <WeekTable timesheets={timesheets} isLoading={isLoading} />
       </div>
       {children}
     </>

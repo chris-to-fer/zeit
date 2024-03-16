@@ -15,7 +15,9 @@ export default function ProjectForm({
 
   async function handleDelete() {
     const data = { method: "DELETEPROJECT" };
-    confirm("Löschen?");
+    if (confirm("Löschen?") === false) {
+      return;
+    }
 
     const response = await fetch(`/api/${userId}/projects/${proId}`, {
       method: "POST",

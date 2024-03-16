@@ -16,7 +16,9 @@ export default function EmpForm({
   async function handleDelete(e) {
     e.preventDefault();
     const data = { method: "DELETEEMPLOYEE" };
-    confirm("Löschen?");
+    if (confirm("Löschen?") === false) {
+      return;
+    }
     const response = await fetch(
       `/api/${userId}/projects/${proId}/employees/${empId}`,
       {

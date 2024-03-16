@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import NextAuth from "next-auth/next";
 import ServerComponent from "@/app/session-action";
 
-export async function GET(request, { params, searchParams }) {
+export async function GET(request, { params }) {
   //GET EMPLOYEES OVER PROJECTS POPULATE for Mitarbeiter des Projekts Page
   // const session = ServerComponent();
   // if (!session) {
@@ -27,7 +27,7 @@ export async function GET(request, { params, searchParams }) {
   return NextResponse.json({ projects }, { status: 200 });
 }
 
-export async function POST(request, { params, searchParams }) {
+export async function POST(request, { params }) {
   //EDIT PROJECT
 
   // const session = await ServerComponent();

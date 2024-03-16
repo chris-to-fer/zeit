@@ -8,6 +8,8 @@ import ServerComponent from "@/app/session-action";
 import { redirect } from "next/navigation";
 import DisplayNumberProvider from "@/app/displayNumber-Provider";
 import LocProvider from "@/app/localization-Provider";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,8 +35,9 @@ export default async function RootLayout({ params, children }) {
           <DisplayNumberProvider>
             <Header params={params} session={session} />
 
-            <main className={styles.main}>{children}</main>
-
+            <Suspense fallback={<Loading />}>
+              <main className={styles.main}>{children}</main>
+            </Suspense>
             <Footer params={params} />
           </DisplayNumberProvider>
         </LocProvider>

@@ -6,7 +6,7 @@ import Employee from "@/app/db/model/Employee";
 import Time from "@/app/db/model/Time";
 import { revalidatePath } from "next/cache";
 
-export async function GET(request, { params, searchParams }) {
+export async function GET(request, { params }) {
   ///GET TIMES Of EMPLOYEES
   await connectDB();
 
@@ -23,7 +23,7 @@ export async function GET(request, { params, searchParams }) {
   }
 }
 
-export async function POST(request, { params, searchParams }) {
+export async function POST(request, { params }) {
   await connectDB();
   const data = await request.json();
   const method = await data.method;

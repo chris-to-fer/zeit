@@ -3,7 +3,7 @@ import connectDB from "@/app/db/connectDB";
 import Time from "@/app/db/model/Time";
 import { revalidatePath } from "next/cache";
 
-export async function GET(request, { params, searchParams }) {
+export async function GET(request, { params }) {
   //GET TIMES DIRECTLY FROM TIMESHEET
   await connectDB();
   const { userId, proId, empId } = params;
@@ -21,7 +21,7 @@ export async function GET(request, { params, searchParams }) {
   }
 }
 
-export async function POST(request, { params, searchParams }) {
+export async function POST(request, { params }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   await connectDB();
   const data = await request.json();

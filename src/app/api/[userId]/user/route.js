@@ -8,7 +8,7 @@ import { auth } from "../../auth/[...nextauth]/route";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-export async function GET(req, { params, searchParams }, response) {
+export async function GET(req, { params }, response) {
   // const token = await getToken({ req, secret });
   // const session = await auth();
   // console.log("jwt: ", session);
@@ -40,7 +40,7 @@ export async function GET(req, { params, searchParams }, response) {
   return NextResponse.json({ user }, { status: 200 });
 }
 
-export async function POST(request, { params, searchParams }, response) {
+export async function POST(request, { params }, response) {
   await connectDB();
   const data = await request.json();
   const method = await data.method;

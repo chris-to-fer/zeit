@@ -114,7 +114,7 @@ export default async function Page({ params, children }) {
                 </h4>
               </Link>
 
-              <span className={styles.weeks}>
+              <article className={styles.weeks}>
                 {injectedTimes.map((obj) =>
                   obj.weekId == e ? (
                     <Link
@@ -125,19 +125,19 @@ export default async function Page({ params, children }) {
                       key={obj.date}
                     >
                       {" "}
-                      <p>
+                      <article>
                         {" "}
                         {new Date(obj.date).toLocaleDateString(
                           "de-DE",
                           options
                         )}
-                      </p>
+                      </article>
                     </Link>
                   ) : (
                     ""
                   )
                 )}
-              </span>
+              </article>
             </li>
           ))}
         </ul>

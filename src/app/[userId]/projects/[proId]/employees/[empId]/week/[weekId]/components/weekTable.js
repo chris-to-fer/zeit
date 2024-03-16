@@ -142,10 +142,10 @@ export default function WeekTable({ timesheets, isLoading }) {
   function CustomNoRowsOverlay() {
     return <div>Hallo</div>;
   }
-
+  // style={{ height: 500, width: "75vw" }}
   return (
     <>
-      <div className={styles.table} style={{ height: 500, width: "90vw" }}>
+      <div className={styles.table}>
         <DataGrid
           checkboxSelection
           onRowSelectionModelChange={(id) => {

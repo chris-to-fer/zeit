@@ -21,7 +21,7 @@ import getWorktime from "@/app/lib/getWorktime";
 //defining the columns
 const columns = makeColumns();
 
-export default function WeekTable({ timesheets, isLoading }) {
+export default function WeekTable({ timesheets }) {
   const options = {
     weekday: "long",
     year: "numeric",

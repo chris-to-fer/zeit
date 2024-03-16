@@ -46,9 +46,6 @@ export default async function PageWeek({ params, children }) {
     throw new Error(error);
   }
 
-  let isLoading = true;
-  if (data) isLoading = false;
-
   const injectedTimes = data.employee?.times.map((e) => {
     const yearOnly = new Date(
       new Date(e.date).getFullYear(),
@@ -114,28 +111,34 @@ export default async function PageWeek({ params, children }) {
   return (
     <>
       <Sidebar params={params} employee={data} />
+
       <div className={styles.card_project_table}>
         <div>
-          <section className={styles.card_project_table_section}>
-            <Link
-              href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
-            >
-              <ArrowBackIosIcon />
-            </Link>
-            <br></br>
-            <h3>
-              Woche {weekId}: {data.employee.name} {data.employee.lastName}
-            </h3>
-            <p>Projekt:{data.employee.project.name}</p>
-            <p>Produktion: {data.employee.project.companyName}</p>
-            <span>
-              {data.employee?.department} / {data.employee?.position}{" "}
-            </span>
-          </section>
+          {data && (
+            <section className={styles.card_project_table_section}>
+              <Link
+                href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
+              >
+                <ArrowBackIosIcon />
+              </Link>
+              <br></br>
+
+              <h3>
+                Woche {weekId}: {data.employee.name} {data.employee.lastName}
+              </h3>
+
+              <p>Projekt:{data.employee.project.name}</p>
+              <p>Produktion: {data.employee.project.companyName}</p>
+              <span>
+                {data.employee?.department} / {data.employee?.position}{" "}
+              </span>
+            </section>
+          )}
         </div>
 
-        <WeekTable timesheets={timesheets} isLoading={isLoading} />
+        <WeekTable timesheets={timesheets} />
       </div>
+
       {children}
     </>
   );

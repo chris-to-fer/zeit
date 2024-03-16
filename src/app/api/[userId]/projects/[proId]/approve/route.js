@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 import Employee from "@/app/db/model/Employee";
 
-export async function GET(request, { params, searchParams }) {
+export async function GET(request, { params }) {
   //GET not approved times of project
 
   const HOSTNAME = process.env.HOSTNAME_URL;

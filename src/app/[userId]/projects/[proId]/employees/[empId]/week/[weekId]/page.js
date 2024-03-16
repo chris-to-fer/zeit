@@ -8,10 +8,12 @@ import Project from "@/app/db/model/Project";
 import Time from "@/app/db/model/Time";
 import Employee from "@/app/db/model/Employee";
 import connectDB from "@/app/db/connectDB";
+import { Suspense } from "react";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 // import handleApprove from "@/app/lib/handleApprove";
 
-export default async function PageWeek({ params, children, searchParams }) {
+export default async function PageWeek({ params, children }) {
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { userId, proId, empId, weekId } = params;
 
@@ -113,23 +115,27 @@ export default async function PageWeek({ params, children, searchParams }) {
     <>
       <Sidebar params={params} employee={data} />
       <div className={styles.card_project_table}>
-        <Link
-          href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
-        >
-          zurück
-        </Link>
-        <br></br>
-        <h3>
-          Wochenzeiten der Woche {weekId} von {data.employee.name}{" "}
-          {data.employee.lastName}
-        </h3>
-        <p>Projekt:{data.employee.project.name}</p>
-        <p>Produktion: {data.employee.project.companyName}</p>
-        <span>
-          {data.employee?.department} / {data.employee?.position}{" "}
-        </span>
-
-        <WeekTable timesheets={timesheets} isLoading={isLoading} />
+        <div>
+          <section className={styles.card_project_table_section}>
+            <Link
+              href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
+            >
+              <ArrowBackIosIcon />
+            </Link>
+            <br></br>
+            <h3>
+              Woche {weekId}: {data.employee.name} {data.employee.lastName}
+            </h3>
+            <p>Projekt:{data.employee.project.name}</p>
+            <p>Produktion: {data.employee.project.companyName}</p>
+            <span>
+              {data.employee?.department} / {data.employee?.position}{" "}
+            </span>
+          </section>
+        </div>
+        <Suspense fallback={<p>Daten werden geladen...</p>}>
+          <WeekTable timesheets={timesheets} isLoading={isLoading} />
+        </Suspense>
       </div>
       {children}
     </>

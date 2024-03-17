@@ -83,11 +83,7 @@
   justify-content: center;
   color: white;
 }
-.button:hover {
-  background-color: #45a049;
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
-}
+
 .buttonAbbort {
   display: flex;
   gap: 12px;
@@ -101,11 +97,7 @@
   justify-content: center;
   color: white;
 }
-.buttonAbbort:hover {
-  background-color: #da190b;
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
-}
+
 .error {
   display: flex;
   gap: 12px;
@@ -122,9 +114,7 @@
   flex-direction: column;
   gap: 15px;
 }
-.toLoggin:hover {
-  color: #45a049;
-}
+
 .modal_server_container {
   display: flex;
   position: absolute;
@@ -179,9 +169,6 @@
   border-radius: 5px;
   width: max-content;
   transition: 200ms ease-in-out;
-}
-.modal button:hover {
-  box-shadow: 4px 3px 7px 2px rgb(196, 194, 194);
 }
 
 .description {
@@ -302,6 +289,22 @@
 
   .card:hover span {
     transform: scale(1.1);
+  }
+  .modal button:hover {
+    box-shadow: 4px 3px 7px 2px rgb(196, 194, 194);
+  }
+  .toLoggin:hover {
+    color: #45a049;
+  }
+  .button:hover {
+    background-color: #45a049;
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
+  }
+  .buttonAbbort:hover {
+    background-color: #da190b;
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
   }
 }
 

@@ -30,12 +30,6 @@
   align-self: left;
 } */
 
-.radio {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 8px;
-}
-
 .right {
   transform: translate(40%, 22%);
 }
@@ -297,29 +291,72 @@
   /* width: 95vw; */
 }
 .form input {
-  padding: 6px;
+  padding: 8px;
+  border-radius: 3px;
+  border-width: 0.5px;
+
+  /* min-width: 300px; */
+}
+.form textarea {
+  padding: 8px;
+  border-radius: 3px;
+  border-width: 0.5px;
+}
+.radio {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  /* padding: 8px; */
+  margin-left: 20%;
+  margin-right: 20%;
+  /* height: 30px; */
+}
+.form [type="radio"] {
+  width: 25px;
+  height: 25px;
+}
+.form [type="time"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+.form input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5) sepia(2) saturate(2) hue-rotate(105deg);
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-self: right;
+}
+.form select {
+  padding: 8px;
   border-radius: 3px;
   border-width: 0.5px;
   /* min-width: 300px; */
 }
 @media (max-width: 735px) {
-  .form input[type="time"]::-webkit-datetime-edit {
-    padding: 6px;
+  .form input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
     border-radius: 3px;
     border-width: 0.5px;
-    min-width: 300px;
+    /* min-width: 300px; */
+    font-family: helvetica;
+    font-size: 1.5rem;
+  }
+  .form input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5) sepia(2) saturate(2) hue-rotate(105deg);
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-self: right;
   }
   .card_forms {
     min-width: 97.5vw;
   }
 }
 
-.form select {
-  padding: 6px;
-  border-radius: 3px;
-  border-width: 0.5px;
-  min-width: 300px;
-}
 .weeks {
   display: flex;
   flex-direction: row;
@@ -576,3 +613,58 @@
     transform: rotate(0deg);
   }
 }  */
+
+/* .form input[type="time"] {
+  border: none;
+  color: #2a2c2d;
+  font-size: 14px;
+  font-family: helvetica;
+  width: 100%;
+} */
+
+/* Wrapper around the hour, minute, second, and am/pm fields as well as 
+the up and down buttons and the 'X' button */
+/* .form input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+} */
+
+/* The space between the fields - between hour and minute, the minute and 
+second, second and am/pm */
+/* .form input[type="time"]::-webkit-datetime-edit-text {
+  padding: 19px 4px;
+} */
+
+/* The naming convention for the hour, minute, second, and am/pm field is
+`-webkit-datetime-edit-{field}-field` */
+
+/* Hour */
+/* .form input[type="time"]::-webkit-datetime-edit-hour-field {
+  background-color: #f2f4f5;
+  border-radius: 15%;
+  padding: 19px 13px;
+} */
+
+/* Minute */
+/* .form input[type="time"]::-webkit-datetime-edit-minute-field {
+  background-color: #f2f4f5;
+  border-radius: 15%;
+  padding: 19px 13px;
+} */
+
+/* AM/PM */
+/* .form input[type="time"]::-webkit-datetime-edit-ampm-field {
+  background-color: #7155d3;
+  border-radius: 15%;
+  color: #fff;
+  padding: 19px 13px;
+} */
+
+/* 'X' button for resetting/clearing time */
+/* .form input[type="time"]::-webkit-clear-button {
+  display: none;
+} */
+
+/* Up/Down arrows for incrementing/decrementing the value */
+/* .form input[type="time"]::-webkit-inner-spin-button {
+  display: none;
+} */

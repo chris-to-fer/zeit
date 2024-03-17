@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Login from "./components/Login";
 import Link from "next/link";
+import google from "/public/static/google.png";
+import git from "/public/static/github-mark.png";
 
 export default function Home() {
   const router = useRouter();
@@ -66,18 +68,13 @@ export default function Home() {
         {seen && <Login seen={seen} setSeen={setSeen} />}
         {!session && (
           <button onClick={() => signIn("github")} className={styles.button}>
-            <Image
-              src="/github-mark.png"
-              alt="Github-Logo"
-              width={20}
-              height={20}
-            />
+            <Image src={git} alt="Github-Logo" width={20} height={20} />
             anmelden mit Github
           </button>
         )}
         {!session && (
           <button onClick={() => signIn("google")} className={styles.button}>
-            <Image src="/google.png" alt="Github-Logo" width={20} height={20} />
+            <Image src={google} alt="Github-Logo" width={20} height={20} />
             anmelden mit Google
           </button>
         )}

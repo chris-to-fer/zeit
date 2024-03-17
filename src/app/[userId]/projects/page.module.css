@@ -352,9 +352,9 @@
   /* max-width: fit-content; */
   flex-wrap: wrap;
 }
-/* .weeks a:hover {
+.weeks a:hover {
   color: green;
-} */
+}
 /* .description {
   display: inherit;
   justify-content: inherit;

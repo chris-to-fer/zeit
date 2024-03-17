@@ -126,7 +126,7 @@ export default function WeekTable({ timesheets }) {
     );
     router.refresh();
     if (response.ok) {
-      router.refresh(`/api/${userId}/projects/${proId}/approve`);
+      //   router.refresh(`/api/${userId}/projects/${proId}/approve`);
     }
   }
 

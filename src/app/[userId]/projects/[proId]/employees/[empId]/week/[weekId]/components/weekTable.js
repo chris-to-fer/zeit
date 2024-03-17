@@ -178,7 +178,7 @@ export default function WeekTable({ timesheets }) {
         />
       </div>
       <Button
-        className={styles.funcbutton}
+        // className={styles.funcbutton}
         onClick={() => handleApprove(approvedTimes)}
         // disabled={rowSelectionModel[0] ? false : true}
       >

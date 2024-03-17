@@ -182,12 +182,12 @@
   font-family: var(--font-mono);
 }
 
-.description a {
+/* .description a {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-}
+} */
 
 .description p {
   position: relative;

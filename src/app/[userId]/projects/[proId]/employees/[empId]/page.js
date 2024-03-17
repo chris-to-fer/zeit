@@ -100,10 +100,7 @@ export default async function Page({ params, children }) {
           {Object.keys(weekObject).map((e, index) => (
             <li key={index}>
               <Link
-                href={{
-                  pathname: `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${e}`,
-                  // query: { objects: encodedArray },
-                }}
+                href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${e}`}
               >
                 <h4>
                   {" "}

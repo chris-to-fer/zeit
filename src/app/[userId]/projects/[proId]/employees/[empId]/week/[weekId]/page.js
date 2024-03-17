@@ -113,28 +113,26 @@ export default async function PageWeek({ params, children }) {
       <Sidebar params={params} employee={data} />
 
       <div className={styles.card_project_table}>
-        <div>
-          {data && (
-            <section className={styles.card_project_table_section}>
-              <Link
-                href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
-              >
-                <ArrowBackIosIcon />
-              </Link>
-              <br></br>
+        {data && (
+          <section className={styles.card_project_table_section}>
+            <Link
+              href={`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`}
+            >
+              <ArrowBackIosIcon />
+            </Link>
+            <br></br>
 
-              <h3>
-                Woche {weekId}: {data.employee.name} {data.employee.lastName}
-              </h3>
+            <h3>
+              Woche {weekId}: {data.employee.name} {data.employee.lastName}
+            </h3>
 
-              <p>Projekt:{data.employee.project.name}</p>
-              <p>Produktion: {data.employee.project.companyName}</p>
-              <span>
-                {data.employee?.department} / {data.employee?.position}{" "}
-              </span>
-            </section>
-          )}
-        </div>
+            <p>Projekt:{data.employee.project.name}</p>
+            <p>Produktion: {data.employee.project.companyName}</p>
+            <span>
+              {data.employee?.department} / {data.employee?.position}{" "}
+            </span>
+          </section>
+        )}
 
         <WeekTable timesheets={timesheets} />
       </div>

@@ -241,11 +241,7 @@
   color: white;
   transition: 300ms ease-in-out;
 }
-.funcbutton:hover {
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
-  transition: 300ms ease-in-out;
-}
+
 .button {
   border: none;
   background-color: rgb(241, 241, 243);
@@ -277,22 +273,6 @@
   padding: 8px;
   border-radius: 5px;
   color: rgb(242, 242, 242);
-}
-
-.button_logout:hover {
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
-}
-
-.button:hover {
-  background-color: rgb(219, 230, 239);
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
-}
-.button_week:hover {
-  background-color: rgb(219, 230, 239);
-  box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
-  opacity: 80%;
 }
 
 .button_selected {
@@ -352,9 +332,7 @@
   /* max-width: fit-content; */
   flex-wrap: wrap;
 }
-.weeks a:hover {
-  color: green;
-}
+
 /* .description {
   display: inherit;
   justify-content: inherit;
@@ -457,7 +435,7 @@
   position: relative;
 }
 /* Enable hover only on non-touch devices */
-/* @media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
@@ -465,6 +443,28 @@
 
   .card:hover span {
     transform: translateX(4px);
+  }
+  .weeks a:hover {
+    color: green;
+  }
+  .button_week:hover {
+    background-color: rgb(219, 230, 239);
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
+  }
+  .button:hover {
+    background-color: rgb(219, 230, 239);
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
+  }
+  .button_logout:hover {
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
+  }
+  .funcbutton:hover {
+    box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
+    opacity: 80%;
+    transition: 300ms ease-in-out;
   }
 }
 

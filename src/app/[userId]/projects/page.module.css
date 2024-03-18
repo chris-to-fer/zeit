@@ -1,3 +1,6 @@
+.pBar {
+  z-index: 28;
+}
 .form_container {
   width: 100%;
   display: flex;

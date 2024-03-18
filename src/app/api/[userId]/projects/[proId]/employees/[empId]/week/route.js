@@ -49,7 +49,8 @@ export async function POST(request, { params }) {
       // revalidatePath(
       //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
       // );
-      return NextResponse.json({ status: 201 });
+      console.log("Approve on Api Route done");
+      return NextResponse.json({ message: "resolved" }, { status: 201 });
     } catch (error) {
       return NextResponse.json({ status: 400 });
     }

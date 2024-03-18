@@ -116,6 +116,7 @@ export default function WeekTable({ timesheets, revalidate }) {
     if (!approvedTimes[0]) {
       return;
     }
+
     const data = { approvedTimes, method: "APPROVETIMESHEETS" };
     const response = await fetch(
       `/api/${userId}/projects/${proId}/employees/${empId}/week`,
@@ -127,8 +128,11 @@ export default function WeekTable({ timesheets, revalidate }) {
         body: JSON.stringify(data),
       }
     );
-    console.log("resp", response.status);
-
+    const api = await response.json();
+    console.log("resp__________________________________", api.message);
+    if (api.message !== "Hello") {
+      return <h1 className={styles.pBar}>Hi</h1>;
+    }
     if (response.ok) {
       revalidate();
       router.refresh(`/api/${userId}/projects/${proId}/approve`);
@@ -138,15 +142,15 @@ export default function WeekTable({ timesheets, revalidate }) {
     }
   }
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        {/* <GridToolbarFilterButton /> */}
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
+  // function CustomToolbar() {
+  //   return (
+  //     <GridToolbarContainer>
+  //       <GridToolbarColumnsButton />
+  //       <GridToolbarFilterButton />
+  //       <GridToolbarExport />
+  //     </GridToolbarContainer>
+  //   );
+  // }
   // function CustomNoRowsOverlay() {
   //   return <div>Hallo</div>;
   // }
@@ -172,7 +176,7 @@ export default function WeekTable({ timesheets, revalidate }) {
               columns={columns}
               loading={rows ? false : true}
               slots={{
-                toolbar: CustomToolbar,
+                toolbar: GridToolbar,
 
                 // noRowsOverlay: CustomNoRowsOverlay,
               }}

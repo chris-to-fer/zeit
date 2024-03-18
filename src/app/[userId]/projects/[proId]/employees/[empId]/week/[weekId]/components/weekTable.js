@@ -129,10 +129,7 @@ export default function WeekTable({ timesheets, revalidate }) {
       }
     );
     const api = await response.json();
-    console.log("resp__________________________________", api.message);
-    if (api.message !== "Hello") {
-      return <h1 className={styles.pBar}>Hi</h1>;
-    }
+
     if (response.ok) {
       revalidate();
       router.refresh(`/api/${userId}/projects/${proId}/approve`);

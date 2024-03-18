@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   DataGrid,
   GridToolbar,
@@ -18,6 +19,7 @@ import makeColumns from "@/app/lib/makeColumns";
 import getWorktime from "@/app/lib/getWorktime";
 // import { LinearProgress } from "@mui/material";
 import { revalidatePath } from "next/cache";
+import { Suspense } from "react";
 
 //defining the columns
 const columns = makeColumns();
@@ -126,6 +128,7 @@ export default function WeekTable({ timesheets, revalidate }) {
       }
     );
     console.log("resp", response.status);
+
     if (response.ok) {
       revalidate();
       router.refresh(`/api/${userId}/projects/${proId}/approve`);
@@ -135,15 +138,15 @@ export default function WeekTable({ timesheets, revalidate }) {
     }
   }
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
+  // function CustomToolbar() {
+  //   return (
+  //     <GridToolbarContainer>
+  //       <GridToolbarColumnsButton />
+  //       <GridToolbarFilterButton />
+  //       <GridToolbarExport />
+  //     </GridToolbarContainer>
+  //   );
+  // }
   // function CustomNoRowsOverlay() {
   //   return <div>Hallo</div>;
   // }
@@ -151,36 +154,42 @@ export default function WeekTable({ timesheets, revalidate }) {
   return (
     <>
       <div className={styles.table}>
-        <DataGrid
-          checkboxSelection
-          onRowSelectionModelChange={(id) => {
-            setRowSelectionModel(id);
-          }}
-          rowSelectionModel={rowSelectionModel}
-          disableColumnMenu
-          disableColumnFilter
-          rows={rows}
-          // rowHeight={52}
-          getRowHeight={() => "auto"}
-          columns={columns}
-          loading={rows ? false : true}
-          slots={{
-            toolbar: CustomToolbar,
+        <Suspense fallback={<CircularProgress />}>
+          {!columns ? (
+            <h1>wait</h1>
+          ) : (
+            <DataGrid
+              checkboxSelection
+              onRowSelectionModelChange={(id) => {
+                setRowSelectionModel(id);
+              }}
+              rowSelectionModel={rowSelectionModel}
+              disableColumnMenu
+              disableColumnFilter
+              rows={rows}
+              // rowHeight={52}
+              getRowHeight={() => "auto"}
+              columns={columns}
+              loading={rows ? false : true}
+              slots={{
+                toolbar: GridToolbar,
 
-            // noRowsOverlay: CustomNoRowsOverlay,
-          }}
-          // initialState={{
-          //   pagination: {
-          //     paginationModel: { page: 1, pageSize: 7 },
-          //   },
-          // }}
-          // pageSize={7}
-          // pageSizeOptions={[7]}
-          // getRowId={getRowId}
-          // getRowClassName={getRowClassName}
-          // autoHeight
-          autoPageSize
-        />
+                // noRowsOverlay: CustomNoRowsOverlay,
+              }}
+              // initialState={{
+              //   pagination: {
+              //     paginationModel: { page: 1, pageSize: 7 },
+              //   },
+              // }}
+              // pageSize={7}
+              // pageSizeOptions={[7]}
+              // getRowId={getRowId}
+              // getRowClassName={getRowClassName}
+              // autoHeight
+              autoPageSize
+            />
+          )}
+        </Suspense>
       </div>
       <button
         className={styles.funcbutton}

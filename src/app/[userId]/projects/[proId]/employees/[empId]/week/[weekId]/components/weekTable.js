@@ -35,6 +35,7 @@ export default function WeekTable({ timesheets, revalidate }) {
   const router = useRouter();
   const params = useParams();
   const { userId, empId, proId, weekId } = params;
+  const [loading, setLoading] = useState(false);
 
   //bring mongo-date to correct display format
   const dateDisplayFormat = (mongo) => {
@@ -113,10 +114,10 @@ export default function WeekTable({ timesheets, revalidate }) {
     .filter(Boolean);
 
   async function handleApprove(approvedTimes) {
+    setLoading(true);
     if (!approvedTimes[0]) {
       return;
     }
-
     const data = { approvedTimes, method: "APPROVETIMESHEETS" };
     const response = await fetch(
       `/api/${userId}/projects/${proId}/employees/${empId}/week`,
@@ -128,7 +129,9 @@ export default function WeekTable({ timesheets, revalidate }) {
         body: JSON.stringify(data),
       }
     );
-    const api = await response.json();
+
+    // const api = await response.json();
+    setLoading(false);
 
     if (response.ok) {
       revalidate();
@@ -152,6 +155,7 @@ export default function WeekTable({ timesheets, revalidate }) {
   //   return <div>Hallo</div>;
   // }
   // style={{ height: 500, width: "75vw" }}
+
   return (
     <>
       <div className={styles.table}>
@@ -171,7 +175,7 @@ export default function WeekTable({ timesheets, revalidate }) {
               // rowHeight={52}
               getRowHeight={() => "auto"}
               columns={columns}
-              // loading={rows ? false : true}
+              loading={loading}
               slots={{
                 toolbar: GridToolbar,
 

@@ -141,9 +141,8 @@ export default async function PageWeek({ params, children }) {
             </span>
           </section>
         )}
-        <Suspense fallback={<h1>wait</h1>}>
-          <WeekTable timesheets={timesheets} revalidate={revalidate} />
-        </Suspense>
+
+        <WeekTable timesheets={timesheets} revalidate={revalidate} />
       </div>
 
       {children}

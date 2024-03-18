@@ -132,10 +132,10 @@ export default function WeekTable({ timesheets, revalidate }) {
 
     if (response.ok) {
       revalidate();
-      router.refresh(`/api/${userId}/projects/${proId}/approve`);
-      router.refresh(
-        `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
-      );
+      // router.refresh(`/api/${userId}/projects/${proId}/approve`);
+      // router.refresh(
+      //   `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
+      // );
     }
   }
 
@@ -171,7 +171,7 @@ export default function WeekTable({ timesheets, revalidate }) {
               // rowHeight={52}
               getRowHeight={() => "auto"}
               columns={columns}
-              loading={rows ? false : true}
+              // loading={rows ? false : true}
               slots={{
                 toolbar: GridToolbar,
 

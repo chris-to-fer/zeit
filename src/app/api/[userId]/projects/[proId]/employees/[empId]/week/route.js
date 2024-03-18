@@ -34,9 +34,6 @@ export async function POST(request, { params }) {
   }));
 
   if (method === "APPROVETIMESHEETS") {
-    revalidatePath(
-      `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
-    );
     try {
       approvedObjects.map(async (e) => {
         const approvedTimesheet = await Time.findByIdAndUpdate(
@@ -48,7 +45,9 @@ export async function POST(request, { params }) {
           { multi: true }
         );
       });
-
+      // revalidatePath(
+      //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
+      // );
       return NextResponse.json({ status: 201 });
     } catch (error) {
       return NextResponse.json({ status: 400 });

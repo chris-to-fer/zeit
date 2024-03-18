@@ -12,7 +12,7 @@ import {
 import { useParams } from "next/navigation";
 // import Button from "@mui/material/Button";
 import { useState } from "react";
-import styles from "../../../../../../../../page.module.css";
+import styles from "../../../../../../page.module.css";
 import { useRouter } from "next/navigation";
 import makeColumns from "@/app/lib/makeColumns";
 import getWorktime from "@/app/lib/getWorktime";
@@ -130,18 +130,18 @@ export default function WeekTable({ timesheets }) {
     }
   }
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
-  function CustomNoRowsOverlay() {
-    return <div>Hallo</div>;
-  }
+  // function CustomToolbar() {
+  //   return (
+  //     <GridToolbarContainer>
+  //       <GridToolbarColumnsButton />
+  //       <GridToolbarFilterButton />
+  //       <GridToolbarExport />
+  //     </GridToolbarContainer>
+  //   );
+  // }
+  // function CustomNoRowsOverlay() {
+  //   return <div>Hallo</div>;
+  // }
   // style={{ height: 500, width: "75vw" }}
   return (
     <>
@@ -160,9 +160,9 @@ export default function WeekTable({ timesheets }) {
           columns={columns}
           loading={rows ? false : true}
           slots={{
-            toolbar: CustomToolbar,
+            toolbar: GridToolbar,
 
-            noRowsOverlay: CustomNoRowsOverlay,
+            // noRowsOverlay: CustomNoRowsOverlay,
           }}
           // initialState={{
           //   pagination: {

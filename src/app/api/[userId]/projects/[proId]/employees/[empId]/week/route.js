@@ -35,7 +35,7 @@ export async function POST(request, { params }) {
 
   if (method === "APPROVETIMESHEETS") {
     try {
-      approvedObjects.map(async (e) => {
+      await approvedObjects.map(async (e) => {
         const approvedTimesheet = await Time.findByIdAndUpdate(
           {
             _id: e._id,

@@ -10,7 +10,7 @@ import {
 } from "@mui/x-data-grid";
 
 import { useParams } from "next/navigation";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import { useState } from "react";
 import styles from "../../../../../../page.module.css";
 import { useRouter } from "next/navigation";
@@ -177,8 +177,8 @@ export default function WeekTable({ timesheets }) {
           autoPageSize
         />
       </div>
-      <Button
-        // className={styles.funcbutton}
+      <button
+        className={styles.funcbutton}
         onClick={() => handleApprove(approvedTimes)}
         // disabled={rowSelectionModel[0] ? false : true}
       >
@@ -189,7 +189,7 @@ export default function WeekTable({ timesheets }) {
         ) : (
           <h3>Nur markierte genehmigen und andere nicht</h3>
         )}
-      </Button>
+      </button>
     </>
   );
 }

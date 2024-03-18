@@ -138,15 +138,15 @@ export default function WeekTable({ timesheets, revalidate }) {
     }
   }
 
-  // function CustomToolbar() {
-  //   return (
-  //     <GridToolbarContainer>
-  //       <GridToolbarColumnsButton />
-  //       <GridToolbarFilterButton />
-  //       <GridToolbarExport />
-  //     </GridToolbarContainer>
-  //   );
-  // }
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        {/* <GridToolbarFilterButton /> */}
+        <GridToolbarExport />
+      </GridToolbarContainer>
+    );
+  }
   // function CustomNoRowsOverlay() {
   //   return <div>Hallo</div>;
   // }
@@ -172,7 +172,7 @@ export default function WeekTable({ timesheets, revalidate }) {
               columns={columns}
               loading={rows ? false : true}
               slots={{
-                toolbar: GridToolbar,
+                toolbar: CustomToolbar,
 
                 // noRowsOverlay: CustomNoRowsOverlay,
               }}

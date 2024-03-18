@@ -474,7 +474,7 @@
 }
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
-  .card:hover {
+  /* .card:hover {
     background: rgba(var(--card-rgb), 0.1);
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
   }
@@ -502,8 +502,8 @@
   .funcbutton:hover {
     box-shadow: 3px 2px 8px 1px rgba(77, 77, 79, 0.2);
     opacity: 80%;
-    /* transition: 300ms ease-in-out; */
-  }
+     transition: 300ms ease-in-out; 
+} */
 }
 
 @media (prefers-reduced-motion) {

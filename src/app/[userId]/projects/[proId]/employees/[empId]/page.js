@@ -92,9 +92,12 @@ export default async function Page({ params, children }) {
     <>
       <Sidebar params={params} employee={data.employee} />
       <div className={styles.card_project}>
+        <h2>
+          {data.employee.name} {data.employee.lastName}
+        </h2>
         <h3>
-          Arbeitszeiten von {data.employee.name} {data.employee.lastName} im
-          Projekt {data.employee.project.name} nach Kalenderwochen:
+          Arbeitszeiten im Projekt {data.employee.project.name} nach
+          Kalenderwochen:
         </h3>{" "}
         <ul className={styles.ul}>
           {Object.keys(weekObject).map((e, index) => (

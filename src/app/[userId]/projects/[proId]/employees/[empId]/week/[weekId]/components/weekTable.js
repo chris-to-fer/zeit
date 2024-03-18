@@ -124,21 +124,24 @@ export default function WeekTable({ timesheets }) {
         body: JSON.stringify(data),
       }
     );
-    router.refresh();
+    console.log("resp", response.status);
     if (response.ok) {
-      //   router.refresh(`/api/${userId}/projects/${proId}/approve`);
+      router.refresh(`/api/${userId}/projects/${proId}/approve`);
+      router.refresh(
+        `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
+      );
     }
   }
 
-  // function CustomToolbar() {
-  //   return (
-  //     <GridToolbarContainer>
-  //       <GridToolbarColumnsButton />
-  //       <GridToolbarFilterButton />
-  //       <GridToolbarExport />
-  //     </GridToolbarContainer>
-  //   );
-  // }
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarExport />
+      </GridToolbarContainer>
+    );
+  }
   // function CustomNoRowsOverlay() {
   //   return <div>Hallo</div>;
   // }
@@ -158,9 +161,9 @@ export default function WeekTable({ timesheets }) {
           // rowHeight={52}
           getRowHeight={() => "auto"}
           columns={columns}
-          loading={rows ? false : true}
+          // loading={rows ? false : true}
           slots={{
-            toolbar: GridToolbar,
+            toolbar: CustomToolbar,
 
             // noRowsOverlay: CustomNoRowsOverlay,
           }}

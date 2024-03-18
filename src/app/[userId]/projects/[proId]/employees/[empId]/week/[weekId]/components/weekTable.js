@@ -17,11 +17,12 @@ import { useRouter } from "next/navigation";
 import makeColumns from "@/app/lib/makeColumns";
 import getWorktime from "@/app/lib/getWorktime";
 // import { LinearProgress } from "@mui/material";
+import { revalidatePath } from "next/cache";
 
 //defining the columns
 const columns = makeColumns();
 
-export default function WeekTable({ timesheets }) {
+export default function WeekTable({ timesheets, revalidate }) {
   const options = {
     weekday: "long",
     year: "numeric",
@@ -130,6 +131,7 @@ export default function WeekTable({ timesheets }) {
       router.refresh(
         `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
       );
+      revalidate();
     }
   }
 

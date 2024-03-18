@@ -35,16 +35,17 @@ export async function POST(request, { params }) {
 
   if (method === "APPROVETIMESHEETS") {
     try {
-      await approvedObjects.map(async (e) => {
-        const approvedTimesheet = await Time.findByIdAndUpdate(
-          {
-            _id: e._id,
-          },
+      await Promise.all(
+        approvedObjects.map(async (e) => {
+          const approvedTimesheet = await Time.findByIdAndUpdate(
+            {
+              _id: e._id,
+            },
 
-          { $set: { approved: e.approved } },
-          { multi: true }
-        );
-      });
+            { $set: { approved: e.approved } }
+          );
+        })
+      );
       // revalidatePath(
       //   `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
       // );

@@ -9,18 +9,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { displayNumberContext } from "@/app/displayNumber-Provider";
+import { useEffect } from "react";
 
-export default function Exit({ goHome, session, userId }) {
+export default function Exit({ userId, session }) {
   const { open, setOpen } = useContext(selectBurgerContext);
   const { number, setNumber } = useContext(displayNumberContext);
   const { selectedProject } = useContext(selectStateContext);
   const proId = selectedProject;
   // const checkEmpty = useParams().proId;
 
-  const signOutandToHome = () => {
-    signOut();
-    // goHome();
-  };
   return (
     <>
       <button className={styles.burger} onClick={() => setOpen(!open)}>
@@ -43,7 +40,7 @@ export default function Exit({ goHome, session, userId }) {
         <h6>{session?.user.name}</h6>
         <button
           className={session ? styles.button_logout : styles.button}
-          onClick={signOutandToHome}
+          onClick={signOut}
         >
           LOGOUT
         </button>

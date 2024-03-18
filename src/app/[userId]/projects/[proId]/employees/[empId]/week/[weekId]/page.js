@@ -8,6 +8,7 @@ import Project from "@/app/db/model/Project";
 import Time from "@/app/db/model/Time";
 import Employee from "@/app/db/model/Employee";
 import connectDB from "@/app/db/connectDB";
+import { Suspense } from "react";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
@@ -140,8 +141,9 @@ export default async function PageWeek({ params, children }) {
             </span>
           </section>
         )}
-
-        <WeekTable timesheets={timesheets} revalidate={revalidate} />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <WeekTable timesheets={timesheets} revalidate={revalidate} />
+        </Suspense>
       </div>
 
       {children}

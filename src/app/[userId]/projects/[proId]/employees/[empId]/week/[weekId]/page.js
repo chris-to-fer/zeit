@@ -108,6 +108,13 @@ export default async function PageWeek({ params, children }) {
   //   }
   // }
 
+  async function revalidate() {
+    "use server";
+    revalidatePath(
+      `${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}/week/${weekId}`
+    );
+  }
+
   return (
     <>
       <Sidebar params={params} employee={data} />
@@ -134,7 +141,7 @@ export default async function PageWeek({ params, children }) {
           </section>
         )}
 
-        <WeekTable timesheets={timesheets} />
+        <WeekTable timesheets={timesheets} revalidate={revalidate} />
       </div>
 
       {children}

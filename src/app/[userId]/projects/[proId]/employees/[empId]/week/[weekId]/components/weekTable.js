@@ -159,42 +159,40 @@ export default function WeekTable({ timesheets, revalidate }) {
   return (
     <>
       <div className={styles.table}>
-        <Suspense fallback={<CircularProgress />}>
-          {!columns ? (
-            <h1>wait</h1>
-          ) : (
-            <DataGrid
-              checkboxSelection
-              onRowSelectionModelChange={(id) => {
-                setRowSelectionModel(id);
-              }}
-              rowSelectionModel={rowSelectionModel}
-              disableColumnMenu
-              disableColumnFilter
-              rows={rows}
-              // rowHeight={52}
-              getRowHeight={() => "auto"}
-              columns={columns}
-              loading={loading}
-              slots={{
-                toolbar: GridToolbar,
+        {!columns ? (
+          <h1>wait</h1>
+        ) : (
+          <DataGrid
+            checkboxSelection
+            onRowSelectionModelChange={(id) => {
+              setRowSelectionModel(id);
+            }}
+            rowSelectionModel={rowSelectionModel}
+            disableColumnMenu
+            disableColumnFilter
+            rows={rows}
+            // rowHeight={52}
+            getRowHeight={() => "auto"}
+            columns={columns}
+            loading={loading}
+            slots={{
+              toolbar: GridToolbar,
 
-                // noRowsOverlay: CustomNoRowsOverlay,
-              }}
-              // initialState={{
-              //   pagination: {
-              //     paginationModel: { page: 1, pageSize: 7 },
-              //   },
-              // }}
-              // pageSize={7}
-              // pageSizeOptions={[7]}
-              // getRowId={getRowId}
-              // getRowClassName={getRowClassName}
-              // autoHeight
-              autoPageSize
-            />
-          )}
-        </Suspense>
+              // noRowsOverlay: CustomNoRowsOverlay,
+            }}
+            // initialState={{
+            //   pagination: {
+            //     paginationModel: { page: 1, pageSize: 7 },
+            //   },
+            // }}
+            // pageSize={7}
+            // pageSizeOptions={[7]}
+            // getRowId={getRowId}
+            // getRowClassName={getRowClassName}
+            // autoHeight
+            autoPageSize
+          />
+        )}
       </div>
       <button
         className={styles.funcbutton}

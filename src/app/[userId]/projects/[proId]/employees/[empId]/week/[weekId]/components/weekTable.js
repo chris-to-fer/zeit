@@ -127,11 +127,11 @@ export default function WeekTable({ timesheets, revalidate }) {
     );
     console.log("resp", response.status);
     if (response.ok) {
+      revalidate();
       router.refresh(`/api/${userId}/projects/${proId}/approve`);
       router.refresh(
         `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
       );
-      revalidate();
     }
   }
 
@@ -163,7 +163,7 @@ export default function WeekTable({ timesheets, revalidate }) {
           // rowHeight={52}
           getRowHeight={() => "auto"}
           columns={columns}
-          // loading={rows ? false : true}
+          loading={rows ? false : true}
           slots={{
             toolbar: CustomToolbar,
 

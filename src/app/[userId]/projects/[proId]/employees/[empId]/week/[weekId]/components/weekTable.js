@@ -133,12 +133,12 @@ export default function WeekTable({ timesheets, revalidate }) {
     // const api = await response.json();
 
     if (response.ok) {
-      revalidate();
+      // revalidate();
       setLoading(false);
       // router.refresh(`/api/${userId}/projects/${proId}/approve`);
-      // router.refresh(
-      //   `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
-      // );
+      router.refresh(
+        `/api/${userId}/projects/${proId}/employee/${empId}/week/${weekId}`
+      );
     }
   }
 

@@ -45,8 +45,8 @@ export default function Create({ params, searchParams }) {
   }
   async function revalidate() {
     "use server";
-    // revalidatePath(`/${HOSTNAME}/${userId}/projects`);
-    // redirect(`/${userId}/projects`);
+    revalidatePath(`/${HOSTNAME}/${userId}/projects`);
+    redirect(`/${userId}/projects`);
   }
 
   return (

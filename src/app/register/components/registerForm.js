@@ -22,6 +22,7 @@ export default function RegisterForm() {
       return;
     }
     try {
+      setError("");
       setLoading(true);
       const resUserExists = await fetch("/api/existingUserEmail", {
         method: "POST",
@@ -58,31 +59,34 @@ export default function RegisterForm() {
 
   return (
     <>
-      {loading && <CircularProgress />}
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="name">Name: </label>
-        <input
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          name="name"
-          id="name"
-        ></input>
-        <label htmlFor="email">Email: </label>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          name="email"
-          id="email"
-        ></input>
-        <label htmlFor="password">Passwort: </label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="password"
-          id="password"
-        ></input>
-        <button className={styles.button}>Registrieren</button>
-      </form>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <label htmlFor="name">Name: </label>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            name="name"
+            id="name"
+          ></input>
+          <label htmlFor="email">Email: </label>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            name="email"
+            id="email"
+          ></input>
+          <label htmlFor="password">Passwort: </label>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="password"
+            id="password"
+          ></input>
+          <button className={styles.button}>Registrieren</button>
+        </form>
+      )}
       {error && <p className={styles.error}>{error}</p>}
       <Link href="/">
         <button className={styles.buttonAbbort}>Abbrechen</button>

@@ -4,26 +4,31 @@ import styles from "../../page.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { CircularProgress } from "@mui/material";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!name || !email || !password) {
       setError("Alle Felder müssen ausgefüllt werden.");
       return;
     }
     try {
+      setLoading(true);
       const resUserExists = await fetch("/api/existingUserEmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      setLoading(false);
       const { userId } = await resUserExists.json();
       if (userId) {
         setError("Die Email ist bereits vergeben.");
@@ -53,6 +58,7 @@ export default function RegisterForm() {
 
   return (
     <>
+      {loading && <CircularProgress />}
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="name">Name: </label>
         <input

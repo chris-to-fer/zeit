@@ -14,7 +14,7 @@ export default function ProjectCard({ user, userId }) {
 
   if (!project)
     return (
-      <h4>Bitte links ein Projekt wählen oder ein neues Projekt erstellen.</h4>
+      <h4>Im Menu ein Projekt wählen oder ein neues Projekt erstellen.</h4>
     );
   return (
     <>

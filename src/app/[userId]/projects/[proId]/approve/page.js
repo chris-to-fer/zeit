@@ -14,7 +14,7 @@ export default async function page({ params }) {
   const { proId, userId } = params;
   const HOSTNAME = process.env.HOSTNAME_URL;
 
-  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/approve`);
+  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/approve`);
 
   // const res = await fetch(
   //   `${HOSTNAME}/api/${userId}/projects/${proId}/approve`

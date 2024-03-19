@@ -21,7 +21,7 @@ export default async function Page({ children, params }) {
 
   // if (!session) return <h3>Please login.</h3>;
 
-  revalidatePath(`${HOSTNAME}/`);
+  // revalidatePath(`${HOSTNAME}/`);
 
   // const res = await fetch(`${HOSTNAME}/api/${userId}/user/`, {
   // method: "GET",

@@ -20,7 +20,7 @@ export async function GET(request, { params }) {
   // console.log("sessioOn", session);
   const HOSTNAME = process.env.HOSTNAME_URL;
   const { proId, userId, empId } = params;
-  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
+  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
   await connectDB();
 
   const projects = await Project.findById(proId).populate("employees");

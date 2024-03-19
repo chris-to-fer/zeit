@@ -20,7 +20,7 @@ export default async function Page({ params, children }) {
     day: "numeric",
   };
 
-  revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
+  // revalidatePath(`${HOSTNAME}/${userId}/projects/${proId}/employees/${empId}`);
 
   // const res = await fetch(
   //   `${HOSTNAME}/api/${userId}/projects/${proId}/employees/${empId}`,
